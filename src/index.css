@@ -67,3 +67,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.section-padding {
+  padding-top: 120px;
+  padding-bottom: 50px;
+}
