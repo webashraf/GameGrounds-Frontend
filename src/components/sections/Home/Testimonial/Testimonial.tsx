@@ -62,7 +62,7 @@ const Testimonial = () => {
       <div className="">
         <CommonHeading
           title="Client Feedback"
-          subTitle="Read the stories of our delighted customers."
+          subTitle="Read the stories of our delighted customers"
         />
         <div className="swiper-container">
           <Swiper

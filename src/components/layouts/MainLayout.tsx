@@ -47,7 +47,7 @@ const MainLayout = () => {
     <>
       <div
         ref={container}
-        className="relative m-2 overflow-x-hidden max-w-[2000px] w-full mx-auto"
+        className="relative m-2 overflow-x-hidden w-full mx-auto"
       >
         <div>
           {/* Desktop Nav */}

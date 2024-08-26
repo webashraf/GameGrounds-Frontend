@@ -1,6 +1,11 @@
+import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
 import CommonHeading from "../../../shared/CommonHeading/CommonHeading";
 
 const FeaturedFacilities = () => {
+  const { data, error, isLoading, isFetching } =
+    useGetFacilitiesQuery(undefined);
+  console.log({ data, error, isLoading, isFetching });
+
   return (
     <div className="section-padding">
       <CommonHeading

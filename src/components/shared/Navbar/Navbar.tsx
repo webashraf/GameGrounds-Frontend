@@ -15,8 +15,8 @@ const Navbar = () => {
     (context, contextSafe: any) => {
       const moveSafe = contextSafe((e: MouseEvent) => {
         gsap.to(".cm", {
-          x: e.clientX - 1190,
-          y: e.clientY - 95,
+          x: e.x - 950,
+          y: e.y - 95,
           scale: 1,
           // cursor: "none",
           duration: 0.5,
@@ -84,12 +84,16 @@ const Navbar = () => {
           </NavLink>
         </ul>
         <div className="space-x-3 cursor-non">
-          <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-non">
-            Sign In
-          </Button>
-          <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-non">
-            Sign Up
-          </Button>
+          <NavLink to="/sign-in">
+            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-non">
+              Sign In
+            </Button>
+          </NavLink>
+          <NavLink to="/sign-up">
+            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-non">
+              Sign Up
+            </Button>
+          </NavLink>
         </div>
         <div className="cm bg-[#ffffff01] backdrop-invert z-50 h-14 w-14 rounded-full fixed cursor-non select-none scale-[0] pointer-events-none"></div>
       </div>

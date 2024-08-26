@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAnimate } from "framer-motion";
+import { FC, MouseEvent } from "react";
 import {
   SiAdobe,
   SiApple,
@@ -12,7 +14,13 @@ import {
 } from "react-icons/si";
 import CommonHeading from "../../../shared/CommonHeading/CommonHeading";
 
-export const OurFields = () => {
+// Define the type for the Icon component
+interface LinkBoxProps {
+  Icon: FC<{ className?: string }>;
+  href: string;
+}
+
+export const OurFields: FC = () => {
   return (
     <div className="bg-neutral-50 px-4 py-12">
       <div className="mx-auto max-w-7xl">
@@ -22,12 +30,12 @@ export const OurFields = () => {
   );
 };
 
-const ClipPathLinks = () => {
+const ClipPathLinks: FC = () => {
   return (
     <div className="section-padding">
       <CommonHeading
-        title="Client Feedback"
-        subTitle="Read the stories of our delighted customers."
+        title="Let’s Get Social"
+        subTitle="Stay Updated with Our Social Feeds"
       />
 
       <div className="divide-y divide-neutral-900 border border-neutral-900">
@@ -57,25 +65,25 @@ const TOP_RIGHT_CLIP = "polygon(0 0, 0 100%, 100% 100%, 0% 100%)";
 const BOTTOM_LEFT_CLIP = "polygon(100% 100%, 100% 0, 100% 100%, 0 100%)";
 const TOP_LEFT_CLIP = "polygon(0 0, 100% 0, 100% 100%, 100% 0)";
 
-const ENTRANCE_KEYFRAMES = {
+const ENTRANCE_KEYFRAMES: Record<string, string[]> = {
   left: [BOTTOM_RIGHT_CLIP, NO_CLIP],
   bottom: [BOTTOM_RIGHT_CLIP, NO_CLIP],
   top: [BOTTOM_RIGHT_CLIP, NO_CLIP],
   right: [TOP_LEFT_CLIP, NO_CLIP],
 };
 
-const EXIT_KEYFRAMES = {
+const EXIT_KEYFRAMES: Record<string, string[]> = {
   left: [NO_CLIP, TOP_RIGHT_CLIP],
   bottom: [NO_CLIP, TOP_RIGHT_CLIP],
   top: [NO_CLIP, TOP_RIGHT_CLIP],
   right: [NO_CLIP, BOTTOM_LEFT_CLIP],
 };
 
-const LinkBox = ({ Icon, href }) => {
-  const [scope, animate] = useAnimate();
+const LinkBox: FC<LinkBoxProps> = ({ Icon, href }) => {
+  const [scope, animate]: any = useAnimate();
 
-  const getNearestSide = (e) => {
-    const box = e.target.getBoundingClientRect();
+  const getNearestSide = (e: MouseEvent<HTMLAnchorElement>): string => {
+    const box = e.currentTarget.getBoundingClientRect();
 
     const proximityToLeft = {
       proximity: Math.abs(box.left - e.clientX),
@@ -104,7 +112,7 @@ const LinkBox = ({ Icon, href }) => {
     return sortedProximity[0].side;
   };
 
-  const handleMouseEnter = (e) => {
+  const handleMouseEnter = (e: MouseEvent<HTMLAnchorElement>) => {
     const side = getNearestSide(e);
 
     animate(scope.current, {
@@ -112,7 +120,7 @@ const LinkBox = ({ Icon, href }) => {
     });
   };
 
-  const handleMouseLeave = (e) => {
+  const handleMouseLeave = (e: MouseEvent<HTMLAnchorElement>) => {
     const side = getNearestSide(e);
 
     animate(scope.current, {
@@ -123,12 +131,8 @@ const LinkBox = ({ Icon, href }) => {
   return (
     <a
       href={href}
-      onMouseEnter={(e) => {
-        handleMouseEnter(e);
-      }}
-      onMouseLeave={(e) => {
-        handleMouseLeave(e);
-      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="relative grid h-20 w-full place-content-center sm:h-28 md:h-36"
     >
       <Icon className="text-xl sm:text-3xl lg:text-4xl" />
