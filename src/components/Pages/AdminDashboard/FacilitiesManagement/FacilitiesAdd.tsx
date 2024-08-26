@@ -25,10 +25,17 @@ const FacilitiesAdd = () => {
     reset();
 
     try {
-      const res = await addFacilities(data);
+      const res = await addFacilities(data).unwrap();
 
       console.log(res);
-      toast.success("Yaaaaaaaa");
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+      if (res?.error) {
+        toast.error(
+          res?.error?.message ? res?.error?.message : "Facility failed to add!"
+        );
+      }
     } catch (err) {
       console.log(err);
     }

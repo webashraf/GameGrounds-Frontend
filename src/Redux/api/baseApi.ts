@@ -14,9 +14,11 @@ export const baseApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["facilities"],
   endpoints: (builder) => ({
     getFacilities: builder.query({
       query: () => ({ url: "/facility", method: "GET" }),
+      providesTags: ["facilities"],
     }),
     login: builder.mutation({
       query: (payload) => ({
@@ -26,11 +28,13 @@ export const baseApi = createApi({
       }),
     }),
     signUp: builder.mutation({
-      query: (payload) => ({
-        url: "/auth/signup",
-        method: "POST",
-        body: payload,
-      }),
+      query: (payload) => {
+        return {
+          url: "/auth/signup",
+          method: "POST",
+          body: payload,
+        };
+      },
     }),
     addFacilities: builder.mutation({
       query: (payload) => ({
@@ -38,6 +42,28 @@ export const baseApi = createApi({
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["facilities"],
+    }),
+    updateFacilities: builder.mutation({
+      query: ({ data, _id }) => {
+        console.log(data);
+        return {
+          url: `/facility/${_id}`,
+          method: "PUT",
+          body: data,
+        };
+      },
+      invalidatesTags: ["facilities"],
+    }),
+    deleteFacilities: builder.mutation({
+      query: (_id) => {
+        console.log(_id);
+        return {
+          url: `/facility/${_id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["facilities"],
     }),
   }),
 });
@@ -47,4 +73,6 @@ export const {
   useLoginMutation,
   useSignUpMutation,
   useAddFacilitiesMutation,
+  useUpdateFacilitiesMutation,
+  useDeleteFacilitiesMutation,
 } = baseApi;
