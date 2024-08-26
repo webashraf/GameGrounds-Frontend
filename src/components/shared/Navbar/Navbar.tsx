@@ -15,10 +15,10 @@ const Navbar = () => {
     (context, contextSafe: any) => {
       const moveSafe = contextSafe((e: MouseEvent) => {
         gsap.to(".cm", {
-          x: e.clientX - 1050,
-          y: e.clientY - 100,
+          x: e.clientX - 1190,
+          y: e.clientY - 95,
           scale: 1,
-          cursor: "none",
+          // cursor: "none",
           duration: 0.5,
           ease: "power2.out",
         });
@@ -49,43 +49,49 @@ const Navbar = () => {
       </div>
       <div
         ref={hoverRef}
-        className="relative flex items-center justify-center w-[50%] mx-auto cursor-none"
+        className="relative flex items-center justify-center w-[50%] mx-auto cursor-non"
       >
-        <ul className="flex justify-center gap-10 font-mono bold text-white/80 text-xl cursor-none">
+        <ul className="flex justify-center gap-10 font-mono bold text-white/80 text-xl cursor-non">
           <NavLink
             to="/"
-            className="hover:underline  bg-yellow-90 p-5 cursor-none"
+            className="hover:underline  bg-yellow-90 p-5 cursor-non"
           >
             Home
           </NavLink>
           <NavLink
             to="/"
-            className="hover:underline  bg-yellow-90 p-5 cursor-none"
+            className="hover:underline  bg-yellow-90 p-5 cursor-non"
           >
             About
           </NavLink>
           <NavLink
             to="/"
-            className="hover:underline  bg-yellow-90 p-5 cursor-none"
+            className="hover:underline  bg-yellow-90 p-5 cursor-non"
           >
             Contact
           </NavLink>
           <NavLink
             to="/"
-            className="hover:underline  bg-yellow-90 p-5 cursor-none"
+            className="hover:underline  bg-yellow-90 p-5 cursor-non"
           >
             Blogs
           </NavLink>
+          <NavLink
+            to="/admin"
+            className="hover:underline  bg-yellow-90 p-5 cursor-non"
+          >
+            Dashboard
+          </NavLink>
         </ul>
-        <div className="space-x-3 cursor-none">
-          <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-none">
+        <div className="space-x-3 cursor-non">
+          <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-non">
             Sign In
           </Button>
-          <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-none">
+          <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-non">
             Sign Up
           </Button>
         </div>
-        <div className="cm bg-[#ffffff01] backdrop-invert z-50 h-14 w-14 rounded-full fixed cursor-none select-none scale-[0]"></div>
+        <div className="cm bg-[#ffffff01] backdrop-invert z-50 h-14 w-14 rounded-full fixed cursor-non select-none scale-[0] pointer-events-none"></div>
       </div>
     </div>
   );

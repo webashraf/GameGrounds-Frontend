@@ -10,27 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 const MainLayout = () => {
   const container = useRef<HTMLDivElement | null>(null);
 
-  // useEffect(() => {
-  //   const animation = gsap.to(".m-nav", {
-  //     scaleY: 3.5,
-  //     scrollTrigger: {
-  //       trigger: ".m-2",
-  //       start: "400px 200px",
-  //       end: "800px 500px",
-  //       scrub: 5,
-  //       // markers: true,
-  //     },
-  //     ease: "power4.inOut",
-  //   });
-
-  //   return () => {
-  //     animation.kill();
-  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  //   };
-  // }, []);
-
   useEffect(() => {
-    // ScaleY animation for ".m-nav"
+    // ScaleY animation for nav
     const scaleAnimation = gsap.to(".m-nav", {
       scaleY: 3.5,
       scrollTrigger: {
@@ -43,15 +24,14 @@ const MainLayout = () => {
       ease: "power4.inOut",
     });
 
-    // Move ".nav" to the top when scrolling down
+    // Move nav to the top when scrolling down
     const moveAnimation = gsap.to(".nav", {
-      y: -60, // Adjust this value to control how much the element moves up
+      y: -60,
       scrollTrigger: {
-        trigger: ".nav", // You can change this to another trigger if needed
+        trigger: ".nav",
         start: "top top",
         end: "bottom top",
         scrub: 5,
-        // markers: true, // Uncomment to see scroll trigger markers
       },
       ease: "power4.inOut",
     });
