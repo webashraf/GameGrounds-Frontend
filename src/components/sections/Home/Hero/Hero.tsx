@@ -56,7 +56,7 @@ const Hero = () => {
                   </li>
                 ))}
               </ul>
-              <Button className="uppercase rounded-none px-20 h-[50px] mt-5 text-lg">
+              <Button className="uppercase rounded-none px-20 h-[50px] mt-5 text-lg bg-[#101010a0] backdrop-blur-md">
                 Book Now
               </Button>
             </div>

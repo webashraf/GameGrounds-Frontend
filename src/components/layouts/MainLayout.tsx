@@ -10,21 +10,55 @@ gsap.registerPlugin(ScrollTrigger);
 const MainLayout = () => {
   const container = useRef<HTMLDivElement | null>(null);
 
+  // useEffect(() => {
+  //   const animation = gsap.to(".m-nav", {
+  //     scaleY: 3.5,
+  //     scrollTrigger: {
+  //       trigger: ".m-2",
+  //       start: "400px 200px",
+  //       end: "800px 500px",
+  //       scrub: 5,
+  //       // markers: true,
+  //     },
+  //     ease: "power4.inOut",
+  //   });
+
+  //   return () => {
+  //     animation.kill();
+  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  //   };
+  // }, []);
+
   useEffect(() => {
-    const animation = gsap.to(".m-nav", {
+    // ScaleY animation for ".m-nav"
+    const scaleAnimation = gsap.to(".m-nav", {
       scaleY: 3.5,
       scrollTrigger: {
         trigger: ".m-2",
         start: "400px 200px",
         end: "800px 500px",
         scrub: 5,
-        // markers: true,
+        // markers: true, // Uncomment to see scroll trigger markers
+      },
+      ease: "power4.inOut",
+    });
+
+    // Move ".nav" to the top when scrolling down
+    const moveAnimation = gsap.to(".nav", {
+      y: -60, // Adjust this value to control how much the element moves up
+      scrollTrigger: {
+        trigger: ".nav", // You can change this to another trigger if needed
+        start: "top top",
+        end: "bottom top",
+        scrub: 5,
+        // markers: true, // Uncomment to see scroll trigger markers
       },
       ease: "power4.inOut",
     });
 
     return () => {
-      animation.kill();
+      scaleAnimation.kill();
+      moveAnimation.kill();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
@@ -37,7 +71,7 @@ const MainLayout = () => {
       >
         <div>
           {/* Desktop Nav */}
-          <div className="hidden lg:block fixed max-w-[2000px] w-full mx-auto top-0 left-0 right-0 z-50">
+          <div className="nav hidden lg:block fixed max-w-[2000px] w-full mx-auto top-0 left-0 right-0 z-50">
             <div className="m-nav w-full h-[60px] absolute bg-[#00000084] backdrop-blur-lg -z-20"></div>
             <Navbar />
           </div>
