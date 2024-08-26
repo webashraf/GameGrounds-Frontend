@@ -3,8 +3,10 @@ import AdminLayout from "../components/layouts/AdminLayout/AdminLayout";
 import MainLayout from "../components/layouts/MainLayout";
 import ProtectedRoute from "../components/layouts/ProtectedRoute";
 import About from "../components/Pages/About/About";
+import AddAdmin from "../components/Pages/AdminDashboard/AddAdmin/AddAdmin";
 import FacilitiesAdd from "../components/Pages/AdminDashboard/FacilitiesManagement/FacilitiesAdd";
 import FacilitiesUpdate from "../components/Pages/AdminDashboard/FacilitiesManagement/FacilitiesUpdate";
+import Contact from "../components/Pages/Contact/Contact";
 import Home from "../components/Pages/Home/Home";
 import Login from "../components/Pages/User/Login";
 import UserSignUp from "../components/Pages/User/userSignUp";
@@ -18,6 +20,7 @@ const router = createBrowserRouter([
     path: "/sign-up",
     element: <UserSignUp />,
   },
+
   {
     path: "/",
     element: <MainLayout />,
@@ -25,6 +28,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
       },
       {
         path: "about",
@@ -50,11 +61,28 @@ const router = createBrowserRouter([
       },
       {
         path: "facilities-add",
-        element: <FacilitiesAdd />,
+        element: (
+          <ProtectedRoute role="admin">
+            {" "}
+            <FacilitiesAdd />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "facilities-update",
-        element: <FacilitiesUpdate />,
+        element: (
+          <ProtectedRoute role="admin">
+            <FacilitiesUpdate />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "add-admin",
+        element: (
+          <ProtectedRoute role="admin">
+            <AddAdmin />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

@@ -110,7 +110,7 @@ const AdminLayout = () => {
               Booking Management
             </NavLink>
             <NavLink
-              to="/add-admin"
+              to="/admin/add-admin"
               className={({ isActive }) =>
                 `px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
                   isActive

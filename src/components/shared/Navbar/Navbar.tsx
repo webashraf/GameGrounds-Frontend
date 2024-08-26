@@ -59,13 +59,13 @@ const Navbar = () => {
             Home
           </NavLink>
           <NavLink
-            to="/"
+            to="/about"
             className="hover:underline  bg-yellow-90 p-5 cursor-non"
           >
             About
           </NavLink>
           <NavLink
-            to="/"
+            to="/contact"
             className="hover:underline  bg-yellow-90 p-5 cursor-non"
           >
             Contact

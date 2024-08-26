@@ -5,22 +5,12 @@ import { SiGoogle } from "react-icons/si";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useSignUpMutation } from "../../../Redux/api/baseApi";
-import { useToken } from "../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../Redux/hook";
-import { verifyToken } from "../../../utils/verifyToken";
 import "./loginRegisterForm.css";
 
-const UserSignUp = () => {
+const UserSignUp = ({ uRole = "user" }) => {
   const [signUp, { error }] = useSignUpMutation();
   const navigate = useNavigate();
-
-  const token = useAppSelector(useToken);
-
-  let user: any;
-
-  if (token) {
-    user = verifyToken(token);
-  }
+  console.log("uROles", uRole);
 
   const defaultValue = {
     name: "Ali Ashraf Tameem",
@@ -38,8 +28,7 @@ const UserSignUp = () => {
     // formState: { errors },
   } = useForm<any>({ defaultValues: defaultValue });
   const onSubmit: SubmitHandler<any> = async (data) => {
-    const role = user ? user?.role : "user";
-    const userInfo = { ...data, role };
+    const userInfo = { ...data, role: uRole };
 
     try {
       const res = await signUp(userInfo).unwrap();
