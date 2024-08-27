@@ -26,7 +26,7 @@ const Hero = () => {
       <div>
         <div
           className="text-white h-screen w-full flex justify-center
-      items-center bg-[#10101053]"
+      items-center bg-[#10101053] pt-20"
         >
           <div className="max-w-[1140px] bg-black/20 backdrop-blur-sm p-10 shadow-2xl rounded-sm w-full mx-auto text-center">
             <h1 className="text-7xl font-serif uppercase">

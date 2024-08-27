@@ -71,10 +71,16 @@ const Navbar = () => {
             Contact
           </NavLink>
           <NavLink
-            to="/"
+            to="/booking"
             className="hover:underline  bg-yellow-90 p-5 cursor-non"
           >
-            Blogs
+            Booking
+          </NavLink>
+          <NavLink
+            to="/facilities"
+            className="hover:underline  bg-yellow-90 p-5 cursor-non"
+          >
+            Facilities
           </NavLink>
           <NavLink
             to="/admin"

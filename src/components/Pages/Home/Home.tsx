@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div>
       <Hero />
-      <div className="w-[1680px] mx-auto">
+      <div className="mx-20 w-full">
         <FeaturedFacilities />
         <HowItsWork />
         <Testimonial />

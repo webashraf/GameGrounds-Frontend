@@ -6,7 +6,9 @@ import About from "../components/Pages/About/About";
 import AddAdmin from "../components/Pages/AdminDashboard/AddAdmin/AddAdmin";
 import FacilitiesAdd from "../components/Pages/AdminDashboard/FacilitiesManagement/FacilitiesAdd";
 import FacilitiesUpdate from "../components/Pages/AdminDashboard/FacilitiesManagement/FacilitiesUpdate";
+import Booking from "../components/Pages/Booking/Booking";
 import Contact from "../components/Pages/Contact/Contact";
+import Facilities from "../components/Pages/Facilities/Facilities";
 import Home from "../components/Pages/Home/Home";
 import Login from "../components/Pages/User/Login";
 import UserSignUp from "../components/Pages/User/userSignUp";
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "booking",
+        element: <Booking />,
+      },
+      {
+        path: "facilities",
+        element: <Facilities />,
       },
     ],
   },

@@ -44,14 +44,11 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <>
-      <div
-        ref={container}
-        className="relative m-2 overflow-x-hidden w-full mx-auto"
-      >
+    <div className="mx-w-[1820px] mx-auto w-[1820px] bg-black">
+      <div ref={container} className="relative overflow-x-hidden ">
         <div>
           {/* Desktop Nav */}
-          <div className="nav hidden lg:block fixed max-w-[2000px] w-full mx-auto top-0 left-0 right-0 z-50">
+          <div className="nav hidden lg:block fixed w-[1820px] mx-auto top-0 left-0 right-0 z-50">
             <div className="m-nav w-full h-[60px] absolute bg-[#00000084] backdrop-blur-lg -z-20"></div>
             <Navbar />
           </div>
@@ -66,7 +63,7 @@ const MainLayout = () => {
         </div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 };
 
