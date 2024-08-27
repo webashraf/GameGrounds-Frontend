@@ -66,10 +66,10 @@ const AdminLayout = () => {
                     <NavLink
                       to="/admin/facilities-add"
                       className={({ isActive }) =>
-                        `w-full py-2 px-4 rounded-lg transition-all duration-300 hover:text-black ease-in-out flex items-center gap-4 ${
+                        `w-full py-2 px-4 rounded-lg transition-all duration-300 hover:text-black ease-in-out flex items-center gap-4  ${
                           isActive
                             ? "bg-white/20 backdrop-blur-lg text-white"
-                            : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                            : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-black"
                         }`
                       }
                     >
@@ -84,7 +84,7 @@ const AdminLayout = () => {
                         `w-full py-2 px-4 rounded-lg transition-all duration-300 hover:text-black ease-in-out flex items-center gap-4 ${
                           isActive
                             ? "bg-white/20 backdrop-blur-lg text-white"
-                            : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                            : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-black"
                         }`
                       }
                     >

@@ -2,6 +2,7 @@
 import GoogleMapReact from "google-map-react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import CommonHero from "../../shared/CommonHero/CommonHero";
 import { Button } from "../../ui/button";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -53,7 +54,9 @@ const Contact = () => {
     zoom: 11,
   };
   return (
-    <div className="w-[1680px] mx-auto section-padding">
+    <div className=" mx-auto">
+      <CommonHero title="about us" />
+
       <div className=" p-10">
         <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6 text-center">
           <h2 className="text-5xl font-serif text-gray-800 mb-8">

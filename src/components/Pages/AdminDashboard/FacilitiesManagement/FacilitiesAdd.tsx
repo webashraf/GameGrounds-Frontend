@@ -8,6 +8,8 @@ const FacilitiesAdd = () => {
   const [addFacilities] = useAddFacilitiesMutation();
   const defaultValue = {
     name: "Basketball Court",
+    photoUrl:
+      "https://images.pexels.com/photos/1619860/pexels-photo-1619860.jpeg?auto=compress&cs=tinysrgb&w=600",
     description: "Indoor basketball court with wooden flooring.",
     pricePerHour: 50,
     location: "789 Athlete St, Springfield",
@@ -18,26 +20,35 @@ const FacilitiesAdd = () => {
     reset,
     // watch,
     formState: { errors },
-  } = useForm<any>({ defaultValues: defaultValue });
+  } = useForm<any>();
   const onSubmit: SubmitHandler<any> = async (data) => {
     console.log(data);
-
-    reset();
-
+    const facilityInfo = {
+      ...data,
+      pricePerHour: Number(data.pricePerHour),
+    };
     try {
-      const res = await addFacilities(data).unwrap();
+      const res = await addFacilities(facilityInfo).unwrap();
 
       console.log(res);
       if (res?.success) {
         toast.success(res?.message);
+        reset();
       }
       if (res?.error) {
         toast.error(
           res?.error?.message ? res?.error?.message : "Facility failed to add!"
         );
+        reset();
       }
     } catch (err) {
       console.log(err);
+      if (err?.data) {
+        toast.error(
+          err?.data?.success ? err?.data?.message : "Facility failed to add!"
+        );
+        reset();
+      }
     }
   };
 
@@ -52,19 +63,47 @@ const FacilitiesAdd = () => {
         <div className="w-full p-3 rounded-lg font-mono bg-blac">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
-            htmlFor="unique-input"
+            htmlFor="name-input"
           >
             Name
           </label>
           <input
             placeholder="Name"
-            {...register("name", { required: true })}
+            {...register("name", { required: "Name is required" })}
             className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
             type="text"
-            id="unique-input"
+            id="name-input"
             name="name"
           />
+
+          {errors.name && (
+            <span className="text-red-500 text-sm">Name is required</span>
+          )}
         </div>
+
+        <div className="w-full p-3 rounded-lg font-mono bg-blac">
+          <label
+            className="block text-gray-700 text-xl font-bold mb-2"
+            htmlFor="photo-input"
+          >
+            Photo
+          </label>
+          <input
+            placeholder="Photo Url"
+            {...register("photoUrl", {
+              required: "Photo URL is required",
+            })}
+            className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
+            type="text"
+            id="photo-input"
+            name="photoUrl"
+          />
+
+          {errors.photoUrl && (
+            <span className="text-red-500 text-sm">Photo URL is required</span>
+          )}
+        </div>
+
         <div className="w-full p-3 rounded-lg font-mono bg-blac">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
@@ -79,7 +118,13 @@ const FacilitiesAdd = () => {
             type="text"
             id="unique-input"
           />
+          {errors.name && (
+            <span className="text-red-500 text-sm">
+              "Description is required"
+            </span>
+          )}
         </div>
+
         <div className="w-full p-3 rounded-lg font-mono bg-blac">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
@@ -91,10 +136,16 @@ const FacilitiesAdd = () => {
             {...register("pricePerHour", { required: true })}
             className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
             placeholder="Price Per-Hour"
-            type="text"
+            type="number"
             id="unique-input"
           />
+          {errors.name && (
+            <span className="text-red-500 text-sm">
+              Price is required. It must be a number
+            </span>
+          )}
         </div>
+
         <div className="w-full p-3 rounded-lg font-mono bg-blac">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
@@ -109,22 +160,9 @@ const FacilitiesAdd = () => {
             type="text"
             id="unique-input"
           />
-        </div>
-        <div className="w-full p-3 rounded-lg font-mono bg-blac">
-          {/* <label
-            className="block text-gray-700 text-xl font-bold mb-2"
-            htmlFor="unique-input"
-          >
-            Photo
-          </label> */}
-          {/* <div className="grid w-full items-center gap-1.5">
-            <input
-              {...register("photo", { required: true })}
-              id="picture"
-              type="file"
-              className="flex w-[100%] rounded-md border border-input bg-white px-3 py-3 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
-            />
-          </div> */}
+          {errors.name && (
+            <span className="text-red-500 text-sm">Location is required</span>
+          )}
         </div>
 
         {errors.exampleRequired && <span>This field is required</span>}

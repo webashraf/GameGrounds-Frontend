@@ -96,7 +96,7 @@ const Testimonial = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className="flex gap-2 justify-end">
+          <div className="flex gap-2 justify-end mr-24">
             <div className="custom-prev bg-black h-20 w-16 flex items-center justify-center hover:scale-[1.2] transition-transform duration-300 ease-in-out">
               <ArrowLeft className="text-white scale-[1.3]" />
             </div>

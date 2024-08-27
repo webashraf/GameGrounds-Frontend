@@ -23,7 +23,7 @@ const Hero = () => {
       style={{ backgroundImage: `url(${heroImg3})` }}
       className="h-[100vh] w-full bg-no-repeat bg-cover bg-[100%]"
     >
-      <div>
+      <>
         <div
           className="text-white h-screen w-full flex justify-center
       items-center bg-[#10101053] pt-20"
@@ -62,7 +62,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-      </div>
+      </>
     </div>
   );
 };

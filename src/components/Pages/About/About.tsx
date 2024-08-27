@@ -1,9 +1,12 @@
 import img1 from "../../../assets/hero/pexels-johnsully-15203.jpg";
 import CommonHeading from "../../shared/CommonHeading/CommonHeading";
+import CommonHero from "../../shared/CommonHero/CommonHero";
 
 const About = () => {
   return (
-    <div className="container mx-auto py-16 px-6">
+    <div className="  ">
+      <CommonHero title="about us" />
+
       <section className="relative bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-8 rounded-lg shadow-lg overflow-hidden">
         <div
           className="absolute inset-0 opacity-20 mix-blend-multiply"

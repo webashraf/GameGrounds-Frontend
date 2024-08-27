@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "../shared/Footer/Footer";
 import MobileNav from "../shared/MobileNav/MobileNav";
 import Navbar from "../shared/Navbar/Navbar";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const MainLayout = () => {
@@ -44,7 +45,7 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div className="mx-w-[1820px] mx-auto w-[1820px] bg-black">
+    <div className="mx-w-[1820px] mx-auto w-[1820px]">
       <div ref={container} className="relative overflow-x-hidden ">
         <div>
           {/* Desktop Nav */}
@@ -58,7 +59,9 @@ const MainLayout = () => {
           <MobileNav />
         </div>
         {/* Body */}
-        <div className="">
+        <div className="m-2">
+          {" "}
+          {/* Added m-2 class */}
           <Outlet />
         </div>
         <Footer />
