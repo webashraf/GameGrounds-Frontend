@@ -65,6 +65,16 @@ export const baseApi = createApi({
       },
       invalidatesTags: ["facilities"],
     }),
+    checkAvailability: builder.query({
+      query: (query) => {
+        console.log(query);
+        return {
+          url: `/check-availability?date=${query}`,
+          method: "GET",
+        };
+      },
+      // invalidatesTags: ["facilities"],
+    }),
   }),
 });
 
@@ -75,4 +85,5 @@ export const {
   useAddFacilitiesMutation,
   useUpdateFacilitiesMutation,
   useDeleteFacilitiesMutation,
+  useCheckAvailabilityQuery,
 } = baseApi;
