@@ -1,49 +1,33 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import GoogleMapReact from "google-map-react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import CommonHero from "../../shared/CommonHero/CommonHero";
 import { Button } from "../../ui/button";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+// Define the interface for form data
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+// Define the props for the map marker component
+interface MapMarkerProps {
+  text: string;
+}
+
+// Map marker component
+const AnyReactComponent = ({ text }: MapMarkerProps) => <div>{text}</div>;
 
 const Contact = () => {
   const {
     register,
     handleSubmit,
-    reset,
-    // watch,
     formState: { errors },
-  } = useForm<any>();
-  const onSubmit: SubmitHandler<any> = async (data) => {
-    const updatedData = {
-      name: data.name,
-      description: data.description,
-      location: data.location,
-      pricePerHour: Number(data.pricePerHour),
-    };
-    console.log(updatedData);
-    reset();
-    console.log(updatedData, data._id);
+  } = useForm<ContactFormData>();
 
-    // try {
-    //   const res = await updateFacilities({
-    //     _id: data._id,
-    //     data: updatedData,
-    //   }).unwrap();
-
-    //   console.log(res);
-    //   if (res?.success) {
-    //     toast.success(res?.message);
-    //   }
-    //   if (res?.error) {
-    //     toast.error(
-    //       res?.error?.message ? res?.error?.message : "Facility failed to add!"
-    //     );
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+  const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
+    console.log(data);
   };
 
   const defaultProps = {
@@ -53,11 +37,12 @@ const Contact = () => {
     },
     zoom: 11,
   };
-  return (
-    <div className=" mx-auto">
-      <CommonHero title="about us" />
 
-      <div className=" p-10">
+  return (
+    <div className="mx-auto ">
+      <CommonHero title="Contact Us" />
+
+      <div className="p-10">
         <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6 text-center">
           <h2 className="text-5xl font-serif text-gray-800 mb-8">
             Get in Touch
@@ -84,10 +69,11 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <div className="flex  items-end justify-center gap-x-5">
-        <div className="w-1/2">
+
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+        <div className="w-full md:w-1/2">
           <div
-            className="mt-20 rounded-lg overflow-hidden "
+            className="mt-20 rounded-lg overflow-hidden"
             style={{ height: "40vh", width: "100%" }}
           >
             <GoogleMapReact
@@ -104,67 +90,78 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="w-1/2">
+        <div className="w-full md:w-1/2">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap- h-[40vh] bg-white  p-5 w-full rounded-lg shadow-xl"
+            className="flex flex-col gap-4 lg:h-[40vh] bg-white p-5 w-full rounded-lg shadow-xl"
           >
-            <div className="w-full p-3 rounded-lg font-mono bg-blac">
+            <div className="w-full p-3 rounded-lg bg-gray-100">
               <label
                 className="block text-gray-700 text-xl font-bold mb-2"
-                htmlFor="unique-input"
+                htmlFor="name"
               >
                 Name
               </label>
               <input
                 placeholder="Name"
                 {...register("name", {
-                  required: true,
+                  required: "Name is required",
                 })}
-                className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
+                className="text-md w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
                 type="text"
-                id="unique-input"
+                id="name"
                 name="name"
               />
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name.message}</p>
+              )}
             </div>
-            <div className="w-full p-3 rounded-lg font-mono bg-blac">
+
+            <div className="w-full p-3 rounded-lg bg-gray-100">
               <label
                 className="block text-gray-700 text-xl font-bold mb-2"
-                htmlFor="unique-input"
+                htmlFor="email"
               >
                 Email
               </label>
               <input
                 {...register("email", {
-                  required: true,
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Invalid email address",
+                  },
                 })}
-                className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
-                placeholder="Your mail"
+                className="text-md w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
+                placeholder="Your email"
                 type="text"
-                id="unique-input"
+                id="email"
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              )}
             </div>
 
-            <div className="w-full p-3 rounded-lg font-mono bg-blac">
+            <div className="w-full p-3 rounded-lg bg-gray-100">
               <label
                 className="block text-gray-700 text-xl font-bold mb-2"
-                htmlFor="unique-input"
+                htmlFor="message"
               >
                 Message
               </label>
               <textarea
                 {...register("message", {
-                  required: true,
+                  required: "Message is required",
                 })}
-                className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
+                className="text-md w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
                 placeholder="Your message..."
-                id="unique-input"
+                id="message"
               />
+              {errors.message && (
+                <p className="text-red-500 text-sm">{errors.message.message}</p>
+              )}
             </div>
 
-            {errors.exampleRequired && <span>This field is required</span>}
-
-            {/* <input type="submit"  /> */}
             <Button type="submit" className="uppercase text-lg mt-3">
               Submit
             </Button>

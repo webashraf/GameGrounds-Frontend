@@ -21,16 +21,11 @@ const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
   if (token) {
     user = verifyToken(token);
   }
-  console.log(user);
 
-  console.log({ token, user });
 
   if (role && (user as TUser)?.role !== role) {
     return <Navigate to="/sign-in" replace={true} />;
   }
-  // if ((user as TUser)?.role === "admin") {
-  //   return <Navigate to="/admin" replace={true} />;
-  // }
 
   return children;
 };

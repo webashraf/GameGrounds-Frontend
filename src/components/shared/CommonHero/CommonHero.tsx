@@ -19,7 +19,9 @@ const CommonHero = ({
       items-center bg-[#10101032] pt-20"
       >
         <div className="max-w-[1140px] bg-black/20 backdrop-blur-sm p-10 shadow-2xl rounded-sm w-full mx-auto text-center">
-          <h1 className="text-7xl font-serif uppercase underline">{title}</h1>
+          <h1 className="lg:text-7xl text-6xl font-serif uppercase underline">
+            {title}
+          </h1>
           {/* <p className="text-xl text-wrap">{subTitle}</p> */}
         </div>
       </div>

@@ -34,7 +34,7 @@ const BookingForm = () => {
       const res = await createABook(bookingInfo).unwrap();
       console.log(res);
       if (res?.success) {
-        window.location.href = res.data.payment_url;
+        window.location.href = res.data.paymentSession.payment_url;
         toast.success("Booking Successful");
       }
       if (res?.error) {
@@ -56,7 +56,7 @@ const BookingForm = () => {
   });
 
   return (
-    <div>
+    <div className="">
       <form onSubmit={handleSubmit(handleBooking)}>
         <Controller
           name="date"
@@ -138,7 +138,9 @@ const BookingForm = () => {
           )}
         />
 
-        <Button type="submit">Check Availability</Button>
+        <Button className="w-full" type="submit">
+          Book Now
+        </Button>
       </form>
       <p className="text-red-600 py-2">{bookError}</p>
     </div>

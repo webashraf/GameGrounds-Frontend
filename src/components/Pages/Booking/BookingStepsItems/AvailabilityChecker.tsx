@@ -20,7 +20,7 @@ const AvailabilityChecker: React.FC<TAvailabilityCheckerProps> = ({
   };
 
   return (
-    <div className="p-20 text-left">
+    <div className=" text-left">
       <div className="flex justify-between items-end">
         <div>
           <h2 className="text-3xl uppercase mb-4">Availability Checker</h2>
@@ -47,7 +47,9 @@ const AvailabilityChecker: React.FC<TAvailabilityCheckerProps> = ({
             ))}
           </select>
 
-          <Button type="submit">Check Availability</Button>
+          <Button type="submit" className=" w-full">
+            Check Availability
+          </Button>
         </form>
       </div>
     </div>
