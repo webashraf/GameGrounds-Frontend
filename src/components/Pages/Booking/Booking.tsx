@@ -4,6 +4,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useCheckAvailabilityQuery } from "../../../Redux/api/baseApi";
 import { TFacility } from "../../../types/gloval.types";
 import CommonHero from "../../shared/CommonHero/CommonHero";
 import "./Booking.css";
@@ -12,6 +13,18 @@ import FacilityFeatureChecker from "./BookingStepsItems/FacilityFeatureChecker";
 
 const Booking = () => {
   const [facilityItem, setFacilityItem] = useState<TFacility>(null);
+  const [query, setQuery] = useState(null);
+  const queryString = `${query?.date}&facility=${query?.id}`;
+  // Check availability
+  console.log("query", !query, query, queryString);
+  const {
+    data: availabilitySlot,
+    error,
+    refetch,
+  } = useCheckAvailabilityQuery(queryString, { skip: !query });
+
+  console.log(availabilitySlot?.data);
+
   return (
     <div className="">
       <CommonHero
@@ -25,6 +38,7 @@ const Booking = () => {
       </div>
 
       {/* Payment Integration */}
+
       <div>
         <h2 className="uppercase text-3xl">Payment Integration</h2>
       </div>
@@ -43,6 +57,19 @@ const Booking = () => {
               <p className="text-gray-700 text-center text-2xl font-serif font-semibold">
                 Your Service Features Will Appear Here
               </p>
+
+              {availabilitySlot && (
+                <div className="flex flex-col items-center pt-10 text-left">
+                  <h2 className="uppercase text-xl text-left  border-b border-black mb-3 ">
+                    Available slot on {query?.date}
+                  </h2>
+                  {availabilitySlot?.data?.map((item, i) => (
+                    <h2 key={i} className="uppercase text-xl text-left">
+                      {item.startTime} - {item.endTime}
+                    </h2>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Subtle Background Pattern */}
@@ -96,7 +123,7 @@ const Booking = () => {
 
                 {/* Slide-2 Availability Checker */}
                 <SwiperSlide className="shadow-xl ">
-                  <AvailabilityChecker />
+                  <AvailabilityChecker setQuery={setQuery} />
                 </SwiperSlide>
 
                 <SwiperSlide className="shadow-xl ">

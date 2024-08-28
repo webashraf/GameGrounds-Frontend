@@ -1,48 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import moment from "moment";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
-import { useCheckAvailabilityQuery } from "../../../../Redux/api/baseApi";
+import { useState } from "react";
 import { TFacility } from "../../../../types/gloval.types";
 import { Button } from "../../../ui/button";
 import DatePicker from "./DatePicker";
 import FacilityFeatureChecker from "./FacilityFeatureChecker";
 
-const AvailabilityChecker = () => {
+const AvailabilityChecker = ({  setQuery }: any) => {
   const [facilityItem, setFacilityItem] = useState<TFacility | null>(null);
   const [date, setDate] = useState<Date | null>(null);
-  const [query, setQuery] = useState<string>("");
-  const {
-    data: availabilitySlot,
-    error,
-    refetch,
-  } = useCheckAvailabilityQuery(query, { skip: !query });
 
-  const handleAvailabilityChecker = async () => {
+  const queryHandler = () => {
     const formattedDate = date ? moment(date).format("YYYY-MM-DD") : "";
-    const queryString = `${formattedDate}&facility=${facilityItem?._id}`;
-    setQuery(queryString);
-    refetch();
+    
+    setQuery({ date: formattedDate, id: facilityItem?._id });
+    // availabilityChecker();
   };
 
-  useEffect(() => {
-    if (availabilitySlot) {
-      console.log(availabilitySlot);
-    }
-
-    if (error) {
-      console.error("Error fetching availability:", error);
-      toast.error(error?.data?.message);
-      if ("status" in error) {
-        // The error is an HTTP error
-        console.error("HTTP Error Status:", error.status);
-      }
-      if ("data" in error) {
-        // The backend sent an error response with a message
-        console.error("Error Data:", error.data);
-      }
-    }
-  }, [availabilitySlot, error]);
-
+  
   return (
     <div className="p-20 text-left">
       <div className="flex justify-between items-end">
@@ -54,10 +29,11 @@ const AvailabilityChecker = () => {
       <div>
         <DatePicker date={date} setDate={setDate} />
         <FacilityFeatureChecker setFacilityItem={setFacilityItem} />
-        <Button type="button" onClick={handleAvailabilityChecker}>
+        <Button type="button" onClick={queryHandler}>
           Check Availability
         </Button>
       </div>
+      <div></div>
     </div>
   );
 };
