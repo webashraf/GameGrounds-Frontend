@@ -1,39 +1,55 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import moment from "moment";
-import { useState } from "react";
-import { TFacility } from "../../../../types/gloval.types";
+import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
+import {
+  TAvailabilityCheckerProps,
+  TFacilitySelect,
+  TFormValues,
+} from "../../../../types/gloval.types";
 import { Button } from "../../../ui/button";
-import DatePicker from "./DatePicker";
-import FacilityFeatureChecker from "./FacilityFeatureChecker";
 
-const AvailabilityChecker = ({  setQuery }: any) => {
-  const [facilityItem, setFacilityItem] = useState<TFacility | null>(null);
-  const [date, setDate] = useState<Date | null>(null);
+const AvailabilityChecker: React.FC<TAvailabilityCheckerProps> = ({
+  setQuery,
+}) => {
+  const { data: facilities } = useGetFacilitiesQuery(undefined);
+  const { register, handleSubmit } = useForm<TFormValues>();
 
-  const queryHandler = () => {
-    const formattedDate = date ? moment(date).format("YYYY-MM-DD") : "";
-    
-    setQuery({ date: formattedDate, id: facilityItem?._id });
-    // availabilityChecker();
+  const onSubmit: SubmitHandler<TFormValues> = (data) => {
+    console.log("Form Data", data);
+    setQuery(data);
   };
 
-  
   return (
     <div className="p-20 text-left">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-3xl uppercase">Availability Checker</h2>
-          <p className="text-[#494949] italic">Content</p>
+          <h2 className="text-3xl uppercase mb-4">Availability Checker</h2>
         </div>
       </div>
       <div>
-        <DatePicker date={date} setDate={setDate} />
-        <FacilityFeatureChecker setFacilityItem={setFacilityItem} />
-        <Button type="button" onClick={queryHandler}>
-          Check Availability
-        </Button>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
+            type="date"
+            {...register("date", { required: true })}
+          />
+          <select
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
+            {...register("facility", { required: true })}
+          >
+            <option value="" disabled>
+              Select a facility
+            </option>
+            {facilities?.data.map((facility: TFacilitySelect) => (
+              <option key={facility._id} value={facility._id}>
+                {facility.name}
+              </option>
+            ))}
+          </select>
+
+          <Button type="submit">Check Availability</Button>
+        </form>
       </div>
-      <div></div>
     </div>
   );
 };

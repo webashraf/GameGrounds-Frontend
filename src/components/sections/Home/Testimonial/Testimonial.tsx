@@ -1,10 +1,9 @@
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import CommonHeading from "../../../shared/CommonHeading/CommonHeading";
 import "./testimonial.css";
 
@@ -59,17 +58,16 @@ const Testimonial = () => {
 
   return (
     <div className="section-padding">
-      <div className="">
+      <div>
         <CommonHeading
           title="Client Feedback"
           subTitle="Read the stories of our delighted customers"
         />
         <div className="swiper-container">
           <Swiper
-            // install Swiper modules
             modules={[Navigation, Pagination]}
             spaceBetween={50}
-            slidesPerView={3}
+            // slidesPerView={3}
             navigation={{
               nextEl: ".custom-next",
               prevEl: ".custom-prev",
@@ -78,17 +76,39 @@ const Testimonial = () => {
             speed={400}
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
+            breakpoints={{
+              640: {
+                // Mobile devices
+                slidesPerView: 1,
+              },
+              768: {
+                // Tablets
+                slidesPerView: 1,
+              },
+              1024: {
+                // Desktop
+                slidesPerView: 2,
+              },
+              1200: {
+                // Large desktop
+                slidesPerView: 3,
+              },
+            }}
           >
             {testimonialsData.map((info, i) => (
-              <SwiperSlide key={i} virtualIndex={i} className="shadow-xl ">
-                <div className="p-20 text-left ">
+              <SwiperSlide key={i} virtualIndex={i} className="shadow-xl">
+                <div className="p-20 text-left">
                   <div className="flex justify-between items-end">
                     <div>
                       <h2 className="text-3xl uppercase">{info.name}</h2>
                       <p className="text-[#494949] italic">{info.position}</p>
                     </div>
                     <div className="border-dashed w-28 h-32 rounded-sm border-black overflow-hidden bg-slate-800">
-                      <img src={info.photoUrl} className="" alt="" />
+                      <img
+                        src={info.photoUrl}
+                        className="w-full h-full object-cover"
+                        alt={`Photo of ${info.name}`}
+                      />
                     </div>
                   </div>
                   <p className="mt-5">{info.feedback}</p>
@@ -96,7 +116,7 @@ const Testimonial = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className="flex gap-2 justify-end mr-24">
+          <div className="flex gap-2 lg:justify-end justify-center lg:mr-24 ">
             <div className="custom-prev bg-black h-20 w-16 flex items-center justify-center hover:scale-[1.2] transition-transform duration-300 ease-in-out">
               <ArrowLeft className="text-white scale-[1.3]" />
             </div>

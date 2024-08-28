@@ -1,9 +1,6 @@
-// import heroImg1 from "../../../../assets/hero/aerial-view-grass-field-hockey_23-2149668573.jpg";
-// import heroImg2 from "../../../../assets/hero/futuristic-soccer-field-illustration_23-2151539709.jpg";
-import heroImg3 from "../../../../assets/hero/pexels-johnsully-15203.jpg";
-// import heroImg5 from "../../../../assets/hero/pexels-skitterphoto-60248.jpg";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import heroImg3 from "../../../../assets/hero/pexels-johnsully-15203.jpg";
 import { Button } from "../../../ui/button";
 
 const Hero = () => {
@@ -24,29 +21,26 @@ const Hero = () => {
       className="h-[100vh] w-full bg-no-repeat bg-cover bg-[100%]"
     >
       <>
-        <div
-          className="text-white h-screen w-full flex justify-center
-      items-center bg-[#10101053] pt-20"
-        >
-          <div className="max-w-[1140px] bg-black/20 backdrop-blur-sm p-10 shadow-2xl rounded-sm w-full mx-auto text-center">
-            <h1 className="text-7xl font-serif uppercase">
+        <div className="text-white lg:h-screen h-[100vh] w-full flex justify-center items-center bg-[#10101053] lg:pt-20">
+          <div className="max-w-[1140px] bg-black/20 backdrop-blur-sm p-5 md:p-10 shadow-2xl rounded-sm w-full mx-auto text-center lg:h-auto h-screen lg:pt-0 pt-10">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif uppercase">
               Discover Top-Rated Sports Venues Near You
             </h1>
-            <p className="text-xl text-wrap">
+            <p className="text-lg md:text-xl mt-4 md:mt-6">
               Find the perfect sports facility for your next game or event.
               Explore our curated selection of venues, complete with detailed
               descriptions, availability, and user reviews. Book your spot today
               and enjoy seamless access to high-quality sports environments.
             </p>
-            <div className="mt-3">
-              <h3 className="text-2xl font-serif uppercase">
+            <div className="mt-6">
+              <h3 className="text-xl md:text-2xl font-serif uppercase">
                 Service and Facility List:
               </h3>
-              <ul className="grid grid-cols-2 text-left bg-b">
+              <ul className="grid grid-cols-1 md:grid-cols-2 text-left bg-b mt-4">
                 {items.map((item, index) => (
                   <li
                     key={index}
-                    className="flex items-center mb-2 text-lg px-5"
+                    className="flex items-center mb-2 text-base md:text-lg px-5"
                   >
                     <FontAwesomeIcon
                       icon={faCheck}
@@ -56,7 +50,7 @@ const Hero = () => {
                   </li>
                 ))}
               </ul>
-              <Button className="uppercase rounded-none px-20 h-[50px] mt-5 text-lg bg-[#101010a0] backdrop-blur-md">
+              <Button className="uppercase rounded-none px-10 md:px-20 h-[40px] md:h-[50px] mt-5 text-base md:text-lg bg-[#101010a0] backdrop-blur-md">
                 Book Now
               </Button>
             </div>

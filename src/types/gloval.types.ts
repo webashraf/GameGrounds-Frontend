@@ -6,4 +6,17 @@ export type TFacility = {
   location: string;
   isDeleted: boolean;
   photoUrl: string;
-} | null;
+} ;
+
+export type TFacilitySelect = {
+  _id: string;
+  name: string;
+};
+export type TFormValues = {
+  date: string;
+  facility: string;
+};
+
+export type TAvailabilityCheckerProps = {
+  setQuery: (query: TFormValues) => void;
+};

@@ -5,11 +5,13 @@ const CommonHero = ({
   img = heroImg,
 }: {
   title: string;
-  img: string | null;
+  img?: string | null;
 }) => {
   return (
     <div
-      style={{ backgroundImage: `url(${img})` }}
+      style={{
+        backgroundImage: `url(https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)`,
+      }}
       className="h-[60vh] w-full bg-no-repeat bg-cover bg-center bg-[100% mb-24"
     >
       <div

@@ -2,8 +2,8 @@ import React from "react";
 import { Chrono } from "react-chrono";
 import heroImg1 from "../../../../assets/hero/aerial-view-grass-field-hockey_23-2149668573.jpg";
 import CommonHeading from "../../../shared/CommonHeading/CommonHeading";
-
 import "./HowItsWork.css";
+
 const HowItsWork: React.FC = () => {
   const items = [
     {
@@ -49,20 +49,19 @@ const HowItsWork: React.FC = () => {
         title="Simplified Booking Journey"
         subTitle="Understand the process of booking sports facilities in just a few clicks."
       />
-      <div className="flex gap-10">
-        <div className="w-1/2">
+      <div className="flex flex-col lg:flex-row gap-10">
+        <div className="w-full lg:w-1/2">
           <img
             src={heroImg1}
             className="w-full h-full object-cover rounded-md"
-            alt=""
+            alt="Sports facility"
           />
         </div>
-        <div className="w-1/2 h-[70vh] shadow-xl">
+        <div className="w-full lg:w-1/2 h-auto lg:h-[70vh] shadow-xl">
           <Chrono
             items={items}
             mode="VERTICAL_ALTERNATING"
             scrollable={{ scrollbar: true }}
-            //   textOverlay
             buttonTexts={{
               first: "Jump to First",
               last: "Jump to Last",
@@ -73,11 +72,11 @@ const HowItsWork: React.FC = () => {
             slideItemDuration={4500}
             slideShowType="reveal"
             theme={{
-              primary: "black",
-              secondary: "white",
-              cardBgColor: "white",
-              titleColor: "Black",
-              titleColorActive: "black",
+              primary: "black", // Primary color for the component
+              secondary: "white", // Secondary color for the component
+              cardBgColor: "white", // Background color of the card
+              titleColor: "black", // Color of the titles
+              titleColorActive: "black", // Color of the active titles
             }}
             fontSizes={{
               cardSubtitle: "0.85rem",

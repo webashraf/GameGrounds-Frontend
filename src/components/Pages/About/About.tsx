@@ -4,10 +4,10 @@ import CommonHero from "../../shared/CommonHero/CommonHero";
 
 const About = () => {
   return (
-    <div className="  ">
+    <div className="">
       <CommonHero title="about us" />
 
-      <section className="relative bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-8 rounded-lg shadow-lg overflow-hidden">
+      <section className="relative bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-4 sm:px-8 rounded-lg shadow-lg overflow-hidden">
         <div
           className="absolute inset-0 opacity-20 mix-blend-multiply"
           style={{
@@ -17,8 +17,8 @@ const About = () => {
           }}
         ></div>
         <div className="relative z-10 text-center max-w-4xl mx-auto">
-          <h2 className="text-5xl font-extrabold mb-6">Our Mission</h2>
-          <p className="text-lg leading-relaxed">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6">Our Mission</h2>
+          <p className="text-base sm:text-lg leading-relaxed">
             We aim to revolutionize the way sports facilities are booked by
             creating an intuitive, user-friendly platform that enhances
             accessibility for all. Our commitment is to empower communities to
@@ -26,7 +26,7 @@ const About = () => {
             accessible to everyone.
           </p>
         </div>
-        <div className="relative z-10 mt-8 flex justify-center space-x-4">
+        <div className="relative z-10 mt-8 flex flex-wrap justify-center gap-4">
           <div className="px-4 py-2 bg-white text-blue-600 font-semibold rounded-full shadow-md">
             <span className="block">Accessibility</span>
           </div>
@@ -39,11 +39,11 @@ const About = () => {
         </div>
       </section>
 
-      <section className="mb-16 section-padding">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="mb-16 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div>
-            <h2 className="text-4xl font-bold mb-4">About the Platform</h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">About the Platform</h2>
+            <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
               The Sports Facility Booking Platform is a comprehensive solution
               designed to simplify the process of reserving sports facilities.
               Whether you're an individual looking to book a local court or an
@@ -55,12 +55,12 @@ const About = () => {
             </p>
           </div>
           <div className="flex justify-center">
-            <img src={img1} alt="Platform" className="rounded-lg shadow-lg" />
+            <img src={img1} alt="Platform" className="w-full sm:w-3/4 md:w-1/2 rounded-lg shadow-lg" />
           </div>
         </div>
       </section>
 
-      <section className="mb-16 section-padding">
+      <section className="mb-16 py-8">
         <CommonHeading
           title="Our Dedicated Professionals"
           subTitle="Get to know the talented individuals behind our success."
@@ -71,9 +71,9 @@ const About = () => {
               <img
                 src={member.photo}
                 alt={member.name}
-                className="w-40 h-40 rounded-full mx-auto mb-4 object-cover shadow-lg"
+                className="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-lg"
               />
-              <h3 className="text-xl font-semibold">{member.name}</h3>
+              <h3 className="text-lg sm:text-xl font-semibold">{member.name}</h3>
               <p className="text-sm text-gray-500">{member.position}</p>
               <p className="text-gray-600 mt-2">{member.bio}</p>
             </div>
@@ -81,23 +81,23 @@ const About = () => {
         </div>
       </section>
 
-      <section className="mb-8  section-padding">
+      <section className="mb-8 py-8">
         <CommonHeading
           title="Milestones and Achievements"
           subTitle="A look back at our key moments and successes"
         />
-        <div className="relative w-[70%] mx-auto">
+        <div className="relative w-full lg:w-3/4 mx-auto">
           <div className="absolute border-l-2 border-blue-500 h-full left-1/2 transform -translate-x-1/2"></div>
           {milestones.map((milestone, index) => (
             <div
               key={index}
-              className={`flex flex-col items-center mb-2 ${
+              className={`flex flex-col items-center mb-4 ${
                 index % 2 === 0 ? "lg:flex-row-reverse" : "lg:flex-row"
               }`}
             >
-              <div className="bg-white shadow-md rounded-lg p-3 lg:p-4 lg:max-w-sm w-full text-center lg:text-left transform transition-transform duration-300 hover:scale-105">
-                <h3 className="text-2xl font-semibold mb-1 flex items-center justify-center lg:justify-start">
-                  <span className="mr-1 text-blue-500 text-3xl">
+              <div className="bg-white shadow-md rounded-lg p-4 lg:max-w-sm w-full text-center lg:text-left transform transition-transform duration-300 hover:scale-105">
+                <h3 className="text-xl sm:text-2xl font-semibold mb-1 flex items-center justify-center lg:justify-start">
+                  <span className="mr-1 text-blue-500 text-2xl sm:text-3xl">
                     {milestone.icon}
                   </span>
                   {milestone.title}
@@ -114,16 +114,16 @@ const About = () => {
         </div>
       </section>
 
-      <section className="bg-gray-100 py-12 rounded-lg shadow-md">
-        <h2 className="text-4xl font-bold text-center mb-8">Contact Us</h2>
+      <section className="bg-gray-100 py-8 rounded-lg shadow-md">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8">Contact Us</h2>
         <div className="flex flex-col items-center">
-          <p className="text-lg text-gray-700 mb-4">
+          <p className="text-base sm:text-lg text-gray-700 mb-4">
             <strong>Office:</strong> 123 Sports Facility St, City, Country
           </p>
-          <p className="text-lg text-gray-700 mb-4">
+          <p className="text-base sm:text-lg text-gray-700 mb-4">
             <strong>Phone:</strong> +123 456 7890
           </p>
-          <p className="text-lg text-gray-700 mb-4">
+          <p className="text-base sm:text-lg text-gray-700 mb-4">
             <strong>Email:</strong> info@sportsfacility.com
           </p>
         </div>
@@ -132,7 +132,6 @@ const About = () => {
   );
 };
 
-// Sample data
 const teamMembers = [
   {
     name: "John Doe",
@@ -148,7 +147,6 @@ const teamMembers = [
     photo:
       "https://images.pexels.com/photos/1819483/pexels-photo-1819483.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
-  // Add more team members as needed
 ];
 
 const milestones = [
@@ -187,7 +185,6 @@ const milestones = [
     date: "2024",
     icon: "🏆",
   },
-  // Add more milestones as needed
 ];
 
 export default About;

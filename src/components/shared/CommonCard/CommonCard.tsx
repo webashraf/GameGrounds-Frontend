@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "../../ui/button";
 
-const CommonCard = ({ item }) => {
+const CommonCard = ({ item }: any) => {
   return (
     <div
       style={{ backgroundImage: `url(${item.photoUrl})` }}
       key={item._id}
-      className="group flex flex-col justify-start items-start gap-2 w-96 h-56 duration-500 relative rounded-lg   hover:-translate-y-2 hover:shadow-xl  shadow-xl backdrop-brightness-0"
+      className="group flex flex-col justify-start items-start gap-2 lg:w-96 w-[92%] h-56 duration-500 relative rounded-lg   hover:-translate-y-2 hover:shadow-xl  shadow-xl backdrop-brightness-0  lg:mb-0 mb-10"
     >
       <div className="absolute duration-700 shadow-md group-hover:-translate-y-4 group-hover:-translate-x-4 -bottom-10 -right-10 w-1/2 h-1/2 rounded-lg  overflow-hidden z-50">
         <img

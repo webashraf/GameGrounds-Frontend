@@ -75,6 +75,16 @@ export const baseApi = createApi({
       },
       // invalidatesTags: ["facilities"],
     }),
+    createABook: builder.mutation({
+      query: (payload) => {
+        console.log(payload);
+        return {
+          url: `/bookings`,
+          method: "POST",
+          body: payload,
+        };
+      },
+    }),
   }),
 });
 
@@ -86,4 +96,5 @@ export const {
   useUpdateFacilitiesMutation,
   useDeleteFacilitiesMutation,
   useCheckAvailabilityQuery,
+  useCreateABookMutation,
 } = baseApi;

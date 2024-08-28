@@ -1,29 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useCheckAvailabilityQuery } from "../../../Redux/api/baseApi";
+import {
+  useCheckAvailabilityQuery,
+  useGetFacilitiesQuery,
+} from "../../../Redux/api/baseApi";
 import { TFacility } from "../../../types/gloval.types";
 import CommonHero from "../../shared/CommonHero/CommonHero";
 import "./Booking.css";
 import AvailabilityChecker from "./BookingStepsItems/AvailabilityChecker";
-import FacilityFeatureChecker from "./BookingStepsItems/FacilityFeatureChecker";
+import BookingForm from "./BookingStepsItems/BookingForm";
 
 const Booking = () => {
-  const [facilityItem, setFacilityItem] = useState<TFacility>(null);
-  const [query, setQuery] = useState(null);
-  const queryString = `${query?.date}&facility=${query?.id}`;
-  // Check availability
-  console.log("query", !query, query, queryString);
-  const {
-    data: availabilitySlot,
-    error,
-    refetch,
-  } = useCheckAvailabilityQuery(queryString, { skip: !query });
+  const { data: facilities } = useGetFacilitiesQuery(undefined);
+  const [query, setQuery] = useState<any>(null);
+  console.log(query);
+  const queryString = `${query?.date}&facility=${query?.facility}`;
+  const [facilityForFeature, setFacilityForFeature] = useState<TFacility>(null);
 
-  console.log(availabilitySlot?.data);
+  // console.log(facilities);
+  console.log("facilityForFeature", facilityForFeature);
+  const handleFacilityFeature = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedId = event.target.value;
+
+    const matchedFacility = facilities?.data?.find(
+      (facility: any) => facility._id === selectedId
+    );
+
+    setFacilityForFeature({ ...matchedFacility });
+
+    console.log({ ...matchedFacility });
+  };
+
+  const { data: availabilitySlot } = useCheckAvailabilityQuery(queryString, {
+    skip: !query,
+  });
+
+  // console.log(availabilitySlot?.data);
 
   return (
     <div className="">
@@ -32,16 +51,6 @@ const Booking = () => {
         img="https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       />
 
-      {/* Booking Form */}
-      <div>
-        <h2 className="uppercase text-3xl">Booking Form</h2>
-      </div>
-
-      {/* Payment Integration */}
-
-      <div>
-        <h2 className="uppercase text-3xl">Payment Integration</h2>
-      </div>
       {/* Display a booking summary */}
       <div>
         <h2 className="uppercase text-3xl">Display a booking summary</h2>
@@ -57,6 +66,30 @@ const Booking = () => {
               <p className="text-gray-700 text-center text-2xl font-serif font-semibold">
                 Your Service Features Will Appear Here
               </p>
+              {/* Step-1 Facility feature data */}
+              {facilityForFeature && (
+                <div className="border-2 border-dashed  min-h-[100px] text-left flex justify-center items-center gap-10 p-5 ">
+                  <div className="r-10">
+                    <h2 className="text-2xl font-serif">
+                      {facilityForFeature?.name}
+                    </h2>
+                    <p className="text-[#494949] text-sm mb-2">
+                      {facilityForFeature?.description}
+                    </p>
+                    <p>
+                      <span className="font-serif">Price:</span> $
+                      {facilityForFeature?.pricePerHour}
+                    </p>
+                    <p>
+                      <span className="font-serif">Location:</span>{" "}
+                      {facilityForFeature?.location}
+                    </p>
+                  </div>
+                  <div className="h-full w-[200px]">
+                    <img src={facilityForFeature?.photoUrl} alt="" />
+                  </div>
+                </div>
+              )}
 
               {availabilitySlot && (
                 <div className="flex flex-col items-center pt-10 text-left">
@@ -76,7 +109,7 @@ const Booking = () => {
             <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
           </div>
 
-          {/* Right div (Input Form) */}
+          {/* Right div */}
           <div className="flex-1 mx-6 my-8 w-1/2">
             <div className="swiper-container mx-auto py-10 shadow-xl rounded- bg-white">
               <Swiper
@@ -91,34 +124,23 @@ const Booking = () => {
                 pagination={{ clickable: false }}
               >
                 {/* Slide-1 Feature Facilities */}
-                <SwiperSlide className="shadow-xl felx flex-col">
-                  <h2 className="text-3xl uppercase">
+                <SwiperSlide className="shadow-xl flex flex-col  ">
+                  <h2 className="text-3xl uppercase mb-5">
                     Select a facility and check it's feature
                   </h2>
-                  <FacilityFeatureChecker setFacilityItem={setFacilityItem} />
-                  {facilityItem && (
-                    <div className="border-2 border-dashed  min-h-[100px] text-left flex justify-center items-center gap-10 p-5 ">
-                      <div className="r-10">
-                        <h2 className="text-2xl font-serif">
-                          {facilityItem?.name}
-                        </h2>
-                        <p className="text-[#494949] text-sm mb-2">
-                          {facilityItem?.description}
-                        </p>
-                        <p>
-                          <span className="font-serif">Price:</span> $
-                          {facilityItem?.pricePerHour}
-                        </p>
-                        <p>
-                          <span className="font-serif">Location:</span>{" "}
-                          {facilityItem?.location}
-                        </p>
-                      </div>
-                      <div className="h-full w-[200px]">
-                        <img src={facilityItem?.photoUrl} alt="" />
-                      </div>
-                    </div>
-                  )}
+                  <select
+                    onChange={handleFacilityFeature}
+                    className=" px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-[400px]"
+                  >
+                    <option value="" disabled>
+                      Select a facility
+                    </option>
+                    {facilities?.data.map((facility: any) => (
+                      <option key={facility._id} value={facility._id}>
+                        {facility.name}
+                      </option>
+                    ))}
+                  </select>
                 </SwiperSlide>
 
                 {/* Slide-2 Availability Checker */}
@@ -126,31 +148,23 @@ const Booking = () => {
                   <AvailabilityChecker setQuery={setQuery} />
                 </SwiperSlide>
 
+                {/* Slide-3 Booking Form */}
                 <SwiperSlide className="shadow-xl ">
                   <div className="p-20 text-left ">
                     <div className="flex justify-between items-end">
                       <div>
-                        <h2 className="text-3xl uppercase">Booking Form</h2>
-                        <p className="text-[#494949] italic">Content</p>
+                        <h2 className="text-3xl uppercase mb-2">
+                          Booking Form
+                        </h2>
                       </div>
                     </div>
-                    <div>Details Info</div>
+                    <div>
+                      <BookingForm />
+                    </div>
                   </div>
                 </SwiperSlide>
 
-                <SwiperSlide className="shadow-xl ">
-                  <div className="p-20 text-left ">
-                    <div className="flex justify-between items-end">
-                      <div>
-                        <h2 className="text-3xl uppercase">
-                          Payment Integration
-                        </h2>
-                        <p className="text-[#494949] italic">Content</p>
-                      </div>
-                    </div>
-                    <div>Details Info</div>
-                  </div>
-                </SwiperSlide>
+               
               </Swiper>
               <div className="flex gap-2 justify-between px-5">
                 <div className="custom-prev bg-black h-16 w-32 flex items-center justify-center hover:bg-slate-800 transition-transform duration-300 ease-in-out">

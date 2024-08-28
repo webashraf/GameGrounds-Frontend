@@ -12,7 +12,7 @@ const MainLayout = () => {
   const container = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // ScaleY animation for nav
+    // Animation for scaling Y-axis of the nav
     const scaleAnimation = gsap.to(".m-nav", {
       scaleY: 3.5,
       scrollTrigger: {
@@ -20,12 +20,11 @@ const MainLayout = () => {
         start: "400px 200px",
         end: "800px 500px",
         scrub: 5,
-        // markers: true, // Uncomment to see scroll trigger markers
       },
       ease: "power4.inOut",
     });
 
-    // Move nav to the top when scrolling down
+    // Animation for moving nav upwards when scrolling down
     const moveAnimation = gsap.to(".nav", {
       y: -60,
       scrollTrigger: {
@@ -37,6 +36,7 @@ const MainLayout = () => {
       ease: "power4.inOut",
     });
 
+    // Cleanup animations on component unmount
     return () => {
       scaleAnimation.kill();
       moveAnimation.kill();
@@ -45,23 +45,22 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div className="mx-w-[1820px] mx-auto w-[1820px]">
-      <div ref={container} className="relative overflow-x-hidden ">
+    <div className="max-w-full lg:max-w-[1820px] mx-auto w-full">
+      {/* Responsive wrapper with maximum width for larger screens */}
+      <div ref={container} className="relative overflow-x-hidden">
         <div>
-          {/* Desktop Nav */}
-          <div className="nav hidden lg:block fixed w-[1820px] mx-auto top-0 left-0 right-0 z-50">
+          {/* Desktop Navbar */}
+          <div className="nav hidden lg:block fixed w-full lg:w-[1820px] mx-auto top-0 left-0 right-0 z-50">
             <div className="m-nav w-full h-[60px] absolute bg-[#00000084] backdrop-blur-lg -z-20"></div>
             <Navbar />
           </div>
         </div>
-        {/* Mobile nav */}
+        {/* Mobile Navbar */}
         <div className="lg:hidden md:block fixed bottom-5 left-0 right-0 z-50">
           <MobileNav />
         </div>
-        {/* Body */}
+        {/* Main Content */}
         <div className="m-2">
-          {" "}
-          {/* Added m-2 class */}
           <Outlet />
         </div>
         <Footer />
