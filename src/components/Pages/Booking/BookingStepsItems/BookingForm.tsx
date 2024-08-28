@@ -21,6 +21,7 @@ const BookingForm = () => {
   const { handleSubmit, control } = useForm<IBookingFormInput>();
   const [bookError, setBookError] = useState("");
 
+  
   // * Handle Booking
   const handleBooking = async (data: IBookingFormInput) => {
     setBookError("");

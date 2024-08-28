@@ -51,6 +51,11 @@ const router = createBrowserRouter([
         path: "facilities",
         element: <Facilities />,
       },
+      {
+        path: "facilities/:id",
+        element: <Facilities />,
+        
+      },
     ],
   },
   {

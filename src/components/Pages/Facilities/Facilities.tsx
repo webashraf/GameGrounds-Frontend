@@ -1,51 +1,84 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  ChangeEvent,
+  FormEvent,
+  KeyboardEvent,
+  useEffect,
+  useState,
+} from "react";
 import { useGetFacilitiesQuery } from "../../../Redux/api/baseApi";
 import CommonCard from "../../shared/CommonCard/CommonCard";
 import CommonHeading from "../../shared/CommonHeading/CommonHeading";
 import CommonHero from "../../shared/CommonHero/CommonHero";
+import { Button } from "../../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
-const Facilities = () => {
-  const {
-    data: facilities,
-    error,
-    isLoading,
-    isFetching,
-  } = useGetFacilitiesQuery(undefined);
-  console.log(facilities);
-  const [searchValue, setSearchValue] = useState("");
-  const [price, setPrice] = useState(1000);
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1000);
 
-  const handlePriceChange = (event) => {
-    setPrice(event.target.value);
-    setMaxPrice(Number(event.target.value));
+// Define types
+interface Facility {
+  _id: string;
+  name: string;
+  pricePerHour: number;
+  // Add other facility properties as needed
+}
 
-    // Add your filtering logic here
-  };
+interface FormData {
+  minPrice: number;
+  maxPrice: number;
+}
 
-  const handleMinPriceChange = (event) => {
-    setMinPrice(Number(event.target.value));
-    setPrice(Number(event.target.value));
-  };
+const Facilities: React.FC = () => {
+  const { data: facilities } = useGetFacilitiesQuery(undefined);
 
-  const handleMaxPriceChange = (event) => {
-    setMaxPrice(Number(event.target.value));
-    setPrice(Number(event.target.value));
-  };
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [formData, setFormData] = useState<FormData>({
+    minPrice: 0,
+    maxPrice: 1000,
+  });
+  const [facilitiesData, setFacilitiesData] = useState<Facility[]>(
+    facilities?.data || []
+  );
 
-  const handleSearchChange = (event) => {
+  useEffect(() => {
+    setFacilitiesData(facilities?.data || []);
+  }, [facilities]);
+
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
 
   const handleSearchClick = () => {
-    console.log(searchValue);
+    const searchResult = facilities?.data.filter((item) =>
+      item.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFacilitiesData(searchResult);
+    if (!searchValue) {
+      setFacilitiesData(facilities?.data || []);
+    }
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       console.log(searchValue);
     }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: parseFloat(value),
+    }));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const minPrice = formData.minPrice || 0;
+    const maxPrice = formData.maxPrice || 1000;
+    const filteredItems = facilities?.data.filter(
+      (item: any) =>
+        item.pricePerHour > minPrice && item.pricePerHour < maxPrice
+    );
+    setFacilitiesData(filteredItems || []);
   };
 
   return (
@@ -87,60 +120,47 @@ const Facilities = () => {
         <Popover>
           <PopoverTrigger>Filter By Price</PopoverTrigger>
           <PopoverContent>
-            <div className="flex flex-col items-center   p-4 bg-gray-100 rounded-lg shadow-lg  gap-5">
-              <div className="20%] flex flex-col">
-                <label htmlFor="minPrice" className="text-lg font-medium ">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-lg gap-5"
+            >
+              <div className="flex flex-col">
+                <label htmlFor="minPrice" className="text-lg font-medium">
                   Min:
                 </label>
                 <input
                   type="number"
                   id="minPrice"
-                  value={minPrice}
-                  onChange={handleMinPriceChange}
-                  className=" p-2 border border-gray-300 rounded-lg 100% text-center"
+                  name="minPrice"
+                  value={formData.minPrice}
+                  onChange={handleChange}
+                  className="p-2 border border-gray-300 rounded-lg text-center"
                 />
               </div>
 
-              <div className="20%] flex flex-col">
-                {" "}
+              <div className="flex flex-col">
                 <label htmlFor="maxPrice" className="text-lg font-medium">
                   Max:
                 </label>
                 <input
                   type="number"
                   id="maxPrice"
-                  value={maxPrice}
-                  onChange={handleMaxPriceChange}
-                  className=" p-2 border border-gray-300 rounded-lg  text-center"
+                  name="maxPrice"
+                  value={formData.maxPrice}
+                  onChange={handleChange}
+                  className="p-2 border border-gray-300 rounded-lg text-center"
                 />
               </div>
 
-              <div className="60%] flex items-center gap">
-                <div className="90%">
-                  <label htmlFor="priceRange" className="text-lg font-medium ">
-                    Filter by Price: ${price}
-                  </label>
-                  <input
-                    type="range"
-                    id="priceRange"
-                    min={minPrice}
-                    max={maxPrice}
-                    step="10"
-                    value={price}
-                    onChange={handlePriceChange}
-                    className="w-full accent-black"
-                  />
-                </div>
-              </div>
-            </div>
+              <Button type="submit">Submit</Button>
+            </form>
           </PopoverContent>
         </Popover>
       </div>
 
       {/* Facilities items card */}
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 lg:gap-28 pb-20 md:pb-28 lg:pb-36 ">
-        {facilities?.data?.map((item: any) => (
+        {facilitiesData.map((item) => (
           <CommonCard key={item._id} item={item} />
         ))}
       </div>
