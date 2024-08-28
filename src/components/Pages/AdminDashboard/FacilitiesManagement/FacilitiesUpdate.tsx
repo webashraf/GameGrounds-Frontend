@@ -12,7 +12,7 @@ import FacilitiesTable from "./FacilitiesTable";
 const FacilitiesUpdate = () => {
   const { data: facilitiesData } = useGetFacilitiesQuery(undefined);
 
-  console.log(facilitiesData?.data);
+  // console.log(facilitiesData?.data);
 
   return (
     <div className="w-full ">

@@ -20,6 +20,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -53,6 +54,7 @@ const FacilitiesTable = ({ item, i }: any) => {
     // watch,
     formState: { errors },
   } = useForm<any>();
+
   const onSubmit: SubmitHandler<any> = async (data) => {
     const updatedData = {
       name: data.name,
@@ -61,18 +63,19 @@ const FacilitiesTable = ({ item, i }: any) => {
       location: data.location,
       pricePerHour: Number(data.pricePerHour),
     };
-    console.log(updatedData);
-    reset();
-    console.log(updatedData, data._id);
+    console.log("updatedData", data.id);
+    console.log("data", data);
+    // console.log(updatedData);
 
     try {
       const res = await updateFacilities({
-        _id: data._id,
+        _id: data.id,
         data: updatedData,
       }).unwrap();
 
       console.log(res);
       if (res?.success) {
+        reset();
         toast.success(res?.message);
       }
       if (res?.error) {
@@ -284,17 +287,26 @@ const FacilitiesTable = ({ item, i }: any) => {
                       {errors.exampleRequired && (
                         <span>This field is required</span>
                       )}
-
+                      <input
+                        {...register("id", { required: true })}
+                        type="text"
+                        className="opacity-0"
+                        defaultValue={item._id}
+                        id="f_id"
+                      />
                       {/* <input type="submit"  /> */}
-                      <Button type="submit" className="uppercase text-lg mt-3">
-                        Submit
-                      </Button>
+                      <DialogFooter>
+                        <Button
+                        
+                          type="submit"
+                          className="uppercase text-lg mt-3 w-full"
+                        >
+                          Submit
+                        </Button>
+                      </DialogFooter>
                     </form>
                   </div>
                 </div>
-                {/* <DialogFooter>
-                  <Button type="submit">Save changes</Button>
-                </DialogFooter> */}
               </DialogContent>
             </Dialog>
           </AlertDialog>

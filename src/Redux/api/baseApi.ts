@@ -20,6 +20,10 @@ export const baseApi = createApi({
       query: () => ({ url: "/facility", method: "GET" }),
       providesTags: ["facilities"],
     }),
+    getSingleFacility: builder.query({
+      query: (id) => ({ url: `/facility/${id}`, method: "GET" }),
+      providesTags: ["facilities"],
+    }),
     login: builder.mutation({
       query: (payload) => ({
         url: "/auth/login",
@@ -90,6 +94,7 @@ export const baseApi = createApi({
 
 export const {
   useGetFacilitiesQuery,
+  useGetSingleFacilityQuery,
   useLoginMutation,
   useSignUpMutation,
   useAddFacilitiesMutation,

@@ -47,7 +47,7 @@ const Facilities: React.FC = () => {
   };
 
   const handleSearchClick = () => {
-    const searchResult = facilities?.data.filter((item) =>
+    const searchResult = facilities?.data.filter((item: any) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFacilitiesData(searchResult);

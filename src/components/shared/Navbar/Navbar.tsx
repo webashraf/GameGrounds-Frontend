@@ -49,7 +49,7 @@ const Navbar = () => {
       </div>
       <div
         ref={hoverRef}
-        className="relative flex items-center justify-center w-[50%] mx-auto cursor-non"
+        className="relative flex items-center justify-center w-[50% mx-auto cursor-non"
       >
         <ul className="flex justify-center gap-10 font-mono bold text-white/80 text-xl cursor-non">
         <NavLink

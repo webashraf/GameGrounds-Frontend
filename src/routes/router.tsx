@@ -10,6 +10,7 @@ import Booking from "../components/Pages/Booking/Booking";
 import Contact from "../components/Pages/Contact/Contact";
 import Facilities from "../components/Pages/Facilities/Facilities";
 import Home from "../components/Pages/Home/Home";
+import SingleFacility from "../components/Pages/SingleFacility/SingleFacility";
 import Login from "../components/Pages/User/Login";
 import UserSignUp from "../components/Pages/User/userSignUp";
 
@@ -52,9 +53,8 @@ const router = createBrowserRouter([
         element: <Facilities />,
       },
       {
-        path: "facilities/:id",
-        element: <Facilities />,
-        
+        path: "single-facility/:id",
+        element: <SingleFacility />,
       },
     ],
   },

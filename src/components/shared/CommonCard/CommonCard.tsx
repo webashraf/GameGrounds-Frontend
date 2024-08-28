@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { NavLink } from "react-router-dom";
 import { Button } from "../../ui/button";
 
 const CommonCard = ({ item }: any) => {
@@ -28,9 +29,11 @@ const CommonCard = ({ item }: any) => {
             Price: ${item.pricePerHour}
           </p>
         </div>
-        <Button className="hover:  text-white mt-14 rounded p-2 px-6 absolute bottom-5 left-6">
-          View Details
-        </Button>
+        <NavLink to={`/single-facility/${item._id}`}>
+          <Button className="hover:  text-white mt-14 rounded p-2 px-6 absolute bottom-5 left-6">
+            View Details
+          </Button>
+        </NavLink>
       </div>
     </div>
   );
