@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div>
       <Hero />
-      <div className="lg:mx-20 w-full">
+      <div className="px-20">
         <FeaturedFacilities />
         <HowItsWork />
         <Testimonial />

@@ -45,12 +45,12 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div className="max-w-full lg:max-w-[1820px] mx-auto w-full">
+    <div className="max-w-full lg:max-w-[1920px] mx-auto w-full">
       {/* Responsive wrapper with maximum width for larger screens */}
       <div ref={container} className="relative overflow-x-hidden">
         <div>
           {/* Desktop Navbar */}
-          <div className="nav hidden lg:block fixed w-full lg:w-[1820px] mx-auto top-0 left-0 right-0 z-50">
+          <div className="nav hidden lg:block fixed w-full lg:w-[1920px] mx-auto top-0 left-0 right-0 z-50">
             <div className="m-nav w-full h-[60px] absolute bg-[#00000084] backdrop-blur-lg -z-20"></div>
             <Navbar />
           </div>
@@ -60,7 +60,7 @@ const MainLayout = () => {
           <MobileNav />
         </div>
         {/* Main Content */}
-        <div className="m-2">
+        <div className="m-2 mx-auto">
           <Outlet />
         </div>
         <Footer />

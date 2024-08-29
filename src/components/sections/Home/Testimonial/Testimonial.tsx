@@ -103,7 +103,7 @@ const Testimonial = () => {
                       <h2 className="text-3xl uppercase">{info.name}</h2>
                       <p className="text-[#494949] italic">{info.position}</p>
                     </div>
-                    <div className="border-dashed w-28 h-32 rounded-sm border-black overflow-hidden bg-slate-800">
+                    <div className="border-dashed mx-auto w-28 h-32 rounded-sm border-black overflow-hidden bg-slate-800">
                       <img
                         src={info.photoUrl}
                         className="w-full h-full object-cover"
