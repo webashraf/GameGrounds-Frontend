@@ -36,11 +36,9 @@ const MyBookings = () => {
   }
   const { data: myBookings } = useGetAllBookingsByUserQuery(user?.email);
   const [cancelBooking] = useCancelBookingMutation();
-  // console.log("MyBookings", myBookings);
 
   const handleCancelBooking = async (id: string) => {
     const res = await cancelBooking(id).unwrap();
-    console.log(res.success);
     if (res?.success) {
       toast.success(res.message);
     } else {

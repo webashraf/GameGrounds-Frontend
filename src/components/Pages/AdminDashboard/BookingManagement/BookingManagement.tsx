@@ -11,7 +11,6 @@ import {
 
 const BookingManagement = () => {
   const { data: bookings } = useGetAllBookingsQuery(undefined);
-  console.log(bookings);
   return (
     <>
       <div className="lg:mt-0 mt-10 relative h-[90vh] w-[90%] overflow-auto custom-scrollbar mx-auto section-padding ">

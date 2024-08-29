@@ -34,7 +34,6 @@ const UserDashboardLayout = () => {
     user = verifyToken(token);
   }
 
-  console.log(user);
 
   return (
     <div className="flex">

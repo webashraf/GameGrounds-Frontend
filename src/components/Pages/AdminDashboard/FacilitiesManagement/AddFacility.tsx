@@ -23,7 +23,6 @@ const AddFacility = () => {
     formState: { errors },
   } = useForm<TFacilityFormData>();
   const onSubmit: SubmitHandler<TFacilityFormData> = async (data) => {
-    console.log(data);
     const facilityInfo = {
       ...data,
       pricePerHour: Number(data.pricePerHour),
@@ -31,7 +30,6 @@ const AddFacility = () => {
     try {
       const res = await addFacilities(facilityInfo).unwrap();
 
-      console.log(res);
       if (res?.success) {
         toast.success(res?.message);
         reset();
@@ -43,7 +41,6 @@ const AddFacility = () => {
         reset();
       }
     } catch (err: any) {
-      console.log(err);
       if (err) {
         toast.error(
           err?.data?.success ? err?.data?.message : "Facility failed to add!"

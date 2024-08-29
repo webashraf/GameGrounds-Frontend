@@ -32,7 +32,6 @@ const MobileNav = () => {
     user = verifyToken(token);
   }
 
-  console.log(user);
 
   const toggleNav = () => {
     if (navRef.current) {

@@ -33,7 +33,6 @@ const AdminLayout = () => {
     user = verifyToken(token);
   }
 
-  console.log(user);
 
   return (
     <div className="flex">

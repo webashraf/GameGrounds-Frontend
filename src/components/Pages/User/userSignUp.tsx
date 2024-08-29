@@ -10,7 +10,6 @@ import "./loginRegisterForm.css";
 const UserSignUp = ({ uRole = "user" }) => {
   const [signUp, { error }] = useSignUpMutation();
   const navigate = useNavigate();
-  console.log("uROles", uRole);
 
   const defaultValue = {
     name: "Ali Ashraf Tameem",

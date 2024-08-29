@@ -25,15 +25,12 @@ const BookingForm = () => {
   // * Handle Booking
   const handleBooking = async (data: IBookingFormInput) => {
     setBookError("");
-    console.log("Form Data", data);
     const amount = facilities?.data?.find(
       (facility: TFacility) => facility._id === data.facility
     )?.pricePerHour;
     const bookingInfo = { ...data, payableAmount: amount };
-    console.log("amount", amount);
     try {
       const res = await createABook(bookingInfo).unwrap();
-      console.log(res);
       if (res?.success) {
         window.location.href = res.data.paymentSession.payment_url;
         toast.success("Booking Successful");
@@ -44,7 +41,6 @@ const BookingForm = () => {
         );
         toast.error(res.error?.data.message);
       }
-      console.log(res.error?.data.message);
     } catch (err) {
       console.log(err);
       setBookError("Faild to book!!");

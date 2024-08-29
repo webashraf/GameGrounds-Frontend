@@ -4,7 +4,6 @@ import { TFacility } from "../../../../types/gloval.types";
 
 const FacilitySelect = ({ setFacility }: any) => {
   const { data: facilities } = useGetFacilitiesQuery(undefined);
-  console.log(facilities);
 
   const handleFacilityFeature = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -17,7 +16,6 @@ const FacilitySelect = ({ setFacility }: any) => {
 
     setFacility({ ...matchedFacility });
 
-    console.log({ ...matchedFacility });
   };
   return (
     <div className=" text-left ">

@@ -35,7 +35,6 @@ const FacilitiesTable = ({ item, i }: any) => {
 
   //* Handle Delete Trees
   const handleDeleteTree = async (_id: string) => {
-    console.log(_id);
     try {
       const res = await deleteFacilities(_id);
       if (res.data.success === true) {
@@ -63,9 +62,7 @@ const FacilitiesTable = ({ item, i }: any) => {
       location: data.location,
       pricePerHour: Number(data.pricePerHour),
     };
-    console.log("updatedData", data.id);
-    console.log("data", data);
-    // console.log(updatedData);
+   
 
     try {
       const res = await updateFacilities({
@@ -73,7 +70,6 @@ const FacilitiesTable = ({ item, i }: any) => {
         data: updatedData,
       }).unwrap();
 
-      console.log(res);
       if (res?.success) {
         reset();
         toast.success(res?.message);

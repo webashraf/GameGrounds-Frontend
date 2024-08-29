@@ -6,11 +6,8 @@ import CommonHeading from "../../../shared/CommonHeading/CommonHeading";
 const FeaturedFacilities = () => {
   const {
     data: facilities,
-    error,
-    isLoading,
-    isFetching,
+ 
   } = useGetFacilitiesQuery(undefined);
-  console.log({ facilities, error, isLoading, isFetching });
 
   return (
     <div className="section-padding px-5 md:px-10 lg:px-20">

@@ -51,7 +51,6 @@ export const baseApi = createApi({
     }),
     updateFacilities: builder.mutation({
       query: ({ data, _id }) => {
-        console.log(data);
         return {
           url: `/facility/${_id}`,
           method: "PUT",
@@ -62,7 +61,6 @@ export const baseApi = createApi({
     }),
     deleteFacilities: builder.mutation({
       query: (_id) => {
-        console.log(_id);
         return {
           url: `/facility/${_id}`,
           method: "DELETE",
@@ -72,7 +70,6 @@ export const baseApi = createApi({
     }),
     checkAvailability: builder.query({
       query: (query) => {
-        console.log(query);
         return {
           url: `/check-availability?date=${query}`,
           method: "GET",
@@ -82,7 +79,6 @@ export const baseApi = createApi({
     }),
     createABook: builder.mutation({
       query: (payload) => {
-        console.log(payload);
         return {
           url: `/bookings`,
           method: "POST",
@@ -91,8 +87,7 @@ export const baseApi = createApi({
       },
     }),
     getAllBookings: builder.query({
-      query: (query) => {
-        console.log(query);
+      query: () => {
         return {
           url: `/bookings`,
           method: "GET",
@@ -101,7 +96,6 @@ export const baseApi = createApi({
     }),
     getAllBookingsByUser: builder.query({
       query: (id) => {
-        console.log(id);
         return {
           url: `/bookings/user/${id}`,
           method: "GET",
@@ -111,7 +105,6 @@ export const baseApi = createApi({
     }),
     cancelBooking: builder.mutation({
       query: (id) => {
-        console.log(id);
         return {
           url: `/bookings/${id}`,
           method: "DELETE",

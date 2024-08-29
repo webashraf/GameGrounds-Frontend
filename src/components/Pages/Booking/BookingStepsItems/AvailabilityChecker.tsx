@@ -14,7 +14,6 @@ const AvailabilityChecker: React.FC<TAvailabilityCheckerProps> = ({
   const { register, handleSubmit } = useForm<TFormValues>();
 
   const onSubmit: SubmitHandler<TFormValues> = (data) => {
-    console.log("Form Data", data);
     setQuery(data);
   };
 
