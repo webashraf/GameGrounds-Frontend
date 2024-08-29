@@ -1,7 +1,8 @@
 import FeaturedFacilities from "../../sections/Home/FeaturedFacilities/FeaturedFacilities";
 import Hero from "../../sections/Home/Hero/Hero";
 import HowItsWork from "../../sections/Home/HowItsWork/HowItsWork";
-import { OurFields } from "../../sections/Home/OurFields/OurFields";
+import OurFields from "../../sections/Home/OurFields/OurFields";
+import { SocialLink } from "../../sections/Home/SocialLink/SocialLink";
 import Testimonial from "../../sections/Home/Testimonial/Testimonial";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
         <HowItsWork />
         <Testimonial />
         <OurFields />
+        <SocialLink />
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const FeaturedFacilities = () => {
     <div className="section-padding px-5 md:px-10 lg:px-20">
       <CommonHeading
         title="Premium Facilities for Every Sport"
-        subTitle="Handpicked venues for the ultimate sports experience"
+        subTitle="Hand picked venues for the ultimate sports experience"
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 lg:gap-28 pb-20 md:pb-28 lg:pb-36 ">
         {facilities?.data?.map((item: any) => (

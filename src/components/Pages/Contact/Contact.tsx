@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import GoogleMapReact from "google-map-react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -5,32 +6,41 @@ import CommonHero from "../../shared/CommonHero/CommonHero";
 import { Button } from "../../ui/button";
 
 // Define the interface for form data
-interface ContactFormData {
+type TContactFormData = {
   name: string;
   email: string;
   message: string;
-}
+};
+type TDefaultProps = {
+  center: {
+    lat: number;
+    lng: number;
+  };
+  zoom: number;
+};
 
 // Define the props for the map marker component
-interface MapMarkerProps {
-  text: string;
-}
+type TMapMarkerProps =
+  | {
+      text: string;
+    }
+  | any;
 
 // Map marker component
-const AnyReactComponent = ({ text }: MapMarkerProps) => <div>{text}</div>;
+const AnyReactComponent = ({ text }: TMapMarkerProps) => <div>{text}</div>;
 
 const Contact = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ContactFormData>();
+  } = useForm<TContactFormData>();
 
-  const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
+  const onSubmit: SubmitHandler<TContactFormData> = async (data) => {
     console.log(data);
   };
 
-  const defaultProps = {
+  const defaultProps: TDefaultProps = {
     center: {
       lat: 10.99835602,
       lng: 77.01502627,
@@ -71,11 +81,8 @@ const Contact = () => {
       </div>
 
       <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-        <div className="w-full md:w-1/2">
-          <div
-            className="mt-20 rounded-lg overflow-hidden"
-            style={{ height: "40vh", width: "100%" }}
-          >
+        <div className="w-full md:w-1/2 bg-black ">
+          <div className="h-[60vh] rounded-lg overflow-hidden">
             <GoogleMapReact
               bootstrapURLKeys={{ key: "" }}
               defaultCenter={defaultProps.center}
@@ -93,7 +100,7 @@ const Contact = () => {
         <div className="w-full md:w-1/2">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4 lg:h-[40vh] bg-white p-5 w-full rounded-lg shadow-xl"
+            className="flex flex-col gap-4  bg-white p-5 w-full rounded-lg shadow-xl"
           >
             <div className="w-full p-3 rounded-lg bg-gray-100">
               <label

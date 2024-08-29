@@ -1,18 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
-import AdminLayout from "../components/layouts/AdminLayout/AdminLayout";
-import MainLayout from "../components/layouts/MainLayout";
+import MainLayout from "../components/layouts/MainLayout/MainLayout";
 import ProtectedRoute from "../components/layouts/ProtectedRoute";
+import UserLayout from "../components/layouts/UserDashboardLayout/UserDashboardLayout";
 import About from "../components/Pages/About/About";
 import AddAdmin from "../components/Pages/AdminDashboard/AddAdmin/AddAdmin";
-import FacilitiesAdd from "../components/Pages/AdminDashboard/FacilitiesManagement/FacilitiesAdd";
+import BookingManagement from "../components/Pages/AdminDashboard/BookingManagement/BookingManagement";
+import AddFacility from "../components/Pages/AdminDashboard/FacilitiesManagement/AddFacility";
 import FacilitiesUpdate from "../components/Pages/AdminDashboard/FacilitiesManagement/FacilitiesUpdate";
+import WelcomeAdminDashboard from "../components/Pages/AdminDashboard/WelcomeAdminDeshboard";
 import Booking from "../components/Pages/Booking/Booking";
 import Contact from "../components/Pages/Contact/Contact";
+import ErrorPage from "../components/Pages/ErrorPage/ErrorPage";
+import UnAuthorizedUser from "../components/Pages/ErrorPage/UnAuthorizedUser";
 import Facilities from "../components/Pages/Facilities/Facilities";
 import Home from "../components/Pages/Home/Home";
 import SingleFacility from "../components/Pages/SingleFacility/SingleFacility";
 import Login from "../components/Pages/User/Login";
 import UserSignUp from "../components/Pages/User/userSignUp";
+import MyBookings from "../components/Pages/UserDashboard/MyBookings/MyBookings";
+import WelcomeUserDashboard from "../components/Pages/UserDashboard/WelcomeUserDashboard";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +29,14 @@ const router = createBrowserRouter([
     path: "/sign-up",
     element: <UserSignUp />,
   },
-
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
+  {
+    path: "/unauthorized",
+    element: <UnAuthorizedUser />,
+  },
   {
     path: "/",
     element: <MainLayout />,
@@ -62,24 +75,23 @@ const router = createBrowserRouter([
     path: "/admin",
     element: (
       <ProtectedRoute role="admin">
-        <AdminLayout />
+        <UserLayout />
       </ProtectedRoute>
     ),
     children: [
       {
         index: true,
         element: (
-          <div>
-            <h2 className="text-7xl uppercase">Welcome to admin dashboard</h2>
-          </div>
+          <ProtectedRoute role="admin">
+            <WelcomeAdminDashboard />
+          </ProtectedRoute>
         ),
       },
       {
         path: "facilities-add",
         element: (
           <ProtectedRoute role="admin">
-            {" "}
-            <FacilitiesAdd />
+            <AddFacility />
           </ProtectedRoute>
         ),
       },
@@ -92,10 +104,44 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "booking-management",
+        element: (
+          <ProtectedRoute role="admin">
+            <BookingManagement />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "add-admin",
         element: (
           <ProtectedRoute role="admin">
             <AddAdmin />
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/user",
+    element: (
+      <ProtectedRoute role="user">
+        <UserLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: (
+          <ProtectedRoute role="user">
+            <WelcomeUserDashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "my-booking",
+        element: (
+          <ProtectedRoute role="user">
+            <MyBookings />
           </ProtectedRoute>
         ),
       },

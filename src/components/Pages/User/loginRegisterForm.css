@@ -78,7 +78,7 @@
   background-color: transparent;
 }
 
-.sign-in_btn {
+/* .sign-in_btn {
   width: 100%;
   height: 40px;
   border: 0;
@@ -87,7 +87,7 @@
   outline: none;
   color: #ffffff;
   cursor: pointer;
-}
+} */
 
 .sign-in_ggl {
   width: 100%;

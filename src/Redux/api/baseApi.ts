@@ -4,7 +4,8 @@ import { RootState } from "../store";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
+    baseUrl:
+      "https://game-grouhnds-sports-facility-booking-backend.vercel.app/api",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
@@ -14,7 +15,7 @@ export const baseApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["facilities"],
+  tagTypes: ["facilities", "myBookings"],
   endpoints: (builder) => ({
     getFacilities: builder.query({
       query: () => ({ url: "/facility", method: "GET" }),
@@ -89,6 +90,35 @@ export const baseApi = createApi({
         };
       },
     }),
+    getAllBookings: builder.query({
+      query: (query) => {
+        console.log(query);
+        return {
+          url: `/bookings`,
+          method: "GET",
+        };
+      },
+    }),
+    getAllBookingsByUser: builder.query({
+      query: (id) => {
+        console.log(id);
+        return {
+          url: `/bookings/user/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["myBookings"],
+    }),
+    cancelBooking: builder.mutation({
+      query: (id) => {
+        console.log(id);
+        return {
+          url: `/bookings/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["myBookings"],
+    }),
   }),
 });
 
@@ -102,4 +132,7 @@ export const {
   useDeleteFacilitiesMutation,
   useCheckAvailabilityQuery,
   useCreateABookMutation,
+  useGetAllBookingsQuery,
+  useGetAllBookingsByUserQuery,
+  useCancelBookingMutation,
 } = baseApi;

@@ -11,6 +11,14 @@ import CommonCard from "../../shared/CommonCard/CommonCard";
 import CommonHeading from "../../shared/CommonHeading/CommonHeading";
 import CommonHero from "../../shared/CommonHero/CommonHero";
 import { Button } from "../../ui/button";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "../../ui/pagination";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 
 // Define types
@@ -37,6 +45,9 @@ const Facilities: React.FC = () => {
   const [facilitiesData, setFacilitiesData] = useState<Facility[]>(
     facilities?.data || []
   );
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil((facilities?.data?.length || 0) / itemsPerPage);
 
   useEffect(() => {
     setFacilitiesData(facilities?.data || []);
@@ -54,6 +65,7 @@ const Facilities: React.FC = () => {
     if (!searchValue) {
       setFacilitiesData(facilities?.data || []);
     }
+    setCurrentPage(1); // Reset to the first page after search
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -79,14 +91,24 @@ const Facilities: React.FC = () => {
         item.pricePerHour > minPrice && item.pricePerHour < maxPrice
     );
     setFacilitiesData(filteredItems || []);
+    setCurrentPage(1); // Reset to the first page after filter
   };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const paginatedFacilities = facilitiesData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="">
       <CommonHero title="Facilities" />
       <CommonHeading
         title="Premium Facilities for Every Sport"
-        subTitle="Handpicked venues for the ultimate sports experience"
+        subTitle="Hand picked venues for the ultimate sports experience"
       />
 
       {/* Search and filter */}
@@ -160,9 +182,45 @@ const Facilities: React.FC = () => {
 
       {/* Facilities items card */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 lg:gap-28 pb-20 md:pb-28 lg:pb-36 ">
-        {facilitiesData.map((item) => (
+        {paginatedFacilities.map((item) => (
           <CommonCard key={item._id} item={item} />
         ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                size="icon"
+                href="#"
+                onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+              />
+            </PaginationItem>
+            {[...Array(totalPages)].map((_, index) => (
+              <PaginationItem key={index}>
+                <PaginationLink
+                  size="lg"
+                  href="#"
+                  onClick={() => handlePageChange(index + 1)}
+                  className={currentPage === index + 1 ? "active" : ""}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                size="lg"
+                href="#"
+                onClick={() =>
+                  handlePageChange(Math.min(totalPages, currentPage + 1))
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Lock, Mail, Map, Phone, User } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { SiGoogle } from "react-icons/si";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useSignUpMutation } from "../../../Redux/api/baseApi";
+import { Button } from "../../ui/button";
 import "./loginRegisterForm.css";
 
 const UserSignUp = ({ uRole = "user" }) => {
@@ -51,7 +51,7 @@ const UserSignUp = ({ uRole = "user" }) => {
   };
 
   return (
-    <div className="w-[500px] mx-auto pt-10 pb-20 bg-whi">
+    <div className="lg:w-[500px] mx-auto pt-10 pb-20 lg:px-0 px-5">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="form_container mx-w-full w-full"
@@ -128,20 +128,11 @@ const UserSignUp = ({ uRole = "user" }) => {
             type="text"
           />
         </div>
-        <button title="Sign In" type="submit" className="sign-in_btn">
+        <Button title="Sign In" type="submit" className="sign-in_btn w-full">
           <span>Sign Up</span>
-        </button>
+        </Button>
         {/* Form bottom */}
         <div className="">
-          <div className="separator">
-            <hr className="line" />
-            <span>Or</span>
-            <hr className="line" />
-          </div>
-          <button title="Sign In" type="submit" className="sign-in_ggl mb-3">
-            <SiGoogle />
-            <span>Sign In with Google</span>
-          </button>
           <p>
             All ready have an account? &nbsp;
             <NavLink to="/sign-in" className="hover:underline">

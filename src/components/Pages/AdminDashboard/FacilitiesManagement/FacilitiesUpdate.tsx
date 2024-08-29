@@ -17,8 +17,10 @@ const FacilitiesUpdate = () => {
   return (
     <div className="w-full ">
       {" "}
-      <div className="mt-10 w-[90%]  mx-auto px-10">
-        <h2 className="text-7xl text-black uppercase mb-20">Facilities Add</h2>
+      <div className="lg:mt-10 mt-32 lg:w-[90%]  mx-auto lg:px-10 px-5">
+        <h2 className="text-6xl text-black uppercase mb-10">
+          Facilities Update
+        </h2>
         <div className="flex justify-end"></div>
         <div className="lg:flex gap-5 items-center">
           {/* Display the list of products in a table */}
@@ -27,7 +29,7 @@ const FacilitiesUpdate = () => {
               <TableHeader className="h-[100px] bg-black/80 shadow-2xl backdrop-blur-lg rounded-md ">
                 <TableRow className="w-full ">
                   <TableHead className="w-[100px] text-white">Serial</TableHead>
-                  <TableHead className="text-white">Name</TableHead>
+                  <TableHead className="text-white">Facility Name</TableHead>
                   <TableHead className="text-white">Location</TableHead>
                   <TableHead className="text-white">Description</TableHead>
                   <TableHead className="text-white">Price</TableHead>

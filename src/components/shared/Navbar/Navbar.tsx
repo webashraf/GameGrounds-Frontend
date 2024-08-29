@@ -1,107 +1,103 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { useToken } from "../../../Redux/feature/authSlice";
+import { useAppSelector } from "../../../Redux/hook";
+import { verifyToken } from "../../../utils/verifyToken";
 import { Button } from "../../ui/button";
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
-  // const containerX = useRef<HTMLDivElement>(null);
-  const hoverRef = useRef<HTMLDivElement>(null);
+  const token = useAppSelector(useToken);
+  const location = useLocation();
+  const navRefs = useRef<HTMLAnchorElement[]>([]);
 
-  useGSAP(
-    (context, contextSafe: any) => {
-      const moveSafe = contextSafe((e: MouseEvent) => {
-        gsap.to(".cm", {
-          x: e.x - 950,
-          y: e.y - 95,
-          scale: 1,
-          // cursor: "none",
+  let user: any;
+
+  if (token) {
+    user = verifyToken(token);
+  }
+
+  useEffect(() => {
+    navRefs.current.forEach((nav) => {
+      // Hover animation
+      gsap.fromTo(
+        nav,
+        { backgroundColor: "transparent" },
+        {
+          backgroundColor: "#000",
+          duration: 0.3,
+          ease: "power2.inOut",
+          paused: true,
+          onHover: true,
+        }
+      );
+
+      // Active link animation
+      if (location.pathname === nav.pathname) {
+        gsap.to(nav, {
+          backgroundColor: "#101010bc",
           duration: 0.5,
-          ease: "power2.out",
+          ease: "power2.inOut",
         });
-      });
+      }
+    });
+  }, [location]);
 
-      const handleMouseLeave = contextSafe(() => {
-        gsap.to(".cm", {
-          scale: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-      });
+  const addToRefs = (el: HTMLAnchorElement) => {
+    if (el && !navRefs.current.includes(el)) {
+      navRefs.current.push(el);
+    }
+  };
 
-      hoverRef.current?.addEventListener("mousemove", moveSafe);
-      hoverRef.current?.addEventListener("mouseleave", handleMouseLeave);
-
-      return () => {
-        hoverRef.current?.removeEventListener("mousemove", moveSafe);
-        hoverRef.current?.removeEventListener("mouseleave", handleMouseLeave);
-      };
-    },
-    { scope: hoverRef }
-  );
   return (
     <div>
       <div className="w-full text-white text-center border-b border-[#908a8a] py-3">
         <h2 className="font-serif text-3xl ">GameGrounds</h2>
       </div>
-      <div
-        ref={hoverRef}
-        className="relative flex items-center justify-center w-[50% mx-auto cursor-non"
-      >
-        <ul className="flex justify-center gap-10 font-mono bold text-white/80 text-xl cursor-non">
-        <NavLink
-            to="/"
-            className="hover:underline  bg-yellow-90 p-5 cursor-non"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/about"
-            className="hover:underline  bg-yellow-90 p-5 cursor-non"
-          >
-            About
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className="hover:underline  bg-yellow-90 p-5 cursor-non"
-          >
-            Contact
-          </NavLink>
-          <NavLink
-            to="/booking"
-            className="hover:underline  bg-yellow-90 p-5 cursor-non"
-          >
-            Booking
-          </NavLink>
-          <NavLink
-            to="/facilities"
-            className="hover:underline  bg-yellow-90 p-5 cursor-non"
-          >
-            Facilities
-          </NavLink>
-          <NavLink
-            to="/admin"
-            className="hover:underline  bg-yellow-90 p-5 cursor-non"
-          >
-            Dashboard
-          </NavLink>
+      <div className="relative flex items-center justify-center w-[50%] mx-auto cursor-pointer">
+        <ul className="flex justify-center gap-10 font-mono font-bold text-white/80 text-xl">
+          {[
+            { path: "/", label: "Home" },
+            { path: "/about", label: "About" },
+            { path: "/contact", label: "Contact" },
+            { path: "/booking", label: "Booking" },
+            { path: "/facilities", label: "Facilities" },
+            { path: `/${user?.role}`, label: "Dashboard" },
+          ].map((link, index) => (
+            <NavLink
+              to={link.path}
+              key={index}
+              className={({ isActive }) =>
+                `hover:underline py-2 my-2 px-5  transition-all duration-500 ${
+                  isActive ? "bg-[#101010a0] backdrop-blur-xl text-white" : ""
+                }`
+              }
+              ref={addToRefs}
+            >
+              {link.label}
+            </NavLink>
+          ))}
         </ul>
-        <div className="space-x-3 cursor-non">
+        <div className="space-x-3 flex">
           <NavLink to="/sign-in">
-            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-non">
+            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md">
               Sign In
             </Button>
           </NavLink>
           <NavLink to="/sign-up">
-            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md cursor-non">
+            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md">
               Sign Up
             </Button>
           </NavLink>
+          <NavLink to="/log-out">
+            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md">
+              Log Out
+            </Button>
+          </NavLink>
         </div>
-        <div className="cm bg-[#ffffff01] backdrop-invert z-50 h-14 w-14 rounded-full fixed cursor-non select-none scale-[0] pointer-events-none"></div>
       </div>
     </div>
   );

@@ -2,9 +2,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
-import Footer from "../shared/Footer/Footer";
-import MobileNav from "../shared/MobileNav/MobileNav";
-import Navbar from "../shared/Navbar/Navbar";
+import Footer from "../../shared/Footer/Footer";
+import MobileNav from "../../shared/MobileNav/MobileNav";
+import Navbar from "../../shared/Navbar/Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 

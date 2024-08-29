@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SubmitHandler, useForm } from "react-hook-form";
-import { SiGoogle } from "react-icons/si";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useLoginMutation } from "../../../Redux/api/baseApi";
 import { setUser } from "../../../Redux/feature/authSlice";
 import { useAppDispatch } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
+import { Button } from "../../ui/button";
 import "./loginRegisterForm.css";
 
 const Login = () => {
@@ -127,21 +127,11 @@ const Login = () => {
             className="input_field"
           />
         </div>
-        <button title="Sign In" type="submit" className="sign-in_btn">
+        <Button title="Sign In" type="submit" className="sign-in_btn w-full">
           <span>Sign In</span>
-        </button>
+        </Button>
         {/* form bottom */}
         <div>
-          <div className="separator">
-            <hr className="line" />
-            <span>Or</span>
-            <hr className="line" />
-          </div>
-          <button title="Sign In" type="submit" className="sign-in_ggl mb-3">
-            <SiGoogle />
-            <span>Sign In with Google</span>
-          </button>
-
           <p>
             Don't have account? &nbsp;
             <NavLink to="/sign-up" className="hover:underline">

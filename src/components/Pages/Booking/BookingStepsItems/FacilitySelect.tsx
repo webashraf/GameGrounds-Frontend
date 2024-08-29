@@ -1,50 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
+import { TFacility } from "../../../../types/gloval.types";
 
 const FacilitySelect = ({ setFacility }: any) => {
-  // const facilities = [
-  //   {
-  //     _id: "66ccc0a163c1483f70b8615d",
-  //     name: "Tennis Court",
-  //     description: "Updated outdoor tennis court with synthetic surface.",
-  //     pricePerHour: 35,
-  //     location: "789 Sports Ave, Springfield",
-  //     isDeleted: false,
-  //     __v: 0,
-  //     photoUrl:
-  //       "https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  //   },
-  //   {
-  //     _id: "66ccc14763c1483f70b86161",
-  //     name: "Basketball Court 09",
-  //     description: "Indoor basketball court with wooden flooring.",
-  //     pricePerHour: 50,
-  //     location: "789 Athlete St, Springfield",
-  //     isDeleted: false,
-  //     __v: 0,
-  //     photoUrl:
-  //       "https://images.pexels.com/photos/2891884/pexels-photo-2891884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  //   },
-  // ];
-
-  const {
-    data: facilities,
-    error,
-    isLoading,
-    isFetching,
-  } = useGetFacilitiesQuery(undefined);
+  const { data: facilities } = useGetFacilitiesQuery(undefined);
   console.log(facilities);
-
-  // const [selectedFacility, setSelectedFacility] = useState("");
 
   const handleFacilityFeature = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const selectedId = event.target.value;
-    // setSelectedFacility(se////////////////////////////////////////////////////////////////////////////////////////>lectedId);
 
     const matchedFacility = facilities?.data?.find(
-      (facility) => facility._id === selectedId
+      (facility: TFacility) => facility._id === selectedId
     );
 
     setFacility({ ...matchedFacility });
@@ -62,7 +30,7 @@ const FacilitySelect = ({ setFacility }: any) => {
           <option value="" disabled>
             Select a facility
           </option>
-          {facilities?.data.map((facility) => (
+          {facilities?.data.map((facility: TFacility) => (
             <option key={facility._id} value={facility._id}>
               {facility.name}
             </option>

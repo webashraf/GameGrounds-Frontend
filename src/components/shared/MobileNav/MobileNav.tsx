@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import gsap from "gsap";
 import {
   Calendar,
@@ -7,15 +8,31 @@ import {
   Mail,
   Menu,
   Minimize,
+  PanelRightInactive,
   User,
+  UserMinus,
+  UserPlus,
 } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useToken } from "../../../Redux/feature/authSlice";
+import { useAppSelector } from "../../../Redux/hook";
+import { verifyToken } from "../../../utils/verifyToken";
 import "./MobileNav.css";
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+
+  const token = useAppSelector(useToken);
+
+  let user: any;
+
+  if (token) {
+    user = verifyToken(token);
+  }
+
+  console.log(user);
 
   const toggleNav = () => {
     if (navRef.current) {
@@ -30,23 +47,25 @@ const MobileNav = () => {
   };
 
   return (
-    <>
-      <button
-        onClick={toggleNav}
-        className="fixed bottom-5 right-5 p-3 bg-slate-500 text-white rounded-full shadow-lg z-50"
-      >
-        {isOpen ? <Minimize /> : <Menu />}
-      </button>
+    <div className="relative">
+      <div className="flex fixed w-full bottom-5  px-5 py-3 bg-black/60 items-center justify-between backdrop-blur-md ">
+        <div className="text-center font-semibold font-serif text-3xl text-white">
+          GameGrounds
+        </div>
+        <button
+          onClick={toggleNav}
+          className=" right-5 p-3 bg-slate-500 text-white rounded-full shadow-lg absolute z-50  "
+        >
+          {isOpen ? <Minimize /> : <Menu />}
+        </button>
+      </div>
       <div
         ref={navRef}
-        className="fixed bottom-0 left-0 w-full rounded-t-2xl flex flex-col justify-center py-5 bg-white/30 backdrop-blur-lg shadow-2xl border border-white/20"
+        className="fixed bottom-0 left-0 w-full rounded-t-2xl flex flex-col justify-center py-5 bg-black/60 backdrop-blur-lg shadow-2xl border border-white/20 text-white"
         style={{ transform: "translateY(100%)" }}
       >
         <div className="w-full px-3">
           <div className="flex flex-col ">
-            <div className="text-center mb-4 font-semibold font-serif text-3xl">
-              GameGrounds
-            </div>
             <div className="border border-gray-300 py-3 flex gap-1 flex-wrap shadow-xl rounded-md w-full justify-center">
               <NavItem to="/" icon={<Home />} label="Home" />
               <NavItem to="/about" icon={<Info />} label="About" />
@@ -57,12 +76,21 @@ const MobileNav = () => {
                 icon={<Clipboard />}
                 label="Facilities"
               />
-              <NavItem to="/admin" icon={<User />} label="Dashboard" />
+              <NavItem
+                to={`/${user?.role}`}
+                icon={<PanelRightInactive />}
+                label="Dashboard"
+              />
+              <div className="flex">
+                <NavItem to={`/sign-in`} icon={<User />} label="Sign In" />
+                <NavItem to={`/sign-up`} icon={<UserPlus />} label="Sign Up" />
+                <NavItem to={`/log-out`} icon={<UserMinus />} label="Log Out" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -84,7 +112,7 @@ const NavItem = ({
       {icon}
     </div>
     <p>{label}</p>
-    <span className="absolute -top-8 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+    <span className="absolute -top-8 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg border border-gray-300 bg-white text-black px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
       {label}
     </span>
   </NavLink>

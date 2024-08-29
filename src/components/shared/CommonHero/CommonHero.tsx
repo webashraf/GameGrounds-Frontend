@@ -1,12 +1,4 @@
-import heroImg from "../../../assets/hero/pexels-skitterphoto-60248.jpg";
-
-const CommonHero = ({
-  title,
-  img = heroImg,
-}: {
-  title: string;
-  img?: string | null;
-}) => {
+const CommonHero = ({ title }: { title: string; img?: string | null }) => {
   return (
     <div
       style={{

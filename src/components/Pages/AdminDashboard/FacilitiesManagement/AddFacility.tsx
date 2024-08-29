@@ -4,24 +4,25 @@ import { toast } from "sonner";
 import { useAddFacilitiesMutation } from "../../../../Redux/api/baseApi";
 import { Button } from "../../../ui/button";
 
-const FacilitiesAdd = () => {
+type TFacilityFormData = {
+  name: string;
+  photoUrl: string;
+  description: string;
+  pricePerHour: number;
+  location: string;
+};
+
+const AddFacility = () => {
   const [addFacilities] = useAddFacilitiesMutation();
-  const defaultValue = {
-    name: "Basketball Court",
-    photoUrl:
-      "https://images.pexels.com/photos/1619860/pexels-photo-1619860.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Indoor basketball court with wooden flooring.",
-    pricePerHour: 50,
-    location: "789 Athlete St, Springfield",
-  };
+
   const {
     register,
     handleSubmit,
     reset,
     // watch,
     formState: { errors },
-  } = useForm<any>();
-  const onSubmit: SubmitHandler<any> = async (data) => {
+  } = useForm<TFacilityFormData>();
+  const onSubmit: SubmitHandler<TFacilityFormData> = async (data) => {
     console.log(data);
     const facilityInfo = {
       ...data,
@@ -41,9 +42,9 @@ const FacilitiesAdd = () => {
         );
         reset();
       }
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
-      if (err?.data) {
+      if (err) {
         toast.error(
           err?.data?.success ? err?.data?.message : "Facility failed to add!"
         );
@@ -53,8 +54,8 @@ const FacilitiesAdd = () => {
   };
 
   return (
-    <div className=" mx-auto w-[50%] section-padding">
-      <h2 className="text-7xl text-black uppercase">Facilities Add</h2>
+    <div className=" mx-auto lg:w-[50%] lg:px-0 px-10 section-padding">
+      <h2 className="text-6xl text-black uppercase mb-10">Add Facility</h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -165,8 +166,6 @@ const FacilitiesAdd = () => {
           )}
         </div>
 
-        {errors.exampleRequired && <span>This field is required</span>}
-
         {/* <input type="submit"  /> */}
         <Button type="submit" className="uppercase text-lg mt-3">
           Submit
@@ -176,4 +175,4 @@ const FacilitiesAdd = () => {
   );
 };
 
-export default FacilitiesAdd;
+export default AddFacility;

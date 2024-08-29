@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="flex justify-between flex-wrap gap-10 items-center flex-co py-10 lg:px-0 px-8">
         {/* footer col-1 */}
         <div
-          className="text-center flex flex-col justify-center items-center gap-5 w-full
+          className="text-center flex flex-col justify-center items-center gap-5 lg:w-auto w-full
           "
         >
           <h2 className="font-serif text-5xl">GameGrounds</h2>

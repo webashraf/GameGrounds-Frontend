@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  BookImageIcon,
   FileEdit,
   FilePlus,
   FileSliders,
@@ -22,7 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 
-const AdminLayout = () => {
+const UserDashboardLayout = () => {
   const [position, setPosition] = useState("bottom");
 
   const token = useAppSelector(useToken);
@@ -37,20 +38,15 @@ const AdminLayout = () => {
 
   return (
     <div className="flex">
-      <div className="bg-slate-900 w-[300px] h-screen p-5">
-        <div>
-          <DeshboardMobileNav />
+      <div className="lg:hidden fixed top-5 flex items-center px-4 z-50">
+        <DeshboardMobileNav />
+        <h2 className="text-4xl font-serif">GameGround</h2>
+      </div>
 
-          <div className="text-white border-b pb-2 mb-5">
-            <h3 className="font-serif text-2xl text-center uppercase">
-              {user?.role} Dashboard
-            </h3>
-            <p className="text-center text-sm lowercase text-gray-300">
-              {user?.email}
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-4 text-white">
+      {/* --------------- */}
+      <div className="bg-slate-900 lg:block hidden lg-[300px] h-screen p-5 pt-32">
+        {user?.role === "admin" ? (
+          <div className="flex flex-col gap-4 text-white ">
             <NavLink
               to="/"
               className={({ isActive }) =>
@@ -136,8 +132,50 @@ const AdminLayout = () => {
               Add Admin
             </NavLink>
           </div>
-        </div>
+        ) : (
+          <div className="hidden lg:block">
+            <div className="text-white border-b pb-2 mb-5">
+              <h3 className="font-serif text-2xl text-center uppercase">
+                {user?.role} Dashboard
+              </h3>
+              <p className="text-center text-sm lowercase text-gray-300">
+                {user?.email}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 text-white">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
+                    isActive
+                      ? "bg-white/20 backdrop-blur-lg text-white"
+                      : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                  }`
+                }
+              >
+                <Home />
+                Home
+              </NavLink>
+              <NavLink
+                to="/user/my-booking"
+                className={({ isActive }) =>
+                  `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
+                    isActive
+                      ? "bg-white/20 backdrop-blur-lg text-white"
+                      : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                  }`
+                }
+              >
+                <BookImageIcon />
+                My Booking
+              </NavLink>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* ---------- */}
       <div className="w-full ">
         <Outlet />
       </div>
@@ -145,4 +183,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default UserDashboardLayout;

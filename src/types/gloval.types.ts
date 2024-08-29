@@ -17,6 +17,8 @@ export type TFormValues = {
   facility: string;
 };
 
+
+
 export type TAvailabilityCheckerProps = {
   setQuery: (query: TFormValues) => void;
 };

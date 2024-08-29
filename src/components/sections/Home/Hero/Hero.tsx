@@ -1,5 +1,6 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef } from "react";
 import heroImg3 from "../../../../assets/hero/pexels-johnsully-15203.jpg";
 import { Button } from "../../../ui/button";
 
@@ -14,15 +15,51 @@ const Hero = () => {
     "24/7 customer support to assist with any booking queries",
     "Cancellation and rescheduling options available",
   ];
+  const hoverRef = useRef<HTMLDivElement>(null);
+
+  // useGSAP(
+  //   (_context, contextSafe: any) => {
+  //     const moveSafe = contextSafe((e: MouseEvent) => {
+  //       gsap.to(".cm", {
+  //         x: e.x - 950,
+  //         y: e.y - 95,
+  //         scale: 1,
+  //         // cursor: "none",
+  //         duration: 0.5,
+  //         ease: "power2.out",
+  //       });
+  //     });
+
+  //     const handleMouseLeave = contextSafe(() => {
+  //       gsap.to(".cm", {
+  //         scale: 0,
+  //         duration: 0.5,
+  //         ease: "power2.out",
+  //       });
+  //     });
+
+  //     hoverRef.current?.addEventListener("mousemove", moveSafe);
+  //     hoverRef.current?.addEventListener("mouseleave", handleMouseLeave);
+
+  //     return () => {
+  //       hoverRef.current?.removeEventListener("mousemove", moveSafe);
+  //       hoverRef.current?.removeEventListener("mouseleave", handleMouseLeave);
+  //     };
+  //   },
+  //   { scope: hoverRef }
+  // );
 
   return (
     <div
       style={{ backgroundImage: `url(${heroImg3})` }}
-      className="h-[100vh] w-full bg-no-repeat bg-cover bg-[100%]"
+      className="h-[100vh] w-full bg-no-repeat bg-cover bg-[100%] mb-12"
     >
       <>
-        <div className="text-white lg:h-screen h-[100vh] w-full flex justify-center items-center bg-[#10101053] lg:pt-20">
-          <div className="max-w-[1140px] bg-black/20 backdrop-blur-sm p-5 md:p-10 shadow-2xl rounded-sm w-full mx-auto text-center lg:h-auto h-screen lg:pt-0 pt-10">
+        <div
+          ref={hoverRef}
+          className="text-white lg:h-screen h-[100vh] w-full flex justify-center items-center bg-[#10101053] lg:pt-20 relative"
+        >
+          <div className="max-w-[1140px] bg-black/20 backdrop-blur-sm p-5 md:p-10 shadow-2xl rounded-sm w-full mx-auto text-center lg:h-auto h-screen pt-10">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif uppercase">
               Discover Top-Rated Sports Venues Near You
             </h1>
@@ -54,6 +91,8 @@ const Hero = () => {
                 Book Now
               </Button>
             </div>
+
+            <div className="cm bg-[#ffffff01] backdrop-invert z-50 h-14 w-14 rounded-full absolute cursor-non select-none scale-[0] pointer-events-none "></div>
           </div>
         </div>
       </>

@@ -1,151 +1,158 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useAnimate } from "framer-motion";
-import { FC, MouseEvent } from "react";
-import {
-  SiAdobe,
-  SiApple,
-  SiFacebook,
-  SiGoogle,
-  SiLinkedin,
-  SiShopify,
-  SiSoundcloud,
-  SiSpotify,
-  SiTiktok,
-} from "react-icons/si";
-import CommonHeading from "../../../shared/CommonHeading/CommonHeading";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Button } from "../../../ui/button";
 
-// Define the type for the Icon component
-interface LinkBoxProps {
-  Icon: FC<{ className?: string }>;
-  href: string;
-}
+type SquareData = {
+  id: number;
+  src: string;
+};
 
-export const OurFields: FC = () => {
+const squareData: SquareData[] = [
+  {
+    id: 1,
+    src: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 2,
+    src: "https://images.unsplash.com/photo-1510925758641-869d353cecc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  },
+  {
+    id: 3,
+    src: "https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  },
+  {
+    id: 4,
+    src: "https://images.unsplash.com/photo-1580238053495-b9720401fd45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  },
+  {
+    id: 5,
+    src: "https://images.unsplash.com/photo-1569074187119-c87815b476da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
+  },
+  {
+    id: 6,
+    src: "https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 7,
+    src: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 8,
+    src: "https://plus.unsplash.com/premium_photo-1671436824833-91c0741e89c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 9,
+    src: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+  },
+  {
+    id: 10,
+    src: "https://images.unsplash.com/photo-1610768764270-790fbec18178?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  },
+  {
+    id: 11,
+    src: "https://images.unsplash.com/photo-1507034589631-9433cc6bc453?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=684&q=80",
+  },
+  {
+    id: 12,
+    src: "https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=882&q=80",
+  },
+  {
+    id: 13,
+    src: "https://images.unsplash.com/photo-1560089000-7433a4ebbd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+  },
+  {
+    id: 14,
+    src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80",
+  },
+  {
+    id: 15,
+    src: "https://images.unsplash.com/photo-1606244864456-8bee63fce472?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=681&q=80",
+  },
+  {
+    id: 16,
+    src: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1820&q=80",
+  },
+];
+
+const shuffle = (array: SquareData[]): SquareData[] => {
+  let currentIndex = array.length,
+    randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+};
+
+const generateSquares = (): JSX.Element[] => {
+  return shuffle(squareData).map((sq) => (
+    <motion.div
+      key={sq.id}
+      layout
+      transition={{ duration: 1.5, type: "spring" }}
+      className="w-full h-full"
+      style={{
+        backgroundImage: `url(${sq.src})`,
+        backgroundSize: "cover",
+      }}
+    ></motion.div>
+  ));
+};
+
+const ShuffleGrid: React.FC = () => {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [squares, setSquares] = useState<JSX.Element[]>(generateSquares());
+
+  useEffect(() => {
+    shuffleSquares();
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  const shuffleSquares = () => {
+    setSquares(generateSquares());
+
+    timeoutRef.current = setTimeout(shuffleSquares, 3000);
+  };
+
   return (
-    <div className="section-padding bg-neutral-50 px-4">
-      <div className="mx-auto max-w-7xl">
-        <ClipPathLinks />
-      </div>
+    <div className="grid grid-cols-4 grid-rows-4 h-[650px] gap-1">
+      {squares.map((sq) => sq)}
     </div>
   );
 };
 
-const ClipPathLinks: FC = () => {
+const OurFields: React.FC = () => {
   return (
-    <div className="">
-      <CommonHeading
-        title="Let’s Get Social"
-        subTitle="Stay Updated with Our Social Feeds"
-      />
-
-      <div className="divide-y divide-neutral-900 border border-neutral-900">
-        <div className="grid grid-cols-2 divide-x divide-neutral-900">
-          <LinkBox Icon={SiGoogle} href="#" />
-          <LinkBox Icon={SiShopify} href="#" />
-        </div>
-        <div className="grid grid-cols-4 divide-x divide-neutral-900">
-          <LinkBox Icon={SiApple} href="#" />
-          <LinkBox Icon={SiSoundcloud} href="#" />
-          <LinkBox Icon={SiAdobe} href="#" />
-          <LinkBox Icon={SiFacebook} href="#" />
-        </div>
-        <div className="grid grid-cols-3 divide-x divide-neutral-900">
-          <LinkBox Icon={SiTiktok} href="#" />
-          <LinkBox Icon={SiSpotify} href="#" />
-          <LinkBox Icon={SiLinkedin} href="#" />
-        </div>
+    <section className="w-full px- section-padding mb-20 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
+      <div>
+        <h3 className="text-4xl md:text-6xl uppercase">
+          Sports Field Showcase
+        </h3>
+        <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
+          Take a visual journey through our extensive range of sports
+          facilities, designed to accommodate a wide variety of sports and
+          events with excellence.
+        </p>
+        <NavLink to="/facilities">
+          <Button className=" text-white font-medium py-2 px-4 rounded transition-all active:scale-95">
+            Explore more
+          </Button>
+        </NavLink>
       </div>
-    </div>
+      <ShuffleGrid />
+    </section>
   );
 };
 
-const NO_CLIP = "polygon(0 0, 100% 0, 100% 100%, 0% 100%)";
-const BOTTOM_RIGHT_CLIP = "polygon(0 0, 100% 0, 0 0, 0% 100%)";
-const TOP_RIGHT_CLIP = "polygon(0 0, 0 100%, 100% 100%, 0% 100%)";
-const BOTTOM_LEFT_CLIP = "polygon(100% 100%, 100% 0, 100% 100%, 0 100%)";
-const TOP_LEFT_CLIP = "polygon(0 0, 100% 0, 100% 100%, 100% 0)";
-
-const ENTRANCE_KEYFRAMES: Record<string, string[]> = {
-  left: [BOTTOM_RIGHT_CLIP, NO_CLIP],
-  bottom: [BOTTOM_RIGHT_CLIP, NO_CLIP],
-  top: [BOTTOM_RIGHT_CLIP, NO_CLIP],
-  right: [TOP_LEFT_CLIP, NO_CLIP],
-};
-
-const EXIT_KEYFRAMES: Record<string, string[]> = {
-  left: [NO_CLIP, TOP_RIGHT_CLIP],
-  bottom: [NO_CLIP, TOP_RIGHT_CLIP],
-  top: [NO_CLIP, TOP_RIGHT_CLIP],
-  right: [NO_CLIP, BOTTOM_LEFT_CLIP],
-};
-
-const LinkBox: FC<LinkBoxProps> = ({ Icon, href }) => {
-  const [scope, animate]: any = useAnimate();
-
-  const getNearestSide = (e: MouseEvent<HTMLAnchorElement>): string => {
-    const box = e.currentTarget.getBoundingClientRect();
-
-    const proximityToLeft = {
-      proximity: Math.abs(box.left - e.clientX),
-      side: "left",
-    };
-    const proximityToRight = {
-      proximity: Math.abs(box.right - e.clientX),
-      side: "right",
-    };
-    const proximityToTop = {
-      proximity: Math.abs(box.top - e.clientY),
-      side: "top",
-    };
-    const proximityToBottom = {
-      proximity: Math.abs(box.bottom - e.clientY),
-      side: "bottom",
-    };
-
-    const sortedProximity = [
-      proximityToLeft,
-      proximityToRight,
-      proximityToTop,
-      proximityToBottom,
-    ].sort((a, b) => a.proximity - b.proximity);
-
-    return sortedProximity[0].side;
-  };
-
-  const handleMouseEnter = (e: MouseEvent<HTMLAnchorElement>) => {
-    const side = getNearestSide(e);
-
-    animate(scope.current, {
-      clipPath: ENTRANCE_KEYFRAMES[side],
-    });
-  };
-
-  const handleMouseLeave = (e: MouseEvent<HTMLAnchorElement>) => {
-    const side = getNearestSide(e);
-
-    animate(scope.current, {
-      clipPath: EXIT_KEYFRAMES[side],
-    });
-  };
-
-  return (
-    <a
-      href={href}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className="relative grid h-20 w-full place-content-center sm:h-28 md:h-36"
-    >
-      <Icon className="text-xl sm:text-3xl lg:text-4xl" />
-
-      <div
-        ref={scope}
-        style={{
-          clipPath: BOTTOM_RIGHT_CLIP,
-        }}
-        className="absolute inset-0 grid place-content-center bg-neutral-900 text-white"
-      >
-        <Icon className="text-xl sm:text-3xl md:text-4xl" />
-      </div>
-    </a>
-  );
-};
+export default OurFields;
