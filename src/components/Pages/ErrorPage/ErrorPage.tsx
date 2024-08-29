@@ -15,13 +15,7 @@ const ErrorPage = () => {
         >
           Back to Home
         </a>
-        <div className="mt-10">
-          <img
-            src="https://via.placeholder.com/300x200"
-            alt="Gaming illustration"
-            className="w-full h-auto mx-auto rounded-lg shadow-lg"
-          />
-        </div>
+
       </div>
     </div>
   );

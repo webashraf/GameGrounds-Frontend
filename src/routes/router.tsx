@@ -17,6 +17,7 @@ import Home from "../components/Pages/Home/Home";
 import SingleFacility from "../components/Pages/SingleFacility/SingleFacility";
 import Login from "../components/Pages/User/Login";
 import UserSignUp from "../components/Pages/User/userSignUp";
+import DetailsBooking from "../components/Pages/UserDashboard/MyBookings/DetailsBooking";
 import MyBookings from "../components/Pages/UserDashboard/MyBookings/MyBookings";
 import WelcomeUserDashboard from "../components/Pages/UserDashboard/WelcomeUserDashboard";
 
@@ -142,6 +143,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute role="user">
             <MyBookings />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "details-booking",
+        element: (
+          <ProtectedRoute role="user">
+            <DetailsBooking />
           </ProtectedRoute>
         ),
       },

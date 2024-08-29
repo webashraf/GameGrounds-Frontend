@@ -22,7 +22,7 @@ const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
     user = verifyToken(token);
   }
 
-  if (role !== "admin") {
+  if (role && (user as TUser)?.role !== role && role !== "admin") {
     return <Navigate to="/unauthorized" replace={true} />;
   }
   if (role && (user as TUser)?.role !== role) {

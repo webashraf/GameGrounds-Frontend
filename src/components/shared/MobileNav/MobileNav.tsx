@@ -32,6 +32,7 @@ const MobileNav = () => {
     user = verifyToken(token);
   }
 
+  console.log(user);
 
   const toggleNav = () => {
     if (navRef.current) {
@@ -46,18 +47,13 @@ const MobileNav = () => {
   };
 
   return (
-    <div className="relative">
-      <div className="flex fixed w-full bottom-5  px-5 py-3 bg-black/60 items-center justify-between backdrop-blur-md ">
-        <div className="text-center font-semibold font-serif text-3xl text-white">
-          GameGrounds
-        </div>
-        <button
-          onClick={toggleNav}
-          className=" right-5 p-3 bg-slate-500 text-white rounded-full shadow-lg absolute z-50  "
-        >
-          {isOpen ? <Minimize /> : <Menu />}
-        </button>
-      </div>
+    <>
+      <button
+        onClick={toggleNav}
+        className="fixed bottom-5 right-5 p-3 bg-slate-500 text-white rounded-full shadow-lg z-50"
+      >
+        {isOpen ? <Minimize /> : <Menu />}
+      </button>
       <div
         ref={navRef}
         className="fixed bottom-0 left-0 w-full rounded-t-2xl flex flex-col justify-center py-5 bg-black/60 backdrop-blur-lg shadow-2xl border border-white/20 text-white"
@@ -65,6 +61,9 @@ const MobileNav = () => {
       >
         <div className="w-full px-3">
           <div className="flex flex-col ">
+            <div className="text-center mb-4 font-semibold font-serif text-3xl">
+              GameGrounds
+            </div>
             <div className="border border-gray-300 py-3 flex gap-1 flex-wrap shadow-xl rounded-md w-full justify-center">
               <NavItem to="/" icon={<Home />} label="Home" />
               <NavItem to="/about" icon={<Info />} label="About" />
@@ -76,7 +75,7 @@ const MobileNav = () => {
                 label="Facilities"
               />
               <NavItem
-                to={`/${user?.role}`}
+                to={`/${user.role}`}
                 icon={<PanelRightInactive />}
                 label="Dashboard"
               />
@@ -89,7 +88,7 @@ const MobileNav = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

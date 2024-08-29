@@ -4,8 +4,8 @@ import { RootState } from "../store";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      "https://game-grouhnds-sports-facility-booking-backend.vercel.app/api",
+    // baseUrl: "http://localhost:5000/api",
+    baseUrl:"https://game-grouhnds-sports-facility-booking-backend.vercel.app/api",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
@@ -96,6 +96,7 @@ export const baseApi = createApi({
     }),
     getAllBookingsByUser: builder.query({
       query: (id) => {
+        console.log(id);
         return {
           url: `/bookings/user/${id}`,
           method: "GET",
@@ -105,6 +106,7 @@ export const baseApi = createApi({
     }),
     cancelBooking: builder.mutation({
       query: (id) => {
+        console.log(id);
         return {
           url: `/bookings/${id}`,
           method: "DELETE",
