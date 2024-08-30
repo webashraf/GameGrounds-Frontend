@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import { ScrollToPlugin, ScrollTrigger } from "gsap/all"; // Import ScrollToPlugin
+import { ChevronUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "../../shared/Footer/Footer";
@@ -85,9 +86,9 @@ const MainLayout = () => {
         {showScrollButton && (
           <button
             onClick={scrollToTop}
-            className="fixed bottom-5 right-10 hover:animate-bounce bg-black text-white p-3 rounded-full shadow-lg z-50"
+            className="fixed bottom-5 right-10 hover:animate-bounce bg-black/30 backdrop-blur-md text-white p-3 rounded-full shadow-lg z-50"
           >
-            ↑
+            <ChevronUp />
           </button>
         )}
       </div>

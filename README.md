@@ -1,50 +1,37 @@
-# React + TypeScript + Vite
+# GameGrounds
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**GameGrounds** is a sports facility booking platform designed to provide a seamless and engaging experience for users and administrators alike. The application features a fully responsive design with animated components using GSAP and Framer Motion, and includes functionalities for user management, facility booking, and administration.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Responsive Design**: The application is fully responsive and adapts to different screen sizes and devices.
+- **Animations**: Enhanced user experience with smooth animations for the navigation bar and other sections using GSAP and Framer Motion.
+- **User Authentication**: Sign-in, sign-up, and logout functionalities to manage user accounts.
+- **Sports Facilities**: Manage sports facilities with features including search, filter, and pagination.
+- **Facility Availability Check**: Check the availability of facilities by date and time slot.
+- **Booking System**: Book facilities for specific dates and time slots.
+- **Payment Integration**: Secure payments through AMR Pay.
+- **Admin Dashboard**: 
+  - Create, update, and delete sports facilities.
+  - Add new administrators.
+- **User Dashboard**: 
+  - View and manage bookings.
+  - Check booking details and cancel bookings if needed.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend**: React.js, Tailwind CSS, GSAP, Framer Motion
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT (JSON Web Tokens)
+- **Payment**: AMR Pay
+- **Deployment**: [Specify deployment platform, if applicable]
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+To get started with the project locally, follow these steps:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/your-username/gamegrounds.git
+   cd gamegrounds

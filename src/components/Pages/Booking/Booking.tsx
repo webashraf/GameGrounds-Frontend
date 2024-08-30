@@ -24,7 +24,6 @@ interface Query {
 
 const Booking = () => {
   const { data: facilities } = useGetFacilitiesQuery(undefined);
-  const [errorMessage, setErrorMessage] = useState("");
   const [query, setQuery] = useState<Query | null>(null);
   // Create query pram for availability check
   const queryString = `?date=${query?.date ?? ""}&facility=${
@@ -49,7 +48,11 @@ const Booking = () => {
       skip: !query,
     });
   if (availabilityError) {
-    toast.error(availabilityError.data.message);
+    if ("data" in availabilityError) {
+      toast.error((availabilityError as any)?.data?.message);
+    } else {
+      toast.error("Something went wrong.");
+    }
   }
   return (
     <div className="">

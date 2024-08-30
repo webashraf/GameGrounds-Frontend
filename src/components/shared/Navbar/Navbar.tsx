@@ -3,8 +3,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { useToken } from "../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../Redux/hook";
+import { logout, useToken } from "../../../Redux/feature/authSlice";
+import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
 import { Button } from "../../ui/button";
 gsap.registerPlugin(ScrollTrigger);
@@ -13,6 +13,8 @@ const Navbar = () => {
   const token = useAppSelector(useToken);
   const location = useLocation();
   const navRefs = useRef<HTMLAnchorElement[]>([]);
+
+  const dispatch = useAppDispatch();
 
   let user: any;
 
@@ -52,6 +54,9 @@ const Navbar = () => {
     }
   };
 
+  const handleLogOut = () => {
+    dispatch(logout());
+  };
   return (
     <div>
       <div className="w-full text-white text-center border-b border-[#908a8a] py-3">
@@ -61,11 +66,14 @@ const Navbar = () => {
         <ul className="flex justify-center gap-10 font-mono font-bold text-white/80 text-xl">
           {[
             { path: "/", label: "Home" },
+            { path: "/facilities", label: "Facilities" },
+            { path: "/booking", label: "Booking" },
             { path: "/about", label: "About" },
             { path: "/contact", label: "Contact" },
-            { path: "/booking", label: "Booking" },
-            { path: "/facilities", label: "Facilities" },
-            { path: `/${user?.role}`, label: "Dashboard" },
+            {
+              path: `/${user?.role ? user?.role : "sign-in"}`,
+              label: "Dashboard",
+            },
           ].map((link, index) => (
             <NavLink
               to={link.path}
@@ -82,21 +90,29 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="space-x-3 flex">
-          <NavLink to="/sign-in">
-            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md">
-              Sign In
-            </Button>
-          </NavLink>
-          <NavLink to="/sign-up">
-            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md">
-              Sign Up
-            </Button>
-          </NavLink>
-          <NavLink to="/log-out">
-            <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md">
-              Log Out
-            </Button>
-          </NavLink>
+          {user ? (
+            <>
+              <Button
+                onClick={handleLogOut}
+                className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md"
+              >
+                Log Out
+              </Button>
+            </>
+          ) : (
+            <>
+              <NavLink to="/sign-in">
+                <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md">
+                  Sign In
+                </Button>
+              </NavLink>
+              <NavLink to="/sign-up">
+                <Button className="rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md">
+                  Sign Up
+                </Button>
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
     </div>

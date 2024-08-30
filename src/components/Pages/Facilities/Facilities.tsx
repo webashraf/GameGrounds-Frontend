@@ -105,7 +105,7 @@ const Facilities: React.FC = () => {
   return (
     <div>
       <CommonHero title="Facilities" />
-      <div className="lg:px-20 px-5">
+      <div className="lg:px-20 px-5 mb-20">
         {/* Search and filter */}
         <div className="flex justify-between pb-20 relative ">
           <div className="relative">
