@@ -81,6 +81,19 @@ export function DashboardMobileNav() {
                 <Home />
                 Home
               </NavLink>
+              <NavLink
+                to="/admin"
+                className={({ isActive }) =>
+                  `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
+                    isActive
+                      ? "bg-white/20 backdrop-blur-lg text-white"
+                      : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                  }`
+                }
+              >
+                <BookImageIcon />
+                My Dashboard
+              </NavLink>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button className="bg-transparent flex justify-start gap-4">
@@ -171,6 +184,19 @@ export function DashboardMobileNav() {
                   >
                     <Home />
                     Home
+                  </NavLink>
+                  <NavLink
+                    to="/user"
+                    className={({ isActive }) =>
+                      `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
+                        isActive
+                          ? "bg-white/20 backdrop-blur-lg text-white"
+                          : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                      }`
+                    }
+                  >
+                    <BookImageIcon />
+                    My Dashboard
                   </NavLink>
                   <NavLink
                     to="/user/my-booking"

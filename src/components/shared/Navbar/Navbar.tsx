@@ -63,7 +63,7 @@ const Navbar = () => {
         <h2 className="font-serif text-3xl ">GameGrounds</h2>
       </div>
       <div className="relative flex items-center justify-center w-[50%] mx-auto cursor-pointer">
-        <ul className="flex justify-center gap-10 font-mono font-bold text-white/80 text-xl">
+        <ul className="flex justify-center gap-10 font-mono font-bold text-white/80 text-xl pt-1">
           {[
             { path: "/", label: "Home" },
             { path: "/facilities", label: "Facilities" },

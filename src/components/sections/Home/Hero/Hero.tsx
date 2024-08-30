@@ -52,7 +52,7 @@ const Hero = () => {
   return (
     <div
       style={{ backgroundImage: `url(${heroImg3})` }}
-      className="h-[100vh] w-full bg-no-repeat bg-cover bg-[100%] mb-12"
+      className="lg:h-[100vh] w-full bg-no-repeat bg-cover bg-[100%] mb-12"
     >
       <>
         <div

@@ -6,7 +6,10 @@ import {
   useCreateABookMutation,
   useGetFacilitiesQuery,
 } from "../../../../Redux/api/baseApi";
+import { useToken } from "../../../../Redux/feature/authSlice";
+import { useAppSelector } from "../../../../Redux/hook";
 import { TFacility, TFacilitySelect } from "../../../../types/gloval.types";
+import { verifyToken } from "../../../../utils/verifyToken";
 import { Button } from "../../../ui/button";
 
 interface IBookingFormInput {
@@ -23,9 +26,22 @@ const BookingForm = () => {
   const [bookError, setBookError] = useState("");
 
   const [processBook, setProcessBook] = useState("");
+  const token = useAppSelector(useToken);
+
+  let user: any;
+
+  if (token) {
+    user = verifyToken(token);
+  }
 
   // * Handle Booking
   const handleBooking = async (data: IBookingFormInput) => {
+    if (!user || user?.role !== "user") {
+      setBookError("First login as a user than book your slot");
+      toast.error("First login as a user than book your slot");
+      return;
+    }
+
     setProcessBook("Processing...");
     setBookError("");
     const amount = facilities?.data?.find(

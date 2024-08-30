@@ -40,19 +40,19 @@ const ClipPathLinks: FC = () => {
 
       <div className="divide-y divide-neutral-900 border border-neutral-900">
         <div className="grid grid-cols-2 divide-x divide-neutral-900">
-          <LinkBox Icon={SiGoogle} href="#" />
-          <LinkBox Icon={SiShopify} href="#" />
+          <LinkBox Icon={SiGoogle} href="https://www.google.com/" />
+          <LinkBox Icon={SiShopify} href="https://www.shopify.com/" />
         </div>
         <div className="grid grid-cols-4 divide-x divide-neutral-900">
-          <LinkBox Icon={SiApple} href="#" />
-          <LinkBox Icon={SiSoundcloud} href="#" />
+          <LinkBox Icon={SiApple} href="https://www.apple.com/" />
+          <LinkBox Icon={SiSoundcloud} href="https://soundcloud.com/" />
           <LinkBox Icon={SiAdobe} href="#" />
-          <LinkBox Icon={SiFacebook} href="#" />
+          <LinkBox Icon={SiFacebook} href="https://www.facebook.com/" />
         </div>
         <div className="grid grid-cols-3 divide-x divide-neutral-900">
-          <LinkBox Icon={SiTiktok} href="#" />
-          <LinkBox Icon={SiSpotify} href="#" />
-          <LinkBox Icon={SiLinkedin} href="#" />
+          <LinkBox Icon={SiTiktok} href="https://www.tiktok.com/" />
+          <LinkBox Icon={SiSpotify} href="https://open.spotify.com/" />
+          <LinkBox Icon={SiLinkedin} href="https://www.linkedin.com/" />
         </div>
       </div>
     </div>

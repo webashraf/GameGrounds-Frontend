@@ -11,21 +11,21 @@ const UserSignUp = ({ uRole = "user" }) => {
   const [signUp, { error }] = useSignUpMutation();
   const navigate = useNavigate();
 
-  const defaultValue = {
-    name: "Ali Ashraf Tameem",
-    email: "aliashraftameem@sgmail.com",
-    password: "ali12@sgmail.com",
-    phone: "01322909805",
-    // role: "user",
-    address: "Level-4, 34, Awal Centre, Banani, Dhaka",
-  };
+  // const defaultValue = {
+  //   name: "Ali Ashraf Tameem",
+  //   email: "aliashraftameem@sgmail.com",
+  //   password: "ali12@sgmail.com",
+  //   phone: "01322909805",
+  //   // role: "user",
+  //   address: "Level-4, 34, Awal Centre, Banani, Dhaka",
+  // };
 
   const {
     register,
     handleSubmit,
     reset,
     // formState: { errors },
-  } = useForm<any>({ defaultValues: defaultValue });
+  } = useForm<any>();
   const onSubmit: SubmitHandler<any> = async (data) => {
     const userInfo = { ...data, role: uRole };
 
