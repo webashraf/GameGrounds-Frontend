@@ -103,39 +103,39 @@ const Footer = () => {
           </div>
         </div>
         {/* footer col-2 */}
-        <div>
-          <h3 className="text-2xl uppercase font-bold mb-3">Pages</h3>
-          <div className="flex flex-col text-xl font-mono gap-2">
-            <NavLink to="/" className="hover:underline">
-              Home
-            </NavLink>
-            <NavLink to="/about" className="hover:underline">
-              About
-            </NavLink>
-            <NavLink to="/contact" className="hover:underline">
-              Contact
-            </NavLink>
-            <NavLink to="/booking" className="hover:underline">
-              Facilities
-            </NavLink>
-            <NavLink to="/booking" className="hover:underline">
-              Booking
-            </NavLink>
+        <div className="flex justify-between items-start gap-10 w-[20%]">
+          <div className="flex justify-center items-start">
+            <div className="flex flex-col text-xl font-mono gap-2">
+              <h3 className="text-2xl uppercase font-bold mb-3">Pages</h3>
+              <NavLink to="/" className="hover:underline">
+                Home
+              </NavLink>
+              <NavLink to="/about" className="hover:underline">
+                About
+              </NavLink>
+              <NavLink to="/contact" className="hover:underline">
+                Contact
+              </NavLink>
+              <NavLink to="/booking" className="hover:underline">
+                Facilities
+              </NavLink>
+              <NavLink to="/booking" className="hover:underline">
+                Booking
+              </NavLink>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-2xl uppercase font-bold mb-3">Login</h3>
+            <div className="flex flex-col text-xl font-mono gap-2">
+              <NavLink to="/sign-in" className="hover:underline">
+                Sign in
+              </NavLink>
+              <NavLink to="/sign-up" className="hover:underline">
+                Sign up
+              </NavLink>
+            </div>
           </div>
         </div>
-        {/* footer col-2 */}
-        <div>
-          <h3 className="text-2xl uppercase font-bold mb-3">Login</h3>
-          <div className="flex flex-col text-xl font-mono gap-2">
-            <NavLink to="/sign-in" className="hover:underline">
-              Sign in
-            </NavLink>
-            <NavLink to="/sign-up" className="hover:underline">
-              Sign up
-            </NavLink>
-          </div>
-        </div>
-
         {/* footer col-3 */}
         <div>
           <div>
