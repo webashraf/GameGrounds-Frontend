@@ -28,8 +28,8 @@ const HowItsWork = () => {
     },
     {
       title: "Step 4: Receive Confirmation",
-      cardTitle: "Get Confirmation",
-      cardSubtitle: "Receive a booking confirmation email.",
+      cardTitle: "Payment With AmarPay and Get Confirmation",
+      cardSubtitle: "Receive a booking confirmation after payment.",
       cardDetailedText:
         "Once your booking is confirmed, you'll receive an email with all the details of your reservation. This email will include the facility address, time slot, and any additional instructions.",
     },

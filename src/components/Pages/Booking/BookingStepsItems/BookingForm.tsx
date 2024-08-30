@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -21,8 +22,11 @@ const BookingForm = () => {
   const { handleSubmit, control } = useForm<IBookingFormInput>();
   const [bookError, setBookError] = useState("");
 
+  const [processBook, setProcessBook] = useState("");
+
   // * Handle Booking
   const handleBooking = async (data: IBookingFormInput) => {
+    setProcessBook("Processing...");
     setBookError("");
     const amount = facilities?.data?.find(
       (facility: TFacility) => facility._id === data.facility
@@ -31,18 +35,25 @@ const BookingForm = () => {
     try {
       const res = await createABook(bookingInfo).unwrap();
       if (res?.success) {
+        toast.success("Going to payment page..");
         window.location.href = res.data.paymentSession.payment_url;
-        toast.success("Going to payment page");
-      }
-      if (res?.error) {
+      } else if (res?.error) {
+        setProcessBook("");
         setBookError(
-          res.error?.data.message ? res.error?.data.message : "Faild to book"
+          res.error?.data.message ? res.error?.data.message : "Failed to book"
         );
-        toast.error(res.error?.data.message);
+        toast.error(
+          res.error?.data.message ? res.error?.data.message : "Failed to book"
+        );
       }
     } catch (err) {
-      console.log(err);
-      setBookError("Faild to book!!");
+      setProcessBook("");
+      setBookError(
+        (err as any).status ? (err as any).data.message : "Failed to book"
+      );
+      toast.error(
+        (err as any).status ? (err as any).data.message : "Failed to book"
+      );
     }
   };
 
@@ -135,7 +146,7 @@ const BookingForm = () => {
         />
 
         <Button className="w-full" type="submit">
-          Book Now
+          {processBook ? processBook : "Book Now"}
         </Button>
       </form>
       <p className="text-red-600 py-2">{bookError}</p>

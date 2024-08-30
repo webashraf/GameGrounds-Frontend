@@ -9,6 +9,7 @@ import {
 import { useGetFacilitiesQuery } from "../../../Redux/api/baseApi";
 import CommonCard from "../../shared/CommonCard/CommonCard";
 import CommonHero from "../../shared/CommonHero/CommonHero";
+import Loader from "../../shared/Loader/Loader";
 import { Button } from "../../ui/button";
 import {
   Pagination,
@@ -34,7 +35,7 @@ interface FormData {
 }
 
 const Facilities: React.FC = () => {
-  const { data: facilities } = useGetFacilitiesQuery(undefined);
+  const { data: facilities, isFetching } = useGetFacilitiesQuery(undefined);
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [formData, setFormData] = useState<FormData>({
@@ -51,6 +52,10 @@ const Facilities: React.FC = () => {
   useEffect(() => {
     setFacilitiesData(facilities?.data || []);
   }, [facilities]);
+
+  if (isFetching) {
+    return <Loader />;
+  }
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);

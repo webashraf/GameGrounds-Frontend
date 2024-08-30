@@ -69,7 +69,7 @@ const MainLayout = () => {
       <div ref={container} className="relative overflow-x-hidden">
         {/* Desktop Navbar */}
         <div className="nav hidden lg:block fixed w-full lg:w-[1920px] mx-auto top-0 left-0 right-0 z-50">
-          <div className="m-nav w-full h-[60px] absolute bg-[#00000084] backdrop-blur-lg -z-20"></div>
+          <div className="m-nav w-full  h-[60px] absolute bg-[#00000084] backdrop-blur-lg -z-20"></div>
           <Navbar />
         </div>
         {/* Mobile Navbar */}
@@ -77,7 +77,7 @@ const MainLayout = () => {
           <MobileNav />
         </div>
         {/* Main Content */}
-        <div className="lg:m-2 mx-auto">
+        <div className=" mx-auto">
           <Outlet />
         </div>
         <Footer />

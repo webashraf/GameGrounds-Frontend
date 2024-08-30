@@ -3,9 +3,18 @@ import { NavLink } from "react-router-dom";
 import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
 import CommonCard from "../../../shared/CommonCard/CommonCard";
 import CommonHeading from "../../../shared/CommonHeading/CommonHeading";
+import Loader from "../../../shared/Loader/Loader";
 
 const FeaturedFacilities = () => {
-  const { data: facilities } = useGetFacilitiesQuery(undefined);
+  const { data: facilities, isFetching } = useGetFacilitiesQuery(undefined);
+
+  if (isFetching) {
+    return (
+      <div className="h-[50vh] justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="section-padding  md:px-10 lg:px-20">

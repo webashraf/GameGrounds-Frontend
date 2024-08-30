@@ -25,9 +25,9 @@ const WelcomeAdminDashboard = () => {
 
       {/* User Info Section */}
       {userInfo && (
-        <div className="p-8 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg shadow-lg text-left text-white mb-5">
+        <div className="p-8 bg-gradient-to-r from-[#000000bd] to-[#10101014] rounded-lg shadow-lg text-left text-white mb-5">
           <h2 className="text-2xl font-bold mb-4">Your Information</h2>
-          <div className="space-y-3">
+          <div className="space-y-3 text-md">
             <div>
               <span className="font-semibold">Name:</span> {userInfo?.data.name}
             </div>

@@ -7,6 +7,7 @@ import {
 import { useToken } from "../../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../../Redux/hook";
 import { verifyToken } from "../../../../utils/verifyToken";
+import Loader from "../../../shared/Loader/Loader";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,7 +35,9 @@ const MyBookings = () => {
   if (token) {
     user = verifyToken(token);
   }
-  const { data: myBookings } = useGetAllBookingsByUserQuery(user?.email);
+  const { data: myBookings, isFetching } = useGetAllBookingsByUserQuery(
+    user?.email
+  );
   const [cancelBooking] = useCancelBookingMutation();
 
   console.log(myBookings);
@@ -48,6 +51,13 @@ const MyBookings = () => {
     }
   };
 
+  if (isFetching) {
+    return (
+      <div className="h-[90vh] flex justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className="lg:w-[90%]  ">
       <div className="  relative h-[90vh] lg:w-[1000px] w-full px-5 overflow-auto  custom-scrollbar mx-auto section-padding mt-10">

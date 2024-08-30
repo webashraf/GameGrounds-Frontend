@@ -1,4 +1,5 @@
 import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
+import Loader from "../../../shared/Loader/Loader";
 import {
   Table,
   TableBody,
@@ -10,9 +11,15 @@ import {
 import FacilitiesTable from "./FacilitiesTable";
 
 const FacilitiesUpdate = () => {
-  const { data: facilitiesData } = useGetFacilitiesQuery(undefined);
+  const { data: facilitiesData, isFetching } = useGetFacilitiesQuery(undefined);
 
-
+  if (isFetching) {
+    return (
+      <div className="h-[90vh] flex justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className="w-full ">
       {" "}
