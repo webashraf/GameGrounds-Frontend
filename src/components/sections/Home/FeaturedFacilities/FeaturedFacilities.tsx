@@ -10,7 +10,7 @@ const FeaturedFacilities = () => {
 
   if (isFetching) {
     return (
-      <div className="h-[50vh] justify-center items-center">
+      <div className="h-[70vh] flex justify-center items-center">
         <Loader />
       </div>
     );
