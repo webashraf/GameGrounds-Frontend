@@ -10,7 +10,7 @@ const FeaturedFacilities = () => {
   } = useGetFacilitiesQuery(undefined);
 
   return (
-    <div className="section-padding px-5 md:px-10 lg:px-20">
+    <div className="section-padding  md:px-10 lg:px-20">
       <CommonHeading
         title="Premium Facilities for Every Sport"
         subTitle="Hand picked venues for the ultimate sports experience"

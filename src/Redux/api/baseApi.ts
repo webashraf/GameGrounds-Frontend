@@ -4,8 +4,8 @@ import { RootState } from "../store";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: "http://localhost:5000/api",
-    baseUrl:"https://game-grouhnds-sports-facility-booking-backend.vercel.app/api",
+    baseUrl: "http://localhost:5000/api",
+    // baseUrl:"https://game-grouhnds-sports-facility-booking-backend.vercel.app/api",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
@@ -71,7 +71,7 @@ export const baseApi = createApi({
     checkAvailability: builder.query({
       query: (query) => {
         return {
-          url: `/check-availability?date=${query}`,
+          url: `/check-availability${query}`,
           method: "GET",
         };
       },
@@ -114,6 +114,15 @@ export const baseApi = createApi({
       },
       invalidatesTags: ["myBookings"],
     }),
+    getUser: builder.query({
+      query: (id) => {
+        console.log(id);
+        return {
+          url: `/auth/ali@gmail.com`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -130,4 +139,5 @@ export const {
   useGetAllBookingsQuery,
   useGetAllBookingsByUserQuery,
   useCancelBookingMutation,
+  useGetUserQuery,
 } = baseApi;

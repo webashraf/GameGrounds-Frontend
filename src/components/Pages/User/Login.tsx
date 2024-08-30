@@ -23,7 +23,7 @@ const Login = () => {
   const onSubmit: SubmitHandler<any> = async (data) => {
     try {
       const res = await login(data).unwrap();
-
+      console.log("user", res);
       reset();
       if (res?.success) {
         const user = verifyToken(res?.token);

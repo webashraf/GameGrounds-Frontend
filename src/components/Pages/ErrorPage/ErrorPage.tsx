@@ -1,3 +1,6 @@
+import { Button } from "react-day-picker";
+import { NavLink } from "react-router-dom";
+
 const ErrorPage = () => {
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">
@@ -9,13 +12,9 @@ const ErrorPage = () => {
         <p className="mt-2 text-gray-400">
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <a
-          href="/"
-          className="mt-6 inline-block px-6 py-3 bg-green-500 text-lg font-medium rounded-full hover:bg-green-600 transition duration-300"
-        >
-          Back to Home
-        </a>
-
+        <NavLink to="/">
+          <Button>Back to Home</Button>
+        </NavLink>
       </div>
     </div>
   );

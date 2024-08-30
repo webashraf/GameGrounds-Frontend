@@ -13,7 +13,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useToken } from "../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
-import { DeshboardMobileNav } from "../../shared/UserMobileNav/UserMobileNav";
+import { DashboardMobileNav } from "../../shared/DashboardMobileNav/DashboardMobileNav";
 import { Button } from "../../ui/button";
 import {
   DropdownMenu,
@@ -34,12 +34,11 @@ const UserDashboardLayout = () => {
     user = verifyToken(token);
   }
 
-
   return (
     <div className="flex">
-      <div className="lg:hidden fixed top-5 flex items-center px-4 z-50">
-        <DeshboardMobileNav />
-        <h2 className="text-4xl font-serif">GameGround</h2>
+      <div className="lg:hidden fixed top-0  flex items-center  justify-between p-5  z-50 bg-black/80 w-full backdrop-blur-md">
+        <DashboardMobileNav />
+        <h2 className="text-4xl text-white font-serif">GameGround</h2>
       </div>
 
       {/* --------------- */}

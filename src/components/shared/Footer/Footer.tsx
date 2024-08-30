@@ -3,7 +3,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div className="bg-[#f4f4f4] relative z-0 lg:px-20  px-0 lg:pb-0 pb-44 ">
+    <div className="bg-[#f4f4f4] relative z-0 lg:px-20  px-0 lg:pb-0 pb-10 ">
       <div className="flex justify-between flex-wrap gap-10 items-center flex-co py-10 lg:px-0 px-8">
         {/* footer col-1 */}
         <div
@@ -109,32 +109,29 @@ const Footer = () => {
             <NavLink to="/" className="hover:underline">
               Home
             </NavLink>
-            <NavLink to="/" className="hover:underline">
+            <NavLink to="/about" className="hover:underline">
               About
             </NavLink>
-            <NavLink to="/" className="hover:underline">
-              News
-            </NavLink>
-            <NavLink to="/" className="hover:underline">
+            <NavLink to="/contact" className="hover:underline">
               Contact
+            </NavLink>
+            <NavLink to="/booking" className="hover:underline">
+              Facilities
+            </NavLink>
+            <NavLink to="/booking" className="hover:underline">
+              Booking
             </NavLink>
           </div>
         </div>
         {/* footer col-2 */}
         <div>
-          <h3 className="text-2xl uppercase font-bold mb-3">Pages</h3>
+          <h3 className="text-2xl uppercase font-bold mb-3">Login</h3>
           <div className="flex flex-col text-xl font-mono gap-2">
-            <NavLink to="/" className="hover:underline">
-              Home
+            <NavLink to="/sign-in" className="hover:underline">
+              Sign in
             </NavLink>
-            <NavLink to="/" className="hover:underline">
-              About
-            </NavLink>
-            <NavLink to="/" className="hover:underline">
-              News
-            </NavLink>
-            <NavLink to="/" className="hover:underline">
-              Contact
+            <NavLink to="/sign-up" className="hover:underline">
+              Sign up
             </NavLink>
           </div>
         </div>

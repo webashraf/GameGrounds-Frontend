@@ -76,7 +76,7 @@ const MainLayout = () => {
           <MobileNav />
         </div>
         {/* Main Content */}
-        <div className="m-2 mx-auto">
+        <div className="lg:m-2 mx-auto">
           <Outlet />
         </div>
         <Footer />
@@ -85,7 +85,7 @@ const MainLayout = () => {
         {showScrollButton && (
           <button
             onClick={scrollToTop}
-            className="fixed bottom-10 right-10 bg-black text-white p-3 rounded-full shadow-lg z-50"
+            className="fixed bottom-5 right-10 hover:animate-bounce bg-black text-white p-3 rounded-full shadow-lg z-50"
           >
             ↑
           </button>

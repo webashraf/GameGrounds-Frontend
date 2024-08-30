@@ -21,7 +21,6 @@ const BookingForm = () => {
   const { handleSubmit, control } = useForm<IBookingFormInput>();
   const [bookError, setBookError] = useState("");
 
-  
   // * Handle Booking
   const handleBooking = async (data: IBookingFormInput) => {
     setBookError("");
@@ -33,7 +32,7 @@ const BookingForm = () => {
       const res = await createABook(bookingInfo).unwrap();
       if (res?.success) {
         window.location.href = res.data.paymentSession.payment_url;
-        toast.success("Booking Successful");
+        toast.success("Going to payment page");
       }
       if (res?.error) {
         setBookError(

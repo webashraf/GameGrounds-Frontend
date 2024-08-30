@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ArrowRight } from "lucide-react";
 import { ChangeEvent, useState } from "react";
+import { toast } from "sonner";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -22,8 +24,13 @@ interface Query {
 
 const Booking = () => {
   const { data: facilities } = useGetFacilitiesQuery(undefined);
+  const [errorMessage, setErrorMessage] = useState("");
   const [query, setQuery] = useState<Query | null>(null);
-  const queryString = `${query?.date ?? ""}&facility=${query?.facility ?? ""}`;
+  // Create query pram for availability check
+  const queryString = `?date=${query?.date ?? ""}&facility=${
+    query?.facility ?? ""
+  }`;
+
   const [facilityForFeature, setFacilityForFeature] =
     useState<TFacility | null>(null);
 
@@ -37,20 +44,22 @@ const Booking = () => {
     setFacilityForFeature(matchedFacility || null);
   };
 
-  const { data: availabilitySlot } = useCheckAvailabilityQuery(queryString, {
-    skip: !query,
-  });
-
+  const { data: availabilitySlot, error: availabilityError } =
+    useCheckAvailabilityQuery(queryString, {
+      skip: !query,
+    });
+  if (availabilityError) {
+    toast.error(availabilityError.data.message);
+  }
   return (
     <div className="">
       <CommonHero
         title="Booking"
         img="https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       />
-
-      <div className="flex flex-col md:flex-row gap-8 px-4">
-        {/* Left div */}
-        <div className="flex-1 bg-white rounded-xl shadow-lg p-6 border border-gray-300 relative overflow-hidden">
+      <div className="flex lg:flex-row flex-col">
+        {/* Info Board */}
+        <div className="flex-1 bg-white rounded-xl shadow-lg p-6 border border-gray-300 relative overflow-hidden ]lg:w-1/2">
           <div className="absolute top-4 left-4 right-4 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
           <div className="absolute bottom-4 left-4 right-4 h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-full"></div>
 
@@ -59,9 +68,11 @@ const Booking = () => {
             <p className="text-gray-700 text-center text-2xl font-serif font-semibold">
               Your Service Features Will Appear Here
             </p>
+
+            {/* {errorMessage && <p className="text-red-500 my-10">{errorMessage}</p>} */}
             {/* Step-1 Facility feature data */}
             {facilityForFeature && (
-              <div className="border-2 border-dashed min-h-[100px] text-left flex justify-center items-center gap-10 p-5">
+              <div className="border-2 border-dashed min-h-[100px] text-left flex justify-center items-center gap-10 p-5 mt-10">
                 <div className="r-10">
                   <h2 className="text-2xl font-serif">
                     {facilityForFeature.name}
@@ -104,66 +115,89 @@ const Booking = () => {
           {/* Subtle Background Pattern */}
           <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
         </div>
-
-        {/* Right div */}
-        <div className="flex-1 lg:mx-6 my-8 w-full md:w-1/2">
-          <div className="swiper-container mx-auto py-10 shadow-xl rounded-lg bg-white px-">
-            <Swiper
-              modules={[Navigation, Pagination]}
-              slidesPerView={1}
-              navigation={{
-                nextEl: ".custom-next",
-                prevEl: ".custom-prev",
-              }}
-              speed={300}
-              allowTouchMove={false}
-              pagination={{ clickable: false }}
-            >
-              {/* Slide-1 Facility Feature Selection */}
-              <SwiperSlide className="shadow-xl flex flex-col px-5">
-                <h2 className="text-3xl uppercase mb-5">
-                  Select a facility and check its features
-                </h2>
-                <select
-                  onChange={handleFacilityFeature}
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-[400px]"
-                >
-                  <option value="" disabled>
-                    Select a facility
-                  </option>
-                  {facilities?.data.map((facility: TFacility) => (
-                    <option key={facility._id} value={facility._id}>
-                      {facility.name}
+        <div className="flex  flex-col md:flex-row gap-8 px-4 lg:w-1/2">
+          {/* Booking form */}
+          <div className="flex-1 lg:mx-6 my-8 w-full md:w-1/2">
+            <div className="swiper-container mx-auto py-10 shadow-xl rounded-lg bg-white px-">
+              <Swiper
+                modules={[Navigation, Pagination]}
+                slidesPerView={1}
+                navigation={{
+                  nextEl: ".custom-next",
+                  prevEl: ".custom-prev",
+                }}
+                speed={300}
+                allowTouchMove={false}
+                pagination={{ clickable: false }}
+                className=""
+              >
+                <h1 className="text-5xl"></h1>
+                {/* Slide-1 Facility Feature Selection */}
+                <SwiperSlide className="shadow-xl flex flex-col px-5">
+                  <h2 className="text-xl uppercase mb-5 flex items-center gap-5 bg-black text-white p-3 rounded-md">
+                    Facility Feature{" "}
+                    <span>
+                      <ArrowRight />
+                    </span>
+                    Availability Checker
+                  </h2>
+                  <h2 className="text-3xl uppercase mb-5">
+                    Check a facility feature
+                  </h2>
+                  <select
+                    onChange={handleFacilityFeature}
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-[400px]"
+                  >
+                    <option value="" disabled>
+                      Select a facility
                     </option>
-                  ))}
-                </select>
-              </SwiperSlide>
+                    {facilities?.data.map((facility: TFacility) => (
+                      <option key={facility._id} value={facility._id}>
+                        {facility.name}
+                      </option>
+                    ))}
+                  </select>
+                </SwiperSlide>
 
-              {/* Slide-2 Availability Checker */}
-              <SwiperSlide className="shadow-xl px-10">
-                <AvailabilityChecker setQuery={setQuery} />
-              </SwiperSlide>
+                {/* Slide-2 Availability Checker */}
+                <SwiperSlide className="shadow-xl lg:px-10 px-5">
+                  <AvailabilityChecker setQuery={setQuery} />
+                </SwiperSlide>
 
-              {/* Slide-3 Booking Form */}
-              <SwiperSlide className="shadow-xl px-10">
-                <div className=" md:p-20 text-left">
-                  <div className="flex justify-between items-end">
+                {/* Slide-3 Booking Form */}
+                <SwiperSlide className="shadow-xl lg:px-10 px-5">
+                  <div className=" md:p-20 text-left w-full">
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <h2 className="lg:text-xl md:text-xl  uppercase mb-5 flex items-center gap-5 bg-black text-white p-3 rounded-md">
+                          Booking Form
+                          <span>
+                            <ArrowRight />
+                          </span>
+                          Payment
+                          <span>
+                            <ArrowRight />
+                          </span>
+                          Successfully booking
+                        </h2>
+                        <h2 className="text-3xl uppercase mb-2">
+                          Booking Form
+                        </h2>
+                      </div>
+                    </div>
                     <div>
-                      <h2 className="text-3xl uppercase mb-2">Booking Form</h2>
+                      <BookingForm />
                     </div>
                   </div>
-                  <div>
-                    <BookingForm />
-                  </div>
+                </SwiperSlide>
+              </Swiper>
+              <div className="flex gap-2 justify-between px-5">
+                <div className="custom-prev bg-black h-16 w-32 flex items-center justify-center hover:bg-slate-800 transition-transform duration-300 ease-in-out">
+                  <p className="text-white">Prev</p>
                 </div>
-              </SwiperSlide>
-            </Swiper>
-            <div className="flex gap-2 justify-between px-5">
-              <div className="custom-prev bg-black h-16 w-32 flex items-center justify-center hover:bg-slate-800 transition-transform duration-300 ease-in-out">
-                <p className="text-white">Prev</p>
-              </div>
-              <div className="custom-next bg-black h-16 w-32 flex items-center justify-center hover:bg-slate-800 transition-transform duration-300 ease-in-out">
-                <p className="text-white">Next</p>
+                <div className="custom-next bg-black h-16 w-32 flex items-center justify-center hover:bg-slate-800 transition-transform duration-300 ease-in-out">
+                  <p className="text-white">Next</p>
+                </div>
               </div>
             </div>
           </div>

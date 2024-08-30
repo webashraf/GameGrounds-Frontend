@@ -33,7 +33,7 @@ import {
   SheetTrigger,
 } from "../../ui/sheet";
 
-export function DeshboardMobileNav() {
+export function DashboardMobileNav() {
   const [position, setPosition] = useState("bottom");
 
   const token = useAppSelector(useToken);
@@ -48,7 +48,7 @@ export function DeshboardMobileNav() {
     <div className="grid grid-cols-2 gap-2 lg:hidden">
       <Sheet key="left">
         <SheetTrigger asChild>
-          <Button variant="outline" className="w-[150px] h-[80px] ">
+          <Button variant="outline" className=" ">
             <Menu />
           </Button>
         </SheetTrigger>

@@ -12,7 +12,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useToken } from "../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
-import { DeshboardMobileNav } from "../../shared/UserMobileNav/UserMobileNav";
+import { DashboardMobileNav } from "../../shared/DashboardMobileNav/DashboardMobileNav";
 import { Button } from "../../ui/button";
 import {
   DropdownMenu,
@@ -33,12 +33,11 @@ const AdminLayout = () => {
     user = verifyToken(token);
   }
 
-
   return (
     <div className="flex">
       <div className="bg-slate-900 w-[300px] h-screen p-5">
         <div>
-          <DeshboardMobileNav />
+          <DashboardMobileNav />
 
           <div className="text-white border-b pb-2 mb-5">
             <h3 className="font-serif text-2xl text-center uppercase">

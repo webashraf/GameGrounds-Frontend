@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import gsap from "gsap";
 import {
+  BookType,
   Calendar,
   Clipboard,
   Home,
-  Info,
   Mail,
   Menu,
   Minimize,
@@ -26,6 +25,7 @@ const MobileNav = () => {
 
   const token = useAppSelector(useToken);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let user: any;
 
   if (token) {
@@ -50,7 +50,7 @@ const MobileNav = () => {
     <>
       <button
         onClick={toggleNav}
-        className="fixed bottom-5 right-5 p-3 bg-slate-500 text-white rounded-full shadow-lg z-50"
+        className="fixed bottom-5 left-5 p-3 bg-slate-500 text-white rounded-full shadow-lg z-50"
       >
         {isOpen ? <Minimize /> : <Menu />}
       </button>
@@ -66,7 +66,7 @@ const MobileNav = () => {
             </div>
             <div className="border border-gray-300 py-3 flex gap-1 flex-wrap shadow-xl rounded-md w-full justify-center">
               <NavItem to="/" icon={<Home />} label="Home" />
-              <NavItem to="/about" icon={<Info />} label="About" />
+              <NavItem to="/about" icon={<BookType />} label="About" />
               <NavItem to="/contact" icon={<Mail />} label="Contact" />
               <NavItem to="/booking" icon={<Calendar />} label="Booking" />
               <NavItem
@@ -103,16 +103,17 @@ const NavItem = ({
 }) => (
   <NavLink
     to={to}
-    className="group relative px-4 flex flex-col items-center cursor-pointer"
-    // activeClassName="bg-yellow-90"
+    className={({ isActive }) =>
+      `group relative px-4 flex flex-col items-center cursor-pointer ${
+        isActive ? "bg-black rounded-lg" : ""
+      }`
+    }
   >
     <div className="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
       {icon}
     </div>
-    <p>{label}</p>
-    <span className="absolute -top-8 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg border border-gray-300 bg-white text-black px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
-      {label}
-    </span>
+    <p className="text-md uppercase">{label}</p>
+
   </NavLink>
 );
 

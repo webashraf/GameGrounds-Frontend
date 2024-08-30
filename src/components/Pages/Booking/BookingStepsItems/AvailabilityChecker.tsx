@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
 import {
@@ -14,13 +15,21 @@ const AvailabilityChecker: React.FC<TAvailabilityCheckerProps> = ({
   const { register, handleSubmit } = useForm<TFormValues>();
 
   const onSubmit: SubmitHandler<TFormValues> = (data) => {
+    // Send data booking component for check availability
     setQuery(data);
   };
 
   return (
-    <div className=" text-left">
-      <div className="flex justify-between items-end">
-        <div>
+    <div className=" text-center w-full">
+      <div className="">
+        <div className="">
+          <h2 className="text-xl uppercase mb-5 flex items-center gap-5 bg-black text-white p-3 rounded-md justify-center">
+            Availability Checker
+            <span>
+              <ArrowRight />
+            </span>
+            Booking form
+          </h2>
           <h2 className="text-3xl uppercase mb-4">Availability Checker</h2>
         </div>
       </div>
