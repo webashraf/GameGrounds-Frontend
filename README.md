@@ -20,19 +20,23 @@
 
 ## Technologies Used
 
-- **Frontend**: React.js, Tailwind CSS, [sadcn](https://sadcn.dev/), GSAP, Framer Motion
+- **Frontend**: React.js, Tailwind CSS, sadcn, GSAP, Framer Motion
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB, Mongoose
 - **Authentication**: JWT (JSON Web Tokens)
 - **Payment**: AMR Pay
-- **Deployment**: [Specify deployment platform, if applicable]
+- **Deployment**: Vercel
 
 ## Installation
 
 To get started with the project locally, follow these steps:
 
 1. **Clone the Repository:**
+
    ```bash
-   git clone https://github.com/your-username/gamegrounds.git
+   git clone https://github.com/webashraf/GameGrounds-Frontend
    cd gamegrounds
    ```
+
+   **Live Link:**
+   https://game-grounds-frontend.vercel.app/
