@@ -52,14 +52,14 @@ const Hero = () => {
   return (
     <div
       style={{ backgroundImage: `url(${heroImg3})` }}
-      className="lg:h-[100vh] w-full bg-no-repeat bg-cover bg-[100%] mb-12"
+      className="lg:h-[100vh] w-full bg-no-repeat bg-cover bg-[100%] mb-12 "
     >
       <>
         <div
           ref={hoverRef}
           className="text-white lg:h-screen h-[100vh] w-full flex justify-center items-center bg-[#10101053] lg:pt-20 relative"
         >
-          <div className="max-w-[1140px] bg-black/20 backdrop-blur-sm p-5 md:p-10 shadow-2xl rounded-sm w-full mx-auto text-center lg:h-auto h-screen pt-10">
+          <div className="max-w-[1140px] flex flex-col justify-center bg-black/20 backdrop-blur-sm p-5 md:p-10 shadow-2xl rounded-sm w-full mx-auto text-center lg:h-auto h-screen pt-10">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif uppercase">
               Discover Top-Rated Sports Venues Near You
             </h1>

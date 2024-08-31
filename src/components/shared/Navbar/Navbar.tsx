@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useRef } from "react";
+import { NavLink } from "react-router-dom";
 import { logout, useToken } from "../../../Redux/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
@@ -11,9 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const token = useAppSelector(useToken);
-  const location = useLocation();
   const navRefs = useRef<HTMLAnchorElement[]>([]);
-
   const dispatch = useAppDispatch();
 
   let user: any;
@@ -21,32 +19,6 @@ const Navbar = () => {
   if (token) {
     user = verifyToken(token);
   }
-
-  useEffect(() => {
-    navRefs.current.forEach((nav) => {
-      // Hover animation
-      gsap.fromTo(
-        nav,
-        { backgroundColor: "transparent" },
-        {
-          backgroundColor: "#000",
-          duration: 0.3,
-          ease: "power2.inOut",
-          paused: true,
-          onHover: true,
-        }
-      );
-
-      // Active link animation
-      if (location.pathname === nav.pathname) {
-        gsap.to(nav, {
-          backgroundColor: "#101010bc",
-          duration: 0.5,
-          ease: "power2.inOut",
-        });
-      }
-    });
-  }, [location]);
 
   const addToRefs = (el: HTMLAnchorElement) => {
     if (el && !navRefs.current.includes(el)) {
@@ -57,13 +29,14 @@ const Navbar = () => {
   const handleLogOut = () => {
     dispatch(logout());
   };
+
   return (
     <div>
       <div className="w-full text-white text-center border-b border-[#908a8a] py-3">
         <h2 className="font-serif text-3xl ">GameGrounds</h2>
       </div>
-      <div className="relative flex items-center justify-center w-[50%] mx-auto cursor-pointer">
-        <ul className="flex justify-center gap-10 font-mono font-bold text-white/80 text-xl pt-1">
+      <div className="relative flex items-center justify-center  mx-auto cursor-pointer">
+        <ul className="flex justify-center gap-10 font-mono font-bold text-white/80 text-xl pt-1 ">
           {[
             { path: "/", label: "Home" },
             { path: "/facilities", label: "Facilities" },
@@ -79,9 +52,12 @@ const Navbar = () => {
               to={link.path}
               key={index}
               className={({ isActive }) =>
-                `hover:underline py-2 my-2 px-5  transition-all duration-500 ${
-                  isActive ? "bg-[#101010a0] backdrop-blur-xl text-white" : ""
-                }`
+                // Force Dashboard link to never be active
+                link.label === "Dashboard"
+                  ? "hover:underline py-2 my-2 px-5 transition-all duration-500"
+                  : `hover:underline py-2 my-2 px-5 transition-all duration-500 ${
+                      isActive ? "bg-black/60 backdrop-blur-md  text-white" : ""
+                    }`
               }
               ref={addToRefs}
             >

@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   gap: 15px;
-  padding: 50px 40px 20px 40px;
+  padding: 50px 40px 50px 40px;
   background-color: #ffffff;
   box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
     0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
@@ -24,13 +24,14 @@
 
 .title {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 38px;
   font-weight: 700;
   color: #212121;
+  text-align: center;
 }
 
 .subtitle {
-  font-size: 0.725rem;
+  font-size: 16px;
   max-width: 80%;
   text-align: center;
   line-height: 1.1rem;
@@ -49,7 +50,7 @@
 .icon {
   width: 20px;
   position: absolute;
-  z-index: 99;
+  z-index: 10;
   left: 12px;
   bottom: 9px;
 }
@@ -77,17 +78,6 @@
   box-shadow: 0px 0px 0px 2px #242424;
   background-color: transparent;
 }
-
-/* .sign-in_btn {
-  width: 100%;
-  height: 40px;
-  border: 0;
-  background: #115dfc;
-  border-radius: 7px;
-  outline: none;
-  color: #ffffff;
-  cursor: pointer;
-} */
 
 .sign-in_ggl {
   width: 100%;

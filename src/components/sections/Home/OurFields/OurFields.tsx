@@ -134,7 +134,7 @@ const ShuffleGrid: React.FC = () => {
 
 const OurFields: React.FC = () => {
   return (
-    <section className="w-full px- section-padding mb-20 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
+    <section className="w-full px- section-padding mb-20 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
       <div>
         <h3 className="text-4xl md:text-6xl uppercase">
           Sports Field Showcase

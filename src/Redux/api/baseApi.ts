@@ -4,7 +4,8 @@ import { RootState } from "../store";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl:"https://game-grouhnds-sports-facility-booking-backend.vercel.app/api",
+    baseUrl:
+      "https://game-grouhnds-sports-facility-booking-backend.vercel.app/api",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
@@ -117,7 +118,7 @@ export const baseApi = createApi({
       query: (id) => {
         console.log(id);
         return {
-          url: `/auth/ali@gmail.com`,
+          url: `/auth/${id}`,
           method: "GET",
         };
       },

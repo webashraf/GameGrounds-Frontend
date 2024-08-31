@@ -3,7 +3,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div className="bg-[#f4f4f4] relative z-0 lg:px-20  px-0 lg:pb-0 pb-10 ">
+    <div className="bg-[#f4f4f4] relative z-0 lg:px-20  px-0 lg:pb-0 pb-10 mt-20">
       <div className="flex justify-between flex-wrap gap-10 items-center flex-co py-10 lg:px-0 px-8">
         {/* footer col-1 */}
         <div

@@ -35,14 +35,16 @@ const MobileNav = () => {
   }
 
   const toggleNav = () => {
+    console.log("Toggle clicked", isOpen);
     if (navRef.current) {
-      const newY = isOpen ? "100%" : "0%";
+      const newX = isOpen ? "100%" : "200%"; // Change Y to X for horizontal movement
       gsap.to(navRef.current, {
-        y: newY,
+        x: newX,
         duration: 0.5,
         ease: "power2.out",
       });
       setIsOpen(!isOpen);
+      console.log("New state", !isOpen);
     }
   };
 
@@ -54,27 +56,37 @@ const MobileNav = () => {
   return (
     <>
       {/* Menu Button */}
-      <button
-        onClick={toggleNav}
-        className="fixed top-5 right-5 p-3 bg-slate-500 text-white rounded-full shadow-lg z-50"
-      >
-        {isOpen ? <Minimize /> : <Menu />}
-      </button>
+      <div className="fixed top-0 py-5 px-5 flex justify-between items-center w-full bg-black/30 backdrop-blur-md">
+        <h2 className=" text-3xl font-semibold font-serif text-white">
+          GameGrounds
+        </h2>
+        {/* Menu Button */}
+        <button
+          onClick={toggleNav}
+          className=" p-3 bg-slate-500 text-white rounded-full shadow-lg "
+        >
+          {<Menu />}
+        </button>
+      </div>
 
       {/* Navigation Menu */}
       <div
         ref={navRef}
-        className="fixed top-0 left-0 w-full h-screen rounded-b-2xl flex flex-col justify-start py-5 bg-black/60 backdrop-blur-lg shadow-2xl border border-white/20 text-white"
-        style={{ transform: "translateY(100%)" }}
+        className="w-[50%] fixed top-0 left-0 h-[100vh] rounded-b-2xl flex flex-col justify-start py-5 bg-black/60 backdrop-blur-lg shadow-2xl border border-white/20 text-white px-5"
+        style={{ transform: "translateX(-100%)" }} // Update Y to X
       >
-        <div className="w-full px-3 flex items-center justify-between">
+        <div className="w-full px-3 flex items-center justify-end pb-10">
           {/* Logo */}
-          <div className="text-3xl font-semibold font-serif">GameGrounds</div>
-          {/* Menu Button (Redundant if already present) */}
+          <button
+            onClick={toggleNav}
+            className=" p-3 bg-slate-500 text-white rounded-full shadow-lg "
+          >
+            {<Minimize />}
+          </button>
         </div>
 
         {/* Navigation Links */}
-        <div className="border border-gray-300 py-3 flex flex-col gap-1 flex-wrap shadow-xl rounded-md  justify-center items-start">
+        <div className="border border-gray-300 py-3 flex flex-col gap-1 flex-wrap shadow-xl rounded-md  justify-center items-start px-5">
           <NavItem to="/" icon={<Home />} label="Home" />
           <NavItem to="/booking" icon={<Calendar />} label="Booking" />
           <NavItem to="/facilities" icon={<Clipboard />} label="Facilities" />
@@ -84,8 +96,9 @@ const MobileNav = () => {
             to={`/${user?.role ? user?.role : "sign-in"}`}
             icon={<PanelRightInactive />}
             label="Dashboard"
+            forceInactive // Custom prop to force Dashboard to be inactive
           />
-          <div className="flex flex-col items-center mt-4">
+          <div className="flex flex-col items-center mt-4 gap-3">
             {user ? (
               <NavItem
                 to="#"
@@ -123,19 +136,23 @@ const NavItem = ({
   label,
   onClick,
   isSpecial = false,
+  forceInactive = false,
 }: {
   to: string;
   icon: React.ReactNode;
   label: string;
   onClick?: () => void;
   isSpecial?: boolean;
+  forceInactive?: boolean;
 }) => (
   <NavLink
     to={to}
     onClick={onClick}
     className={({ isActive }) =>
       `group relative px-4 flex flex-col items-center cursor-pointer ${
-        !isSpecial && isActive ? "bg-black rounded-lg" : ""
+        !isSpecial && (forceInactive || !isActive)
+          ? ""
+          : "rounded-none h-[35px] bg-[#101010a0] backdrop-blur-md pr-10"
       }`
     }
   >

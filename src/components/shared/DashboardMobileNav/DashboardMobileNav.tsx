@@ -52,7 +52,10 @@ export function DashboardMobileNav() {
             <Menu />
           </Button>
         </SheetTrigger>
-        <SheetContent className="bg-slate-900 pt-14 " side="left">
+        <SheetContent
+          className="bg-slate-900/30 backdrop-blur-md pt-14 "
+          side="left"
+        >
           <SheetHeader>
             <SheetTitle className="">
               <h3 className="font-serif text-2xl text-center uppercase text-white">
@@ -85,7 +88,7 @@ export function DashboardMobileNav() {
                 to="/admin"
                 className={({ isActive }) =>
                   `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
-                    isActive
+                    isActive && window.location.pathname === "/admin"
                       ? "bg-white/20 backdrop-blur-lg text-white"
                       : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
                   }`
@@ -96,11 +99,18 @@ export function DashboardMobileNav() {
               </NavLink>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button className="bg-transparent flex justify-start gap-4">
+                  <Button
+                    className={`bg-transparent flex justify-start gap-4 ${
+                      (window.location.pathname === "/admin/facilities-add" ||
+                        window.location.pathname ===
+                          "/admin/facilities-update") &&
+                      "bg-white/20 backdrop-blur-lg"
+                    }`}
+                  >
                     <FileSliders /> Facility Management
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56 bg-slate-900">
+                <DropdownMenuContent className="w-56 bg-slate-900/30 backdrop-blur-md">
                   <DropdownMenuRadioGroup
                     value={position}
                     onValueChange={setPosition}
@@ -109,7 +119,7 @@ export function DashboardMobileNav() {
                       <NavLink
                         to="/admin/facilities-add"
                         className={({ isActive }) =>
-                          `w-full py-2 px-4 rounded-lg transition-all duration-300 hover:text-black ease-in-out flex items-center gap-4  ${
+                          `w-full py-2 px-4 rounded-lg transition-all duration-300 text-whit ease-in-out flex items-center gap-4 ${
                             isActive
                               ? "bg-white/20 backdrop-blur-lg text-white"
                               : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-black"
@@ -124,7 +134,7 @@ export function DashboardMobileNav() {
                       <NavLink
                         to="/admin/facilities-update"
                         className={({ isActive }) =>
-                          `w-full py-2 px-4 rounded-lg transition-all duration-300 hover:text-black ease-in-out flex items-center gap-4 ${
+                          `w-full py-2 px-4 rounded-lg transition-all duration-300 text-whit ease-in-out flex items-center gap-4 ${
                             isActive
                               ? "bg-white/20 backdrop-blur-lg text-white"
                               : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-black"
@@ -169,7 +179,7 @@ export function DashboardMobileNav() {
           ) : (
             <div className="  w-[300px h-screen p-5">
               <div className="">
-                <div className="text-white border-b pb-2 mb-5"></div>
+                <div className="text-white pb-2 mb-5"></div>
 
                 <div className="flex flex-col gap-4 text-white">
                   <NavLink
@@ -189,7 +199,7 @@ export function DashboardMobileNav() {
                     to="/user"
                     className={({ isActive }) =>
                       `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
-                        isActive
+                        isActive && window.location.pathname === "/user"
                           ? "bg-white/20 backdrop-blur-lg text-white"
                           : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
                       }`

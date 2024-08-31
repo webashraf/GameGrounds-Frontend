@@ -16,7 +16,7 @@ const WelcomeAdminDashboard = () => {
   const { data: userInfo } = useGetUserQuery(user?.email);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-8 text-center bg-white shadow-lg rounded-lg mt-20">
+    <div className="w-full max-w-4xl mx-auto p-8 text-center bg-white shadow-lg rounded-lg mt-20 ">
       <h1 className="text-4xl font-bold mb-4">Welcome, Admin!</h1>
       <p className="text-lg text-gray-700 mb-8">
         Manage sports facilities, oversee user bookings, and empower your team

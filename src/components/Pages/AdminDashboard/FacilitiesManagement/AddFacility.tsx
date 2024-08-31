@@ -51,8 +51,10 @@ const AddFacility = () => {
   };
 
   return (
-    <div className=" mx-auto lg:w-[50%] lg:px-0 px-10 section-padding">
-      <h2 className="text-6xl text-black uppercase mb-10">Add Facility</h2>
+    <div className=" mx-auto lg:w-[50%] lg:px-0 px-10 ">
+      <h2 className="text-6xl  lg:mt-10 mt-32 text-black uppercase mb-10">
+        Add Facility
+      </h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}

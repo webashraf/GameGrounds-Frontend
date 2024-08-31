@@ -21,7 +21,7 @@ const BookingManagement = () => {
   }
   return (
     <>
-      <div className="lg:mt-0 mt-10 relative h-[90vh] w-[90%] overflow-auto custom-scrollbar mx-auto section-padding ">
+      <div className="lg:mt-10 mt-32 relative h-[90vh] w-[90%] overflow-auto custom-scrollbar mx-auto  ">
         <h2 className="text-6xl text-black uppercase mb-10">
           Booking Management
         </h2>

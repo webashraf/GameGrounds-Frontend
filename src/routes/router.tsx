@@ -16,20 +16,12 @@ import Facilities from "../components/Pages/Facilities/Facilities";
 import Home from "../components/Pages/Home/Home";
 import SingleFacility from "../components/Pages/SingleFacility/SingleFacility";
 import Login from "../components/Pages/User/Login";
-import UserSignUp from "../components/Pages/User/userSignUp";
+import UserSignUp from "../components/Pages/User/SignUp";
 import DetailsBooking from "../components/Pages/UserDashboard/MyBookings/DetailsBooking";
 import MyBookings from "../components/Pages/UserDashboard/MyBookings/MyBookings";
 import WelcomeUserDashboard from "../components/Pages/UserDashboard/WelcomeUserDashboard";
 
 const router = createBrowserRouter([
-  {
-    path: "/sign-in",
-    element: <Login />,
-  },
-  {
-    path: "/sign-up",
-    element: <UserSignUp />,
-  },
   {
     path: "*",
     element: <ErrorPage />,
@@ -45,6 +37,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "/sign-in",
+        element: <Login />,
+      },
+      {
+        path: "/sign-up",
+        element: <UserSignUp />,
       },
       {
         path: "about",

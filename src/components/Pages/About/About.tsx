@@ -4,7 +4,7 @@ import CommonHero from "../../shared/CommonHero/CommonHero";
 
 const About = () => {
   return (
-    <div className="">
+    <>
       <CommonHero title="about us" />
 
       <div className="lg:px-20 px-5">
@@ -142,7 +142,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
