@@ -1,6 +1,7 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
+import { NavLink } from "react-router-dom";
 import heroImg3 from "../../../../assets/hero/pexels-johnsully-15203.jpg";
 import { Button } from "../../../ui/button";
 
@@ -87,9 +88,11 @@ const Hero = () => {
                   </li>
                 ))}
               </ul>
-              <Button className="uppercase rounded-none px-10 md:px-20 h-[40px] md:h-[50px] mt-5 text-base md:text-lg bg-[#101010a0] backdrop-blur-md">
-                Book Now
-              </Button>
+              <NavLink to="/booking">
+                <Button className="uppercase rounded-none px-10 md:px-20 h-[40px] md:h-[50px] mt-5 text-base md:text-lg bg-[#101010a0] backdrop-blur-md">
+                  Book Now
+                </Button>
+              </NavLink>
             </div>
 
             <div className="cm bg-[#ffffff01] backdrop-invert z-50 h-14 w-14 rounded-full absolute cursor-non select-none scale-[0] pointer-events-none "></div>
