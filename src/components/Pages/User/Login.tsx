@@ -1,6 +1,6 @@
 import { Lock, Mail, UnlockIcon } from "lucide-react";
 import { useState } from "react";
-import { FieldError, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useLoginMutation } from "../../../Redux/api/baseApi";
@@ -11,22 +11,25 @@ import CommonHero from "../../shared/CommonHero/CommonHero";
 import { Button } from "../../ui/button";
 import "./loginRegisterForm.css";
 
+type TLoginFormInputs = {
+  email: string;
+  password: string;
+};
+
 const Login = () => {
   const [login, { error }] = useLoginMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<string | FieldError | undefined>();
+  } = useForm<TLoginFormInputs>();
 
-  const onSubmit: SubmitHandler<string | FieldError | undefined> = async (
-    data
-  ) => {
+  const onSubmit: SubmitHandler<TLoginFormInputs> = async (data) => {
     try {
       const res = await login(data).unwrap();
       console.log("user", res);
@@ -83,7 +86,9 @@ const Login = () => {
               />
             </div>
             {errors.email && (
-              <span className="error_message text-red-600">{errors.email.message}</span>
+              <span className="error_message text-red-600">
+                {errors.email.message}
+              </span>
             )}
           </div>
           <div className="input_container">
@@ -116,7 +121,9 @@ const Login = () => {
               />
             </div>
             {errors.password && (
-              <span className="error_message text-red-600">{errors.password.message}</span>
+              <span className="error_message text-red-600">
+                {errors.password.message}
+              </span>
             )}
           </div>
           <Button title="Sign In" type="submit" className="sign-in_btn w-full">

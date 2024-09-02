@@ -1,12 +1,20 @@
 import { Lock, Mail, Map, Phone, UnlockIcon, User } from "lucide-react";
 import { useState } from "react";
-import { FieldError, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useSignUpMutation } from "../../../Redux/api/baseApi";
 import CommonHero from "../../shared/CommonHero/CommonHero";
 import { Button } from "../../ui/button";
 import "./loginRegisterForm.css";
+
+type TSignUpFormData = {
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  address: string;
+};
 
 const SignUp = ({ uRole = "user" }) => {
   const [signUp, { error }] = useSignUpMutation();
@@ -19,11 +27,9 @@ const SignUp = ({ uRole = "user" }) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<string | FieldError | undefined>();
+  } = useForm<TSignUpFormData>();
 
-  const onSubmit: SubmitHandler<string | FieldError | undefined> = async (
-    data
-  ) => {
+  const onSubmit: SubmitHandler<TSignUpFormData> = async (data) => {
     const userInfo = { ...data, role: uRole };
 
     try {
@@ -73,7 +79,9 @@ const SignUp = ({ uRole = "user" }) => {
               />
             </div>
             {errors.name && (
-              <span className="error_message text-red-600">{errors.name.message}</span>
+              <span className="error_message text-red-600">
+                {errors.name.message}
+              </span>
             )}
           </div>
           <div className="input_container">
@@ -94,7 +102,9 @@ const SignUp = ({ uRole = "user" }) => {
               />
             </div>
             {errors.email ? (
-              <span className="error_message text-red-600">{errors.email.message}</span>
+              <span className="error_message text-red-600">
+                {errors.email.message}
+              </span>
             ) : (
               ""
             )}
@@ -129,13 +139,15 @@ const SignUp = ({ uRole = "user" }) => {
               />
             </div>
             {errors.password && (
-              <span className="error_message text-red-600">{errors.password.message}</span>
+              <span className="error_message text-red-600">
+                {errors.password.message}
+              </span>
             )}
           </div>
           <div className="input_container">
             <label className="input_label">Phone</label>
             <div className="relative">
-            <Phone className="icon" />
+              <Phone className="icon" />
               <input
                 {...register("phone", {
                   required: "Phone number is required",
@@ -150,7 +162,9 @@ const SignUp = ({ uRole = "user" }) => {
               />
             </div>
             {errors.phone && (
-              <span className="error_message text-red-600">{errors.phone.message}</span>
+              <span className="error_message text-red-600">
+                {errors.phone.message}
+              </span>
             )}
           </div>
           <div className="input_container">
@@ -165,7 +179,9 @@ const SignUp = ({ uRole = "user" }) => {
               />
             </div>
             {errors.address && (
-              <span className="error_message text-red-600">{errors.address.message}</span>
+              <span className="error_message text-red-600">
+                {errors.address.message}
+              </span>
             )}
           </div>
           <Button title="Sign In" type="submit" className="sign-in_btn w-full">

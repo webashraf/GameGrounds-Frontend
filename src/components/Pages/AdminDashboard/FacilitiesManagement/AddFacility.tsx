@@ -58,9 +58,9 @@ const AddFacility = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap- bg-white  p-5 w-full"
+        className="flex flex-col gap- bg-white p-5 w-full"
       >
-        <div className="w-full p-3 rounded-lg font-mono bg-blac">
+        <div className="w-full p-3 rounded-lg font-mono">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
             htmlFor="name-input"
@@ -75,97 +75,101 @@ const AddFacility = () => {
             id="name-input"
             name="name"
           />
-
           {errors.name && (
-            <span className="text-red-500 text-sm">Name is required</span>
+            <span className="text-red-500 text-sm">{errors.name.message}</span>
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg font-mono bg-blac">
+        <div className="w-full p-3 rounded-lg font-mono ">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
             htmlFor="photo-input"
           >
-            Photo
+            Photo URL
           </label>
           <input
-            placeholder="Photo Url"
-            {...register("photoUrl", {
-              required: "Photo URL is required",
-            })}
+            placeholder="Photo URL"
+            {...register("photoUrl", { required: "Photo URL is required" })}
             className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
             type="text"
             id="photo-input"
             name="photoUrl"
           />
-
           {errors.photoUrl && (
-            <span className="text-red-500 text-sm">Photo URL is required</span>
+            <span className="text-red-500 text-sm">
+              {errors.photoUrl.message}
+            </span>
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg font-mono bg-blac">
+        <div className="w-full p-3 rounded-lg font-mono ">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
-            htmlFor="unique-input"
+            htmlFor="description-input"
           >
             Description
           </label>
           <input
-            {...register("description", { required: true })}
+            {...register("description", {
+              required: "Description is required",
+            })}
             className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
             placeholder="Description"
             type="text"
-            id="unique-input"
+            id="description-input"
           />
-          {errors.name && (
+          {errors.description && (
             <span className="text-red-500 text-sm">
-              "Description is required"
+              {errors.description.message}
             </span>
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg font-mono bg-blac">
+        <div className="w-full p-3 rounded-lg font-mono ">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
-            htmlFor="unique-input"
+            htmlFor="price-input"
           >
-            price Per-Hour
+            Price Per Hour
           </label>
           <input
-            {...register("pricePerHour", { required: true })}
+            {...register("pricePerHour", {
+              required: "Price is required",
+              valueAsNumber: true,
+            })}
             className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
-            placeholder="Price Per-Hour"
+            placeholder="Price Per Hour"
             type="number"
-            id="unique-input"
+            id="price-input"
           />
-          {errors.name && (
+          {errors.pricePerHour && (
             <span className="text-red-500 text-sm">
-              Price is required. It must be a number
+              {errors.pricePerHour.message}
             </span>
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg font-mono bg-blac">
+        <div className="w-full p-3 rounded-lg font-mono ">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
-            htmlFor="unique-input"
+            htmlFor="location-input"
           >
             Location
           </label>
           <input
-            {...register("location", { required: true })}
+            {...register("location", { required: "Location is required" })}
             className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
             placeholder="Location"
             type="text"
-            id="unique-input"
+            id="location-input"
           />
-          {errors.name && (
-            <span className="text-red-500 text-sm">Location is required</span>
+          {errors.location && (
+            <span className="text-red-500 text-sm">
+              {errors.location.message}
+            </span>
           )}
         </div>
 
-        {/* <input type="submit"  /> */}
         <Button type="submit" className="uppercase text-lg mt-3">
           Submit
         </Button>
