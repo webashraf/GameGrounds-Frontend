@@ -52,8 +52,8 @@ const BookingForm = () => {
     }
 
     if (data.startTime > data.endTime) {
-      setBookError(` Please set the time correctly `);
-      toast.error("Please set the time correctly");
+      setBookError(` Please set the time slot correctly `);
+      toast.error("Please set the time slot correctly");
       return;
     }
 

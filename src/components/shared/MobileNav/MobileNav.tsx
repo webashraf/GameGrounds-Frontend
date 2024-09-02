@@ -88,7 +88,7 @@ const MobileNav = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="border border-gray-300 py-3 flex flex-col gap-1 flex-wrap shadow-xl rounded-md  justify-center items-start px-5">
+          <div className="border border-gray-300 py-3 flex flex-col gap-1 flex-wrap shadow-xl rounded-md  justify-center items-start px-1">
             <NavItem to="/" icon={<Home />} label="Home" />
             <NavItem to="/booking" icon={<Calendar />} label="Booking" />
             <NavItem to="/facilities" icon={<Clipboard />} label="Facilities" />
