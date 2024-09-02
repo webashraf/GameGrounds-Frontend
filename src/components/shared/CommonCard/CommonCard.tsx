@@ -30,7 +30,7 @@ const CommonCard = ({ item }: any) => {
           </p>
         </div>
         <NavLink to={`/single-facility/${item._id}`}>
-          <Button className="hover:  text-white mt-14 rounded p-2 px-6 absolute bottom-5 left-6">
+          <Button className="hover:  text-white mt-14 p-2 px-6 absolute bottom-5 left-6">
             View Details
           </Button>
         </NavLink>

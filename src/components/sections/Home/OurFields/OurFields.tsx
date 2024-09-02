@@ -145,7 +145,7 @@ const OurFields: React.FC = () => {
           events with excellence.
         </p>
         <NavLink to="/facilities">
-          <Button className=" text-white font-medium py-2 px-4 rounded transition-all active:scale-95">
+          <Button className=" text-white font-medium py-2 px-4  transition-all active:scale-95">
             Explore more
           </Button>
         </NavLink>

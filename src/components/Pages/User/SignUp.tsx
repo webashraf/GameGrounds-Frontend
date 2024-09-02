@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Lock, Mail, Map, Phone, User } from "lucide-react";
+import { Lock, Mail, Map, Phone, UnlockIcon, User } from "lucide-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -83,7 +83,12 @@ const SignUp = ({ uRole = "user" }) => {
             <label className="input_label" htmlFor="password_field">
               Password
             </label>
-            <Lock className="icon" onClick={togglePasswordVisibility} />
+            {showPassword ? (
+              <Lock className="icon" onClick={togglePasswordVisibility} />
+            ) : (
+              <UnlockIcon className="icon" onClick={togglePasswordVisibility}  />
+            )}
+
             <input
               {...register("password")}
               placeholder="Password"

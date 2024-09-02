@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import gsap from "gsap";
 import {
   BookType,
@@ -27,7 +28,6 @@ const MobileNav = () => {
 
   const token = useAppSelector(useToken);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let user: any;
 
   if (token) {
@@ -35,22 +35,21 @@ const MobileNav = () => {
   }
 
   const toggleNav = () => {
-    console.log("Toggle clicked", isOpen);
     if (navRef.current) {
-      const newX = isOpen ? "100%" : "200%"; // Change Y to X for horizontal movement
+      const newX = isOpen ? "100%" : "200%";
       gsap.to(navRef.current, {
         x: newX,
         duration: 0.5,
         ease: "power2.out",
       });
       setIsOpen(!isOpen);
-      console.log("New state", !isOpen);
+      console.log("New state", isOpen);
     }
   };
 
   const handleLogOut = () => {
     dispatch(logout());
-    navigate("/sign-in"); // Redirect to sign-in page after logout
+    navigate("/sign-in");
   };
 
   return (
@@ -73,7 +72,7 @@ const MobileNav = () => {
       <div
         ref={navRef}
         className="w-[50%] fixed top-0 left-0 h-[100vh] rounded-b-2xl flex flex-col justify-start py-5 bg-black/60 backdrop-blur-lg shadow-2xl border border-white/20 text-white px-5"
-        style={{ transform: "translateX(-100%)" }} // Update Y to X
+        style={{ transform: "translateX(200%)" }}
       >
         <div className="w-full px-3 flex items-center justify-end pb-10">
           {/* Logo */}
@@ -96,7 +95,7 @@ const MobileNav = () => {
             to={`/${user?.role ? user?.role : "sign-in"}`}
             icon={<PanelRightInactive />}
             label="Dashboard"
-            forceInactive // Custom prop to force Dashboard to be inactive
+            forceInactive
           />
           <div className="flex flex-col items-center mt-4 gap-3">
             {user ? (
