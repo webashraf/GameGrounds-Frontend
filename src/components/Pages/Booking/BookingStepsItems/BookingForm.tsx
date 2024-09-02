@@ -22,7 +22,11 @@ interface IBookingFormInput {
 const BookingForm = () => {
   const { data: facilities } = useGetFacilitiesQuery(undefined);
   const [createABook] = useCreateABookMutation();
-  const { handleSubmit, control } = useForm<IBookingFormInput>();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<IBookingFormInput>();
   const [bookError, setBookError] = useState("");
 
   const [processBook, setProcessBook] = useState("");
@@ -37,8 +41,8 @@ const BookingForm = () => {
   // * Handle Booking
   const handleBooking = async (data: IBookingFormInput) => {
     if (!user || user?.role !== "user") {
-      setBookError("First login as a user than book your slot");
-      toast.error("First login as a user than book your slot");
+      setBookError("First login as a user then book your slot");
+      toast.error("First login as a user then book your slot");
       return;
     }
 
@@ -81,85 +85,129 @@ const BookingForm = () => {
   return (
     <div className="">
       <form onSubmit={handleSubmit(handleBooking)}>
-        <Controller
-          name="date"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <input
-              {...field}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
-              type="date"
-              required
-            />
-          )}
-        />
+        <div className="mb-3">
+          <Controller
+            name="date"
+            control={control}
+            defaultValue=""
+            rules={{ required: "Date is required" }}
+            render={({ field }) => (
+              <>
+                <input
+                  {...field}
+                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    errors.date ? "border-red-500" : ""
+                  }`}
+                  type="date"
+                />
+                {errors.date && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.date.message}
+                  </p>
+                )}
+              </>
+            )}
+          />
+        </div>
 
-        <Controller
-          name="facility"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <select
-              {...field}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
-              required
-            >
-              <option value="" disabled>
-                Select a facility
-              </option>
-              {facilities?.data.map((facility: TFacilitySelect) => (
-                <option key={facility._id} value={facility._id}>
-                  {facility.name}
-                </option>
-              ))}
-            </select>
-          )}
-        />
+        <div className="mb-3">
+          <Controller
+            name="facility"
+            control={control}
+            defaultValue=""
+            rules={{ required: "Facility is required" }}
+            render={({ field }) => (
+              <>
+                <select
+                  {...field}
+                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    errors.facility ? "border-red-500" : ""
+                  }`}
+                >
+                  <option value="" disabled>
+                    Select a facility
+                  </option>
+                  {facilities?.data.map((facility: TFacilitySelect) => (
+                    <option key={facility._id} value={facility._id}>
+                      {facility.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.facility && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.facility.message}
+                  </p>
+                )}
+              </>
+            )}
+          />
+        </div>
 
-        <Controller
-          name="startTime"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <select
-              {...field}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
-              required
-            >
-              <option value="" disabled>
-                Select Start Time
-              </option>
-              {timeOptions.map((time) => (
-                <option key={time} value={time}>
-                  {time}
-                </option>
-              ))}
-            </select>
-          )}
-        />
+        <div className="mb-3">
+          <Controller
+            name="startTime"
+            control={control}
+            defaultValue=""
+            rules={{ required: "Start time is required" }}
+            render={({ field }) => (
+              <>
+                <select
+                  {...field}
+                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    errors.startTime ? "border-red-500" : ""
+                  }`}
+                >
+                  <option value="" disabled>
+                    Select Start Time
+                  </option>
+                  {timeOptions.map((time) => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
+                {errors.startTime && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.startTime.message}
+                  </p>
+                )}
+              </>
+            )}
+          />
+        </div>
 
-        <Controller
-          name="endTime"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <select
-              {...field}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
-              required
-            >
-              <option value="" disabled>
-                Select End Time
-              </option>
-              {timeOptions.map((time) => (
-                <option key={time} value={time}>
-                  {time}
-                </option>
-              ))}
-            </select>
-          )}
-        />
+        <div className="mb-3">
+          <Controller
+            name="endTime"
+            control={control}
+            defaultValue=""
+            rules={{ required: "End time is required" }}
+            render={({ field }) => (
+              <>
+                <select
+                  {...field}
+                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    errors.endTime ? "border-red-500" : ""
+                  }`}
+                >
+                  <option value="" disabled>
+                    Select End Time
+                  </option>
+                  {timeOptions.map((time) => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
+                {errors.endTime && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.endTime.message}
+                  </p>
+                )}
+              </>
+            )}
+          />
+        </div>
 
         <Button className="w-full" type="submit">
           {processBook ? processBook : "Book Now"}

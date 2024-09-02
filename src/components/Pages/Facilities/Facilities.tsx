@@ -71,7 +71,6 @@ const Facilities: React.FC = () => {
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      console.log(searchValue);
       const searchResult = facilities?.data.filter((item: any) =>
         item.name.toLowerCase().includes(searchValue.toLowerCase())
       );

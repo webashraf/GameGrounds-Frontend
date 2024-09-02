@@ -1,7 +1,9 @@
+import { NavLink } from "react-router-dom";
 import { useGetUserQuery } from "../../../Redux/api/baseApi";
 import { useToken } from "../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
+import { Button } from "../../ui/button";
 
 const WelcomeUserDashboard = () => {
   const token = useAppSelector(useToken);
@@ -17,7 +19,7 @@ const WelcomeUserDashboard = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-8 text-center bg-white shadow-lg rounded-lg mt-20">
-      <h1 className="text-4xl font-extrabold text-purple-900 mb-4">
+      <h1 className="text-4xl font-extrabold text-slate-900 mb-4">
         Welcome, {userInfo?.data.name}!
       </h1>
       <p className="text-lg text-gray-600 mb-10">
@@ -48,16 +50,16 @@ const WelcomeUserDashboard = () => {
         </div>
 
         <div className="p-8 bg-white rounded-lg shadow-lg border border-gray-200">
-          <h2 className="text-xl font-semibold text-purple-800 mb-4">
+          <h2 className="text-xl font-semibold text-slate-800 mb-4">
             Your Bookings
           </h2>
           <p className="text-gray-700 mb-6">
             Browse through your bookings, view details, or cancel any upcoming
             reservations.
           </p>
-          <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full transition duration-200">
-            View My Bookings
-          </button>
+          <NavLink to="/user/my-booking">
+            <Button className="bg-black">View My Bookings</Button>
+          </NavLink>
         </div>
       </div>
     </div>

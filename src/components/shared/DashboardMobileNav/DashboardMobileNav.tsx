@@ -62,7 +62,7 @@ export function DashboardMobileNav() {
                 {user?.role} Dashboard
               </h3>
             </SheetTitle>
-            <SheetDescription className=" pb-10">
+            <SheetDescription className=" lg:pb-10">
               <p className="text-center text-sm lowercase text-gray-300">
                 {user?.email}
               </p>
@@ -100,12 +100,7 @@ export function DashboardMobileNav() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
-                    className={`bg-transparent flex justify-start gap-4 ${
-                      (window.location.pathname === "/admin/facilities-add" ||
-                        window.location.pathname ===
-                          "/admin/facilities-update") &&
-                      "bg-white/20 backdrop-blur-lg"
-                    }`}
+                    className={`bg-transparent flex justify-start gap-4`}
                   >
                     <FileSliders /> Facility Management
                   </Button>

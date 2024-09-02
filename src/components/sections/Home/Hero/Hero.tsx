@@ -95,7 +95,7 @@ const Hero = () => {
               </NavLink>
             </div>
 
-            <div className="cm bg-[#ffffff01] backdrop-invert z-50 h-14 w-14 rounded-full absolute cursor-non select-none scale-[0] pointer-events-none "></div>
+            {/* <div className="cm bg-[#ffffff01] backdrop-invert z-50 h-14 w-14 rounded-full absolute cursor-non select-none scale-[0] pointer-events-none "></div> */}
           </div>
         </div>
       </>

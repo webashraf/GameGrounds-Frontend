@@ -60,7 +60,7 @@ const AddFacility = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap- bg-white p-5 w-full"
       >
-        <div className="w-full p-3 rounded-lg font-mono">
+        <div className="w-full p-3 rounded-lg fo">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
             htmlFor="name-input"
@@ -76,11 +76,13 @@ const AddFacility = () => {
             name="name"
           />
           {errors.name && (
-            <span className="text-red-500 text-sm">{errors.name.message}</span>
+            <span className="text-red-500 error_message fo">
+              {errors.name.message}
+            </span>
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg font-mono ">
+        <div className="w-full p-3 rounded-lg fo ">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
             htmlFor="photo-input"
@@ -96,13 +98,13 @@ const AddFacility = () => {
             name="photoUrl"
           />
           {errors.photoUrl && (
-            <span className="text-red-500 text-sm">
+            <span className="text-red-500 error_message fo">
               {errors.photoUrl.message}
             </span>
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg font-mono ">
+        <div className="w-full p-3 rounded-lg fo ">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
             htmlFor="description-input"
@@ -119,13 +121,13 @@ const AddFacility = () => {
             id="description-input"
           />
           {errors.description && (
-            <span className="text-red-500 text-sm">
+            <span className="text-red-500 error_message fo">
               {errors.description.message}
             </span>
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg font-mono ">
+        <div className="w-full p-3 rounded-lg fo ">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
             htmlFor="price-input"
@@ -143,13 +145,13 @@ const AddFacility = () => {
             id="price-input"
           />
           {errors.pricePerHour && (
-            <span className="text-red-500 text-sm">
+            <span className="text-red-500 error_message fo">
               {errors.pricePerHour.message}
             </span>
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg font-mono ">
+        <div className="w-full p-3 rounded-lg fo ">
           <label
             className="block text-gray-700 text-xl font-bold mb-2"
             htmlFor="location-input"
@@ -164,7 +166,7 @@ const AddFacility = () => {
             id="location-input"
           />
           {errors.location && (
-            <span className="text-red-500 text-sm">
+            <span className="text-red-500 error_message fo">
               {errors.location.message}
             </span>
           )}

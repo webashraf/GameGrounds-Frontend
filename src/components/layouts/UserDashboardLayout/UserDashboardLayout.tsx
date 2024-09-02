@@ -42,7 +42,7 @@ const UserDashboardLayout = () => {
       </div>
 
       {/* --------------- */}
-      <div className="bg-slate-900 lg:block hidden lg-[300px] h-screen p-5 pt-32">
+      <div className="bg-slate-900 lg:block hidden lg-[300px] h-screen p-5 pt-10">
         {user?.role === "admin" ? (
           <div className="flex flex-col gap-4 text-white ">
             <NavLink
@@ -62,7 +62,7 @@ const UserDashboardLayout = () => {
               to="/admin"
               className={({ isActive }) =>
                 `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
-                  isActive
+                  isActive && window.location.pathname === "/admin"
                     ? "bg-white/20 backdrop-blur-lg text-white"
                     : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
                 }`
@@ -147,6 +147,9 @@ const UserDashboardLayout = () => {
           <div className="hidden lg:block">
             <div className="text-white border-b pb-2 mb-5">
               <h3 className="font-serif text-2xl text-center uppercase">
+                gameGrounds
+              </h3>
+              <h3 className="font-serif text-lg text-center uppercase">
                 {user?.role} Dashboard
               </h3>
               <p className="text-center text-sm lowercase text-gray-300">
@@ -172,7 +175,7 @@ const UserDashboardLayout = () => {
                 to="/user"
                 className={({ isActive }) =>
                   `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
-                    isActive
+                    isActive && window.location.pathname === "/user"
                       ? "bg-white/20 backdrop-blur-lg text-white"
                       : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
                   }`

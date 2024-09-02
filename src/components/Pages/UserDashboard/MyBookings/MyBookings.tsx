@@ -40,7 +40,6 @@ const MyBookings = () => {
   );
   const [cancelBooking] = useCancelBookingMutation();
 
-  console.log(myBookings);
 
   const handleCancelBooking = async (id: string) => {
     const res = await cancelBooking(id).unwrap();
@@ -136,7 +135,7 @@ const MyBookings = () => {
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancel</AlertDialogCancel>
                           <AlertDialogAction
-                            className="btn-2 px-5 rounded-md"
+                            className="btn-2 px-5 "
                             onClick={() => handleCancelBooking(item._id)}
                           >
                             Continue
@@ -220,7 +219,7 @@ const MyBookings = () => {
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             {/* <AlertDialogCancel>Cancel</AlertDialogCancel> */}
-                            <AlertDialogAction className="btn-2 px-5 rounded-md">
+                            <AlertDialogAction className="btn-2 px-5">
                               Continue
                             </AlertDialogAction>
                           </AlertDialogFooter>

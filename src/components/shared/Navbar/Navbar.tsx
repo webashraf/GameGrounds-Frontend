@@ -33,7 +33,9 @@ const Navbar = () => {
   return (
     <div>
       <div className="w-full text-white text-center border-b border-[#908a8a] py-3">
-        <h2 className="font-serif text-3xl ">GameGrounds</h2>
+        <NavLink to="/" className="font-serif text-3xl ">
+          GameGrounds
+        </NavLink>
       </div>
       <div className="relative flex items-center justify-center  mx-auto cursor-pointer">
         <ul className="flex justify-center gap-10 font-mono font-bold text-white/80 text-xl pt-1 ">

@@ -96,7 +96,6 @@ export const baseApi = createApi({
     }),
     getAllBookingsByUser: builder.query({
       query: (id) => {
-        console.log(id);
         return {
           url: `/bookings/user/${id}`,
           method: "GET",
@@ -106,7 +105,6 @@ export const baseApi = createApi({
     }),
     cancelBooking: builder.mutation({
       query: (id) => {
-        console.log(id);
         return {
           url: `/bookings/${id}`,
           method: "DELETE",
@@ -116,7 +114,6 @@ export const baseApi = createApi({
     }),
     getUser: builder.query({
       query: (id) => {
-        console.log(id);
         return {
           url: `/auth/${id}`,
           method: "GET",

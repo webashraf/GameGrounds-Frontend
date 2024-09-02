@@ -56,9 +56,9 @@ const Booking = () => {
         img="https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       />
       <div className="container mx-auto px-4 py-10">
-        <div className="flex justify-around gap-5">
+        <div className="flex flex-col lg:flex-row justify-around gap-5">
           {/* Step 1: Facility Selection */}
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-10 w-1/2">
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-10 lg:w-1/2">
             <h2 className="text-2xl font-bold mb-5">
               Step 1: Select a Facility
             </h2>
@@ -66,9 +66,7 @@ const Booking = () => {
               onChange={handleFacilityFeature}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-full"
             >
-              <option value="" disabled>
-                Select a facility
-              </option>
+              <option value="">Select a facility</option>
               {facilities?.data.map((facility: TFacility) => (
                 <option key={facility._id} value={facility._id}>
                   {facility.name}
@@ -103,7 +101,7 @@ const Booking = () => {
           </div>
 
           {/* Step 2: Check Availability */}
-          <div className="w-1/2 bg-white rounded-xl shadow-lg p-6 mb-10">
+          <div className="lg:w-1/2 bg-white rounded-xl shadow-lg p-6 mb-10">
             <h2 className="text-2xl font-bold mb-5">
               Step 2: Check Availability
             </h2>
