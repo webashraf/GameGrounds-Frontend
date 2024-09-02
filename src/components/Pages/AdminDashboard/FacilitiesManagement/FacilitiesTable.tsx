@@ -145,7 +145,10 @@ const FacilitiesTable = ({ item, i }: any) => {
 
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" className="">
+                <Button
+                  variant="outline"
+                  className="bg-black text-white hover:bg-slate-950/80 hover:text-white"
+                >
                   Update Facility
                 </Button>
               </DialogTrigger>
@@ -263,7 +266,7 @@ const FacilitiesTable = ({ item, i }: any) => {
                       <DialogFooter>
                         <Button
                           type="submit"
-                          className="uppercase text-lg mt-3 w-full"
+                          className="uppercase text-lg mt-3 w-full bg-black"
                         >
                           Submit
                         </Button>

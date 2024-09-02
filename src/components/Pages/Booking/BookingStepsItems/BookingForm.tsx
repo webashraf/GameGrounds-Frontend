@@ -20,22 +20,27 @@ interface IBookingFormInput {
 }
 
 const BookingForm = () => {
-  const { data: facilities } = useGetFacilitiesQuery(undefined);
+  const { data: facilities, error: facilitiesFetchError } =
+    useGetFacilitiesQuery(undefined);
+
   const [createABook] = useCreateABookMutation();
+
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<IBookingFormInput>();
-  const [bookError, setBookError] = useState("");
 
+  const [bookError, setBookError] = useState("");
   const [processBook, setProcessBook] = useState("");
   const token = useAppSelector(useToken);
-
   let user: any;
 
   if (token) {
     user = verifyToken(token);
+  }
+  if (facilitiesFetchError) {
+    toast.error("Failed to fetch facilities.");
   }
 
   // * Handle Booking
@@ -46,14 +51,22 @@ const BookingForm = () => {
       return;
     }
 
+    if (data.startTime > data.endTime) {
+      setBookError(` Please set the time correctly `);
+      toast.error("Please set the time correctly");
+      return;
+    }
+
     setProcessBook("Processing...");
     setBookError("");
     const amount = facilities?.data?.find(
       (facility: TFacility) => facility._id === data.facility
     )?.pricePerHour;
+
     const bookingInfo = { ...data, payableAmount: amount };
     try {
       const res = await createABook(bookingInfo).unwrap();
+      console.log(res);
       if (res?.success) {
         toast.success("Going to payment page..");
         window.location.href = res.data.paymentSession.payment_url;
@@ -67,6 +80,7 @@ const BookingForm = () => {
         );
       }
     } catch (err) {
+      console.log(err);
       setProcessBook("");
       setBookError(
         (err as any).status ? (err as any).data.message : "Failed to book"
@@ -209,7 +223,7 @@ const BookingForm = () => {
           />
         </div>
 
-        <Button className="w-full" type="submit">
+        <Button className="w-full bg-black" type="submit">
           {processBook ? processBook : "Book Now"}
         </Button>
       </form>

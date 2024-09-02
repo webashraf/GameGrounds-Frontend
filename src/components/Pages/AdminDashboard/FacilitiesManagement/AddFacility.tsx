@@ -172,7 +172,7 @@ const AddFacility = () => {
           )}
         </div>
 
-        <Button type="submit" className="uppercase text-lg mt-3">
+        <Button type="submit" className="uppercase text-lg mt-3 bg-black">
           Submit
         </Button>
       </form>

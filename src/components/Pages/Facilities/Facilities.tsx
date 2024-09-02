@@ -7,6 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { toast } from "sonner";
 import { useGetFacilitiesQuery } from "../../../Redux/api/baseApi";
 import CommonCard from "../../shared/CommonCard/CommonCard";
 import CommonHero from "../../shared/CommonHero/CommonHero";
@@ -36,8 +37,14 @@ interface FormData {
 }
 
 const Facilities: React.FC = () => {
-  const { data: facilities, isFetching } = useGetFacilitiesQuery(undefined);
-
+  const {
+    data: facilities,
+    isFetching,
+    error,
+  } = useGetFacilitiesQuery(undefined);
+  if (error) {
+    toast.error("Failed to fetch facilities.");
+  }
   const [searchValue, setSearchValue] = useState<string>("");
   const [formData, setFormData] = useState<FormData>({
     minPrice: 0,

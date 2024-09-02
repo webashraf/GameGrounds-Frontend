@@ -125,7 +125,11 @@ const Login = () => {
               </span>
             )}
           </div>
-          <Button title="Sign In" type="submit" className="sign-in_btn w-full">
+          <Button
+            title="Sign In"
+            type="submit"
+            className="sign-in_btn w-full bg-black"
+          >
             <span>Sign In</span>
           </Button>
           {/* form bottom */}

@@ -30,23 +30,33 @@ const WelcomeUserDashboard = () => {
       <div className="grid grid-cols-1 gap-6">
         <div className="p-8 bg-gradient-to-r from-[#000000bd] to-[#10101014] rounded-lg shadow-lg text-left text-white">
           <h2 className="text-2xl font-bold mb-4">Your Information</h2>
-          <div className="space-y-3 text-md">
-            <div>
-              <span className="font-semibold">Name:</span> {userInfo?.data.name}
+          {userInfo ? (
+            <div className="space-y-3 text-md">
+              <div>
+                <span className="font-semibold">Name: </span>{" "}
+                {userInfo?.data.name}
+              </div>
+              <div>
+                <span className="font-semibold">Email: </span>
+                {userInfo?.data.email}
+              </div>
+              <div>
+                <span className="font-semibold">Phone: </span>
+                {userInfo?.data.phone}
+              </div>
+              <div>
+                <span className="font-semibold">Address: </span>
+                {userInfo?.data.address}
+              </div>
             </div>
-            <div>
-              <span className="font-semibold">Email:</span>{" "}
-              {userInfo?.data.email}
+          ) : (
+            <div className="space-y-2">
+              <div className="animate-pulse rounded-md bg-gray-500 h-4 w-[200px]"></div>
+              <div className="animate-pulse rounded-md bg-gray-500 h-4 w-[170px]"></div>
+              <div className="animate-pulse rounded-md bg-gray-500 h-4 w-[200px]"></div>
+              <div className="animate-pulse rounded-md bg-gray-500 h-4 w-[170px]"></div>
             </div>
-            <div>
-              <span className="font-semibold">Phone:</span>{" "}
-              {userInfo?.data.phone}
-            </div>
-            <div>
-              <span className="font-semibold">Address:</span>{" "}
-              {userInfo?.data.address}
-            </div>
-          </div>
+          )}
         </div>
 
         <div className="p-8 bg-white rounded-lg shadow-lg border border-gray-200">

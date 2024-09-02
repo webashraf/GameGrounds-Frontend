@@ -184,7 +184,11 @@ const SignUp = ({ uRole = "user" }) => {
               </span>
             )}
           </div>
-          <Button title="Sign In" type="submit" className="sign-in_btn w-full">
+          <Button
+            title="Sign In"
+            type="submit"
+            className="sign-in_btn w-full bg-black"
+          >
             <span>Sign Up</span>
           </Button>
           {uRole === "user" && (

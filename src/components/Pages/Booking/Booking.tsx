@@ -17,8 +17,13 @@ interface Query {
 }
 
 const Booking = () => {
-  const { data: facilities } = useGetFacilitiesQuery(undefined);
+  const { data: facilities, error: facilitiesFetchError } =
+    useGetFacilitiesQuery(undefined);
   const [query, setQuery] = useState<Query | null>(null);
+
+  if (facilitiesFetchError) {
+    toast.error("Failed to fetch facilities.");
+  }
 
   const [facilityForFeature, setFacilityForFeature] =
     useState<TFacility | null>(null);

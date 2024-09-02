@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
 import {
   TAvailabilityCheckerProps,
@@ -10,7 +11,12 @@ import { Button } from "../../../ui/button";
 const AvailabilityChecker: React.FC<TAvailabilityCheckerProps> = ({
   setQuery,
 }) => {
-  const { data: facilities } = useGetFacilitiesQuery(undefined);
+  const { data: facilities, error: facilitiesFetchError } =
+    useGetFacilitiesQuery(undefined);
+  if (facilitiesFetchError) {
+    toast.error("Failed to fetch facilities.");
+  }
+
   const {
     register,
     handleSubmit,
@@ -48,9 +54,7 @@ const AvailabilityChecker: React.FC<TAvailabilityCheckerProps> = ({
             }`}
             {...register("facility", { required: "Facility is required" })}
           >
-            <option value="">
-              Select a facility
-            </option>
+            <option value="">Select a facility</option>
             {facilities?.data.map((facility: TFacilitySelect) => (
               <option key={facility._id} value={facility._id}>
                 {facility.name}
@@ -63,7 +67,7 @@ const AvailabilityChecker: React.FC<TAvailabilityCheckerProps> = ({
             </p>
           )}
 
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full bg-black">
             Check Availability
           </Button>
         </form>
