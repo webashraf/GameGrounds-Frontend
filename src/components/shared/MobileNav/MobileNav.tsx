@@ -36,7 +36,7 @@ const MobileNav = () => {
 
   const toggleNav = () => {
     if (navRef.current) {
-      const newX = isOpen ? "100%" : "200%";
+      const newX = !isOpen ? "100%" : "200%";
       gsap.to(navRef.current, {
         x: newX,
         duration: 0.5,

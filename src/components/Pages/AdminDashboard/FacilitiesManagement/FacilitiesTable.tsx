@@ -51,7 +51,7 @@ const FacilitiesTable = ({ item, i }: any) => {
     handleSubmit,
     reset,
     // watch,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<any>();
 
   const onSubmit: SubmitHandler<any> = async (data) => {
@@ -62,7 +62,6 @@ const FacilitiesTable = ({ item, i }: any) => {
       location: data.location,
       pricePerHour: Number(data.pricePerHour),
     };
-   
 
     try {
       const res = await updateFacilities({
@@ -131,7 +130,7 @@ const FacilitiesTable = ({ item, i }: any) => {
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
-                className="btn-2 px-5 rounded-md"
+                className=""
                 onClick={() => handleDeleteTree(item._id)}
               >
                 Continue
@@ -146,11 +145,15 @@ const FacilitiesTable = ({ item, i }: any) => {
 
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline">Edit Profile</Button>
+                <Button variant="outline" className="">
+                  Update Facility
+                </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[625px]">
                 <DialogHeader>
-                  <DialogTitle>Edit profile</DialogTitle>
+                  <DialogTitle className="text-3xl uppercase font-semibold">
+                    Update profile
+                  </DialogTitle>
                   <DialogDescription>
                     Make changes to your profile here. Click save when you're
                     done.
@@ -171,21 +174,13 @@ const FacilitiesTable = ({ item, i }: any) => {
                         </label>
                         <input
                           placeholder="Name"
-                          {...register("name", {
-                            required: "Name is required",
-                          })}
+                          {...register("name", {})}
                           className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
                           type="text"
                           defaultValue={item.name}
                           id="name-input"
                           name="name"
                         />
-
-                        {errors.name && (
-                          <span className="text-red-500 text-sm">
-                            Name is required
-                          </span>
-                        )}
                       </div>
 
                       <div className="w-full p-3 rounded-lg font-mono bg-blac">
@@ -197,21 +192,13 @@ const FacilitiesTable = ({ item, i }: any) => {
                         </label>
                         <input
                           placeholder="Photo Url"
-                          {...register("photoUrl", {
-                            required: "Photo URL is required",
-                          })}
+                          {...register("photoUrl", {})}
                           className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
                           type="text"
                           defaultValue={item.photoUrl}
                           id="photo-input"
                           name="photoUrl"
                         />
-
-                        {errors.photoUrl && (
-                          <span className="text-red-500 text-sm">
-                            Photo URL is required
-                          </span>
-                        )}
                       </div>
 
                       <div className="w-full p-3 rounded-lg font-mono bg-blac">
@@ -222,18 +209,13 @@ const FacilitiesTable = ({ item, i }: any) => {
                           Description
                         </label>
                         <input
-                          {...register("description", { required: true })}
+                          {...register("description", {})}
                           className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
                           placeholder="Description"
                           defaultValue={item.description}
                           type="text"
                           id="unique-input"
                         />
-                        {errors.name && (
-                          <span className="text-red-500 text-sm">
-                            "Description is required"
-                          </span>
-                        )}
                       </div>
 
                       <div className="w-full p-3 rounded-lg font-mono bg-blac">
@@ -244,18 +226,13 @@ const FacilitiesTable = ({ item, i }: any) => {
                           price Per-Hour
                         </label>
                         <input
-                          {...register("pricePerHour", { required: true })}
+                          {...register("pricePerHour", {})}
                           className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
                           placeholder="Price Per-Hour"
                           defaultValue={item.pricePerHour}
                           type="number"
                           id="unique-input"
                         />
-                        {errors.name && (
-                          <span className="text-red-500 text-sm">
-                            Price is required. It must be a number
-                          </span>
-                        )}
                       </div>
 
                       <div className="w-full p-3 rounded-lg font-mono bg-blac">
@@ -266,25 +243,17 @@ const FacilitiesTable = ({ item, i }: any) => {
                           Location
                         </label>
                         <input
-                          {...register("location", { required: true })}
+                          {...register("location", {})}
                           className="text-md custom-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:-translate-y-1 focus:outline-blue-300 hover:shadow-lg hover:border-blue-300 bg-gray-100"
                           placeholder="Location"
                           defaultValue={item.location}
                           type="text"
                           id="unique-input"
                         />
-                        {errors.name && (
-                          <span className="text-red-500 text-sm">
-                            Location is required
-                          </span>
-                        )}
                       </div>
 
-                      {errors.exampleRequired && (
-                        <span>This field is required</span>
-                      )}
                       <input
-                        {...register("id", { required: true })}
+                        {...register("id", {})}
                         type="text"
                         className="opacity-0"
                         defaultValue={item._id}
@@ -293,7 +262,6 @@ const FacilitiesTable = ({ item, i }: any) => {
                       {/* <input type="submit"  /> */}
                       <DialogFooter>
                         <Button
-                        
                           type="submit"
                           className="uppercase text-lg mt-3 w-full"
                         >

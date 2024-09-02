@@ -46,6 +46,9 @@
   flex-direction: column;
   gap: 5px;
 }
+.input_container div.relative {
+  width: full;
+}
 
 .icon {
   width: 20px;
@@ -63,6 +66,7 @@
 
 .input_field {
   width: auto;
+  width: 100%;
   height: 40px;
   padding: 0 0 0 40px;
   border-radius: 7px;
