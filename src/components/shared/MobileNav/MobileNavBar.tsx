@@ -1,35 +1,50 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from "framer-motion";
-import {
-  BookType,
-  Calendar,
-  Clipboard,
-  Home,
-  Mail,
-  PanelRightInactive,
-  User,
-  UserMinus,
-  UserPlus,
-} from "lucide-react";
 import { useState } from "react";
-import {
-  FiChevronDown,
-  FiEdit,
-  FiPlusSquare,
-  FiShare,
-  FiTrash,
-} from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { FiChevronDown, FiHome } from "react-icons/fi";
+import { IoLogInOutline, IoLogOutOutline } from "react-icons/io5";
+import { MdOutlineContactMail } from "react-icons/md";
+import { PiGiftDuotone } from "react-icons/pi";
+import { RxDashboard } from "react-icons/rx";
+import { TbBrandBooking, TbListDetails } from "react-icons/tb";
+import { NavLink, useNavigate } from "react-router-dom";
 import { logout, useToken } from "../../../Redux/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
-import { NavItem } from "./MobileNav";
+
+const NavItems = [
+  {
+    text: "Home",
+    icon: FiHome,
+    link: "/",
+  },
+  {
+    text: "Booking",
+    icon: TbBrandBooking,
+    link: "/booking",
+  },
+  {
+    text: "Facilities",
+    icon: PiGiftDuotone,
+    link: "/facilities",
+  },
+  {
+    text: "About",
+    icon: TbListDetails,
+    link: "/about",
+  },
+  {
+    text: "Contact",
+    icon: MdOutlineContactMail,
+    link: "/contact",
+  },
+];
+
 const MobileNavBar = () => {
   const [open, setOpen] = useState(false);
   let user: any;
   const token = useAppSelector(useToken);
-  // const [isOpen, setIsOpen] = useState(false);
-  // const navRef = useRef<HTMLDivElement>(null);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -59,66 +74,66 @@ const MobileNavBar = () => {
           style={{ originY: "top", translateX: "-50%" }}
           className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] -left-[10%] w-48 overflow-hidden "
         >
-          <Option setOpen={setOpen} Icon={FiEdit} text="Edit" />
-          <Option setOpen={setOpen} Icon={FiPlusSquare} text="Duplicate" />
-          <Option setOpen={setOpen} Icon={FiShare} text="Share" />
-          <Option setOpen={setOpen} Icon={FiTrash} text="Remove" />
-          <div className="border border-gray-300 py-3 flex flex-col gap-1 flex-wrap shadow-xl rounded-md  justify-center items-start px-1">
-            <NavItem to="/" icon={<Home />} label="Home" />
-            <NavItem to="/booking" icon={<Calendar />} label="Booking" />
-            <NavItem to="/facilities" icon={<Clipboard />} label="Facilities" />
-            <NavItem to="/about" icon={<BookType />} label="About" />
-            <NavItem to="/contact" icon={<Mail />} label="Contact" />
-            <NavItem
-              to={`/${user?.role ? user?.role : "sign-in"}`}
-              icon={<PanelRightInactive />}
-              label="Dashboard"
-              forceInactive
+          {NavItems?.map((navItem, i) => (
+            <Option
+              key={i}
+              link={navItem.link}
+              setOpen={setOpen}
+              Icon={navItem.icon}
+              text={navItem.text}
             />
-            <div className="flex flex-col items-center mt-4 gap-3">
-              {user ? (
-                <NavItem
-                  to="#"
-                  icon={<UserMinus />}
-                  label="Log Out"
-                  onClick={handleLogOut}
-                  isSpecial
-                />
-              ) : (
-                <>
-                  <NavItem
-                    to="/sign-in"
-                    icon={<User />}
-                    label="Sign In"
-                    isSpecial
-                  />
-                  <NavItem
-                    to="/sign-up"
-                    icon={<UserPlus />}
-                    label="Sign Up"
-                    isSpecial
-                  />
-                </>
-              )}
-            </div>
-          </div>
+          ))}
+
+          <Option
+            setOpen={setOpen}
+            link={`${user?.role}`}
+            Icon={RxDashboard}
+            text="Dashboard"
+          />
+          <motion.li variants={itemVariants} onClick={() => setOpen(false)}>
+            {user ? (
+              <span
+                className="flex items-center gap-2 w-full p-2 text-sm font-medium whitespace-nowrap rounded-md hover:bg-red-100 text-red-600  transition-colors cursor-pointer "
+                onClick={handleLogOut}
+              >
+                <span className="text-xl">
+                  {" "}
+                  <IoLogOutOutline />
+                </span>{" "}
+                Log Out
+              </span>
+            ) : (
+              <NavLink
+                to="/sign-in"
+                className="flex items-center gap-2 w-full p-2 text-sm font-medium whitespace-nowrap rounded-md hover:bg-zinc-100 text-lime-700 hover:text-zinc-500 transition-colors cursor-pointer"
+              >
+                <motion.span variants={actionIconVariants}>
+                  <span className="text-xl =">
+                    <IoLogInOutline />
+                  </span>
+                </motion.span>
+                Sign in
+              </NavLink>
+            )}
+          </motion.li>
         </motion.ul>
       </motion.div>
     </div>
   );
 };
 
-const Option = ({ text, Icon, setOpen }: any) => {
+const Option = ({ text, Icon, setOpen, link }: any) => {
   return (
-    <motion.li
-      variants={itemVariants}
-      onClick={() => setOpen(false)}
-      className="flex items-center gap-2 w-full p-2 text-xs font-medium whitespace-nowrap rounded-md hover:bg-indigo-100 text-slate-700 hover:text-indigo-500 transition-colors cursor-pointer"
-    >
-      <motion.span variants={actionIconVariants}>
-        <Icon />
-      </motion.span>
-      <span>{text}</span>
+    <motion.li variants={itemVariants} onClick={() => setOpen(false)}>
+      <NavLink
+        to={link}
+        className="flex items-center gap-2 w-full p-2 text-sm font-medium whitespace-nowrap rounded-md hover:bg-zinc-100 text-zinc-950 hover:text-zinc-500 transition-colors cursor-pointer"
+      >
+        <motion.span className="text-xl" variants={actionIconVariants}>
+          <Icon />
+        </motion.span>
+        <span>{text}</span>
+      </NavLink>
     </motion.li>
   );
 };
