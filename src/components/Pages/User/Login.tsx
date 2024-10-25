@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Lock, Mail, UnlockIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -21,13 +22,23 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loginCredentials, setLoginCredentials] = useState<TLoginFormInputs>({
+    email: "",
+    password: "",
+  });
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TLoginFormInputs>();
+  } = useForm<TLoginFormInputs>({
+    defaultValues: loginCredentials,
+  });
+
+  useEffect(() => {
+    reset(loginCredentials);
+  }, [loginCredentials, reset]);
 
   const onSubmit: SubmitHandler<TLoginFormInputs> = async (data) => {
     try {
@@ -48,100 +59,132 @@ const Login = () => {
       }
     } catch (err) {
       console.log({ error, err });
-      toast.error("Login Failed! Something went wrong.");
+      toast.error(
+        (error as any)?.data?.message
+          ? (error as any)?.data?.message
+          : "Login Failed! Something went wrong."
+      );
     }
   };
 
   return (
     <>
       <CommonHero title="Login" />
-      <div className="lg:w-[500px] mx-auto pt-10 pb-20 lg:px-0 md:px-36 px-5 mt-20">
-        <form onSubmit={handleSubmit(onSubmit)} className="form_container">
-          <div className="title_container">
+      <div className="lg:w-[500px] mx-auto pt-10 pb-20 lg:px-0 md:px-36 px-5 mt-20 ">
+        <div className="form_container w-[80%] mx-auto">
+          <div className="title_container px-">
             <p className="title">Login to your Account</p>
             <span className="subtitle">
               Get started with our app, just create an account and enjoy the
               experience.
             </span>
+            <span className="flex gap-2">
+              <Button
+                className=" rounded-lg text-sm py-1 h-7"
+                variant={"outline"}
+                onClick={() =>
+                  setLoginCredentials({
+                    email: "ali@gmail.com",
+                    password: "ali@gmail.com",
+                  })
+                }
+              >
+                User Credentials
+              </Button>
+              <Button
+                className=" rounded-lg text-sm py-1 h-7"
+                variant={"outline"}
+                onClick={() =>
+                  setLoginCredentials({
+                    email: "admin@gmail.com",
+                    password: "ashraf@gmail.com",
+                  })
+                }
+              >
+                Admin Credentials
+              </Button>
+            </span>
           </div>
-          <br />
-          <div className="input_container">
-            <label className="input_label" htmlFor="email_field">
-              Email
-            </label>
-            <div className="relative">
-              <Mail className="icon" />
-              <input
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Invalid email address",
-                  },
-                })}
-                placeholder="name@mail.com"
-                type="email"
-                className="input_field"
-              />
-            </div>
-            {errors.email && (
-              <span className="error_message text-red-600">
-                {errors.email.message}
-              </span>
-            )}
-          </div>
-          <div className="input_container">
-            <label className="input_label" htmlFor="password_field">
-              Password
-            </label>
-            <div className="relative">
-              {showPassword ? (
-                <Lock
-                  className="icon"
-                  onClick={() => setShowPassword(!showPassword)}
+          <form onSubmit={handleSubmit(onSubmit)} className=" w-full">
+            <br />
+            <div className="input_container">
+              <label className="input_label" htmlFor="email_field">
+                Email
+              </label>
+              <div className="relative">
+                <Mail className="icon" />
+                <input
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  placeholder="name@mail.com"
+                  type="email"
+                  className="input_field"
                 />
-              ) : (
-                <UnlockIcon
-                  className="icon"
-                  onClick={() => setShowPassword(!showPassword)}
-                />
+              </div>
+              {errors.email && (
+                <span className="error_message text-red-600">
+                  {errors.email.message}
+                </span>
               )}
-              <input
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                })}
-                placeholder="Password"
-                type={showPassword ? "text" : "password"}
-                className="input_field"
-              />
             </div>
-            {errors.password && (
-              <span className="error_message text-red-600">
-                {errors.password.message}
-              </span>
-            )}
-          </div>
-          <Button
-            title="Sign In"
-            type="submit"
-            className="sign-in_btn w-full bg-black"
-          >
-            <span>Sign In</span>
-          </Button>
-          {/* form bottom */}
-          <div>
-            <p>
-              Don't have an account? &nbsp;
-              <NavLink to="/sign-up" className="hover:underline">
-                <span className="font-bold">Sign-Up</span>
-              </NavLink>
-            </p>
-          </div>
-        </form>
+            <div className="input_container">
+              <label className="input_label" htmlFor="password_field">
+                Password
+              </label>
+              <div className="relative">
+                {showPassword ? (
+                  <Lock
+                    className="icon"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <UnlockIcon
+                    className="icon"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
+                <input
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                  placeholder="Password"
+                  type={showPassword ? "text" : "password"}
+                  className="input_field"
+                />
+              </div>
+              {errors.password && (
+                <span className="error_message text-red-600">
+                  {errors.password.message}
+                </span>
+              )}
+            </div>
+            <Button
+              title="Sign In"
+              type="submit"
+              className="sign-in_btn w-full bg-black mt-5"
+            >
+              <span>Sign In</span>
+            </Button>
+            {/* form bottom */}
+            <div>
+              <p>
+                Don't have an account? &nbsp;
+                <NavLink to="/sign-up" className="hover:underline">
+                  <span className="font-bold">Sign-Up</span>
+                </NavLink>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
