@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -45,16 +46,15 @@ const Navbar = () => {
             { path: "/booking", label: "Booking" },
             { path: "/about", label: "About" },
             { path: "/contact", label: "Contact" },
-            {
-              path: `/${user?.role ? user?.role : "sign-in"}`,
-              label: "Dashboard",
-            },
+            // {
+            //   path: `/${user?.role ? user?.role : "sign-in"}`,
+            //   label: "Dashboard",
+            // },
           ].map((link, index) => (
             <NavLink
               to={link.path}
               key={index}
               className={({ isActive }) =>
-                // Force Dashboard link to never be active
                 link.label === "Dashboard"
                   ? "hover:underline py-2 my-2 px-5 transition-all duration-500"
                   : `hover:underline py-2 my-2 px-5 transition-all duration-500 ${
@@ -66,6 +66,17 @@ const Navbar = () => {
               {link.label}
             </NavLink>
           ))}
+          {user && (
+            <NavLink
+              to={`/${user?.role ? user?.role : "sign-in"}`}
+              className={({ isActive }) =>
+                "hover:underline py-2 my-2 px-5 transition-all duration-500"
+              }
+              ref={addToRefs}
+            >
+              Dashboard
+            </NavLink>
+          )}
         </ul>
         <div className="space-x-3 flex">
           {user ? (

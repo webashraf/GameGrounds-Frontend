@@ -2,9 +2,9 @@ import gsap from "gsap";
 import { ScrollToPlugin, ScrollTrigger } from "gsap/all"; // Import ScrollToPlugin
 import { ChevronUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../../shared/Footer/Footer";
-import MobileNav from "../../shared/MobileNav/MobileNav";
+import MobileNavBar from "../../shared/MobileNav/MobileNavBar";
 import Navbar from "../../shared/Navbar/Navbar";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // Register ScrollTrigger and ScrollToPlugin
@@ -73,8 +73,21 @@ const MainLayout = () => {
           <Navbar />
         </div>
         {/* Mobile Navbar */}
-        <div className="lg:hidden md:block fixed bottom-5 left-0 right-0 z-50">
-          <MobileNav />
+        <div className="lg:hidden md:block relative  z-50">
+          <div>
+            <div className="fixed top-0 py-5 px-2 flex justify-between items-center w-full bg-black/30 backdrop-blur-md">
+              <NavLink
+                to="/"
+                className=" text-3xl font-semibold font-serif text-white"
+              >
+                GameGrounds
+              </NavLink>
+              {/* Menu Button */}
+
+              <MobileNavBar />
+              {/* <Button variant="outline">Open</Button> */}
+            </div>
+          </div>
         </div>
         {/* Main Content */}
         <div className=" mx-auto">

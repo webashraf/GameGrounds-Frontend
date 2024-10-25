@@ -133,7 +133,7 @@ const MobileNav = () => {
   );
 };
 
-const NavItem = ({
+export const NavItem = ({
   to,
   icon,
   label,
