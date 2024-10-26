@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useGetFacilitiesQuery } from "../../../Redux/api/facilities.api";
 import CommonCard from "../../shared/CommonCard/CommonCard";
 import CommonHero from "../../shared/CommonHero/CommonHero";
-import { SkeletonCard } from "../../shared/Loader/Loader";
+import LoadingSkeleton from "../../shared/Loader/LoadingSkeleton";
 import { Button } from "../../ui/button";
 import {
   Pagination,
@@ -33,7 +33,12 @@ interface FormData {
 const Facilities: React.FC = () => {
   const [query, setQuery] = useState<any>([]);
   // [{ field: "searchTerm", value: "Tennis" }]
-  const { data: facilities, isFetching, error } = useGetFacilitiesQuery(query);
+  const {
+    data: facilities,
+    isLoading,
+    isFetching,
+    error,
+  } = useGetFacilitiesQuery(query);
   console.log("Facilities: ", facilities?.dataLength);
 
   if (error) {
@@ -94,16 +99,12 @@ const Facilities: React.FC = () => {
       { field: "limit", value: limit },
     ]);
   };
-
+  if (isLoading) {
+    return <LoadingSkeleton />;
+  }
   return (
     <>
       <CommonHero title="Facilities" />
-      {/* {isFetching ? (
-        <div className="h-[60vh] flex justify-center items-center">
-          <Loader />
-        </div>
-      ) : ( */}
-      <SkeletonCard />
 
       <div className="lg:px-20 px-5">
         {/* Search and filter */}
@@ -163,11 +164,15 @@ const Facilities: React.FC = () => {
         </div>
 
         {/* Facilities items card */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 lg:gap-28 pb-20 md:pb-28 lg:pb-36 ">
-          {facilities?.data.map((item: any) => (
-            <CommonCard key={item._id} item={item} />
-          ))}
-        </div>
+        {isFetching ? (
+          <LoadingSkeleton />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 lg:gap-28 pb-20 md:pb-28 lg:pb-36 ">
+            {facilities?.data.map((item: any) => (
+              <CommonCard key={item._id} item={item} />
+            ))}
+          </div>
+        )}
 
         {/* Pagination */}
         <div className="flex justify-center">
