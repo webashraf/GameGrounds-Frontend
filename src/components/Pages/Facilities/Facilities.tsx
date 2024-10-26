@@ -36,13 +36,17 @@ const Facilities: React.FC = () => {
     isFetching,
     error,
   } = useGetFacilitiesQuery(query);
-  const [facilitiesLength, setFacilitiesLength] = useState(
-    facilities.dataLength
-  );
   if (error) {
     toast.error("Failed to fetch facilities.");
   }
 
+  console.log("facilities?.dataLength", facilities?.dataLength);
+  const [facilitiesLength, setFacilitiesLength] = useState(
+    facilities?.dataLength
+  );
+  useEffect(() => {
+    setFacilitiesLength(facilities?.dataLength);
+  }, [facilities, isLoading]);
   // * Handle filtering by price
   const handlePriceFilterInput = (e: {
     minValue: number;
@@ -63,7 +67,7 @@ const Facilities: React.FC = () => {
   };
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const limit = 8;
+  const limit = 6;
   const totalPages = Math.ceil((facilitiesLength || 0) / limit);
 
   // * Debounced search handling

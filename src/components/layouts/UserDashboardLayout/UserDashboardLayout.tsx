@@ -8,24 +8,13 @@ import {
   ShieldPlus,
   SquareKanban,
 } from "lucide-react";
-import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useToken } from "../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
 import { DashboardMobileNav } from "../../shared/DashboardMobileNav/DashboardMobileNav";
-import { Button } from "../../ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
 
 const UserDashboardLayout = () => {
-  const [position, setPosition] = useState("bottom");
-
   const token = useAppSelector(useToken);
 
   let user: any;
@@ -72,50 +61,44 @@ const UserDashboardLayout = () => {
                 <BookImageIcon />
                 My Dashboard
               </NavLink>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button className="bg-transparent flex justify-start gap-4">
-                    <FileSliders /> Facility Management
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56 bg-slate-900">
-                  <DropdownMenuRadioGroup
-                    value={position}
-                    onValueChange={setPosition}
+              <>
+                <NavLink
+                  to="/admin/facilities-add"
+                  className="w-full py-2 px-4 rounded-lg transition-all duration-300  ease-in-out flex items-center gap-4 text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-black"
+                >
+                  <FileSliders /> Facility Management
+                </NavLink>
+
+                <div className="ml-3 flex flex-col gap-3">
+                  <NavLink
+                    to="/admin/facilities-add"
+                    className={({ isActive }) =>
+                      `w-full py-2 px-4 rounded-lg transition-all duration-300 hover:text-black ease-in-out flex items-center gap-4  ${
+                        isActive
+                          ? "bg-white/20 backdrop-blur-lg text-white"
+                          : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-black"
+                      }`
+                    }
                   >
-                    <DropdownMenuRadioItem value="top" className="p-0 m-1 ">
-                      <NavLink
-                        to="/admin/facilities-add"
-                        className={({ isActive }) =>
-                          `w-full py-2 px-4 rounded-lg transition-all duration-300 hover:text-black ease-in-out flex items-center gap-4  ${
-                            isActive
-                              ? "bg-white/20 backdrop-blur-lg text-white"
-                              : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-black"
-                          }`
-                        }
-                      >
-                        <FilePlus />
-                        Add Facility
-                      </NavLink>
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="top" className="p-0 m-1 ">
-                      <NavLink
-                        to="/admin/facilities-update"
-                        className={({ isActive }) =>
-                          `w-full py-2 px-4 rounded-lg transition-all duration-300 hover:text-black ease-in-out flex items-center gap-4 ${
-                            isActive
-                              ? "bg-white/20 backdrop-blur-lg text-white"
-                              : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-black"
-                          }`
-                        }
-                      >
-                        <FileEdit />
-                        Update Facility
-                      </NavLink>
-                    </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                    <FilePlus />
+                    Add Facility
+                  </NavLink>
+
+                  <NavLink
+                    to="/admin/facilities-update"
+                    className={({ isActive }) =>
+                      `w-full py-2 px-4 rounded-lg transition-all duration-300 hover:text-black ease-in-out flex items-center gap-4 ${
+                        isActive
+                          ? "bg-white/20 backdrop-blur-lg text-white"
+                          : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-black"
+                      }`
+                    }
+                  >
+                    <FileEdit />
+                    Update Facility
+                  </NavLink>
+                </div>
+              </>
 
               <NavLink
                 to="/admin/booking-management"

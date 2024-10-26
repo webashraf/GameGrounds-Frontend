@@ -90,7 +90,7 @@ const FacilitiesTable = ({ item, i }: any) => {
         <h5 className="text-md font-bold mb-1">{item.name}</h5>
       </TableCell>
       <TableCell className="uppercase">{item.location}</TableCell>
-      <TableCell>{item.description}</TableCell>
+      <TableCell className="max-w-[400px]">{item.description}</TableCell>
       <TableCell>${item.pricePerHour}</TableCell>
       <TableCell className="text-right flex gap-2 items-center justify-center">
         {/* Delete Button  */}

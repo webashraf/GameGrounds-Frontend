@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "./baseApi";
 
 const bookingApi = baseApi.injectEndpoints({
@@ -21,10 +22,19 @@ const bookingApi = baseApi.injectEndpoints({
       },
     }),
     getAllBookings: builder.query({
-      query: () => {
+      query: (queries) => {
+        const params = new URLSearchParams();
+
+        if (params) {
+          queries.forEach((query: any) => {
+            params.append(query.field, query.value);
+          });
+        }
+
         return {
           url: `/bookings`,
           method: "GET",
+          params: params,
         };
       },
     }),
@@ -53,5 +63,6 @@ export const {
   useCheckAvailabilityQuery,
   useCreateABookMutation,
   useGetAllBookingsByUserQuery,
+  useGetAllBookingsQuery,
   useCancelBookingMutation,
 } = bookingApi;

@@ -1,6 +1,6 @@
 import { Skeleton } from "../../ui/skeleton";
 
-function LoadingSkeleton({ skeletonLength = 4, styles = " " }) {
+function LoadingSkeleton({ skeletonLength = 6, styles = " " }) {
   console.log("skeletonLength", skeletonLength);
   const fakeArr = Array.from({ length: skeletonLength });
 
@@ -9,7 +9,7 @@ function LoadingSkeleton({ skeletonLength = 4, styles = " " }) {
       className={`grid lg:grid-cols-3 grid-cols-2 gap-12 pb-20  ${styles} items-center justify-center`}
     >
       {fakeArr.map((_, i) => (
-        <div key={i} className="flex flex-col space-y-3">
+        <div key={i} className="flex flex-col space-y-3 lg:px-20 px-5">
           <Skeleton className="h-[200px] bg-zinc-400 rounded-xl">
             <div className="space-y-2 relative h-full p-5">
               <Skeleton className="h-4 w-[150px] bg-zinc-500" />
