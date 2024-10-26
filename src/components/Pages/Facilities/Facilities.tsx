@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Search } from "lucide-react";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import MultiRangeSlider from "multi-range-slider-react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
-
 import { useGetFacilitiesQuery } from "../../../Redux/api/facilities.api";
 import CommonCard from "../../shared/CommonCard/CommonCard";
 import CommonHero from "../../shared/CommonHero/CommonHero";
 import LoadingSkeleton from "../../shared/Loader/LoadingSkeleton";
-import { Button } from "../../ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -16,99 +15,94 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "../../ui/pagination";
-import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import "./RangeSlider.css";
 
-// Define types
-interface Facility {
-  _id: string;
-  name: string;
-  pricePerHour: number;
-}
-
-interface FormData {
-  minPrice: number;
-  maxPrice: number;
+interface FacilityQuery {
+  field: string;
+  value: any;
 }
 
 const Facilities: React.FC = () => {
-  const [query, setQuery] = useState<any>([]);
-  // [{ field: "searchTerm", value: "Tennis" }]
+  const [query, setQuery] = useState<FacilityQuery[]>([]);
+  const [minValue, setMinValue] = useState<number>(25);
+  const [maxValue, setMaxValue] = useState<number>(200);
+
+  // Debounce timer
+  let debounceTimer: NodeJS.Timeout;
+
   const {
     data: facilities,
     isLoading,
     isFetching,
     error,
   } = useGetFacilitiesQuery(query);
-  console.log("Facilities: ", facilities?.dataLength);
-
+  const [facilitiesLength, setFacilitiesLength] = useState(
+    facilities.dataLength
+  );
   if (error) {
     toast.error("Failed to fetch facilities.");
   }
 
-  const [formData, setFormData] = useState<FormData>({
-    minPrice: 0,
-    maxPrice: 1000,
-  });
+  // * Handle filtering by price
+  const handlePriceFilterInput = (e: {
+    minValue: number;
+    maxValue: number;
+  }) => {
+    setMinValue(e.minValue);
+    setMaxValue(e.maxValue);
+    const newQuery = [
+      { field: "minPrice", value: e.minValue },
+      { field: "maxPrice", value: e.maxValue },
+    ];
 
-  const [facilitiesData, setFacilitiesData] = useState<Facility[]>(
-    facilities?.data || []
-  );
-  console.log("FacilitiesData: ", facilitiesData);
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      setQuery(newQuery);
+      setFacilitiesLength(facilities?.data?.length);
+    }, 300);
+  };
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const limit = 8;
-  const totalPages = Math.ceil((facilities?.dataLength || 0) / limit);
+  const totalPages = Math.ceil((facilitiesLength || 0) / limit);
 
-  useEffect(() => {
-    setFacilitiesData(facilities?.data || []);
-  }, [facilities]);
-
-  //* Search done
+  // * Debounced search handling
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     const valueOfSearch = event.target.value;
-    setQuery([{ field: "searchTerm", value: valueOfSearch }]);
+
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      setQuery([{ field: "searchTerm", value: valueOfSearch }]);
+      setFacilitiesLength(facilities?.data?.length);
+    }, 300);
   };
 
-  // ! need to handle it from backend
-  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: parseFloat(value),
-    }));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const minPrice = formData.minPrice || 0;
-    const maxPrice = formData.maxPrice || 1000;
-    const filteredItems = facilities?.data.filter(
-      (item: any) =>
-        item.pricePerHour > minPrice && item.pricePerHour < maxPrice
-    );
-    setFacilitiesData(filteredItems || []);
-    setCurrentPage(1);
-  };
-
-  // * pagination done
+  // *  Handle Pagination
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    console.log("Paginate page", page);
     setQuery([
       { field: "page", value: page },
       { field: "limit", value: limit },
     ]);
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(debounceTimer);
+    };
+  }, []);
+
   if (isLoading) {
     return <LoadingSkeleton />;
   }
+
   return (
     <>
       <CommonHero title="Facilities" />
 
       <div className="lg:px-20 px-5">
         {/* Search and filter */}
-        <div className="flex justify-between pb-20 relative ">
+        <div className="flex justify-between pb-20 relative items-center">
           <div className="relative">
             <input
               placeholder="Search..."
@@ -120,50 +114,29 @@ const Facilities: React.FC = () => {
 
             <Search className="size-6 absolute top-3 right-3 text-gray-500 cursor-pointer" />
           </div>
-          <Popover>
-            <PopoverTrigger>
-              <Button>Filter By Price</Button>
-            </PopoverTrigger>
-            <PopoverContent>
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-lg gap-5"
-              >
-                <div className="flex flex-col">
-                  <label htmlFor="minPrice" className="text-lg font-medium">
-                    Min:
-                  </label>
-                  <input
-                    type="number"
-                    id="minPrice"
-                    name="minPrice"
-                    value={formData.minPrice}
-                    onChange={handleFilterChange}
-                    className="p-2 border border-gray-300 rounded-lg text-center"
-                  />
-                </div>
 
-                <div className="flex flex-col">
-                  <label htmlFor="maxPrice" className="text-lg font-medium">
-                    Max:
-                  </label>
-                  <input
-                    type="number"
-                    id="maxPrice"
-                    name="maxPrice"
-                    value={formData.maxPrice}
-                    onChange={handleFilterChange}
-                    className="p-2 border border-gray-300 rounded-lg text-center"
-                  />
-                </div>
-
-                <Button type="submit">Submit</Button>
-              </form>
-            </PopoverContent>
-          </Popover>
+          <div className="w-[300px] shadow-xl shadow-black/10 rounded-md p-3">
+            <h4 className="pb-2">Filter By Price:</h4>
+            <MultiRangeSlider
+              className="shadow-lg shadow-orange-700"
+              min={0}
+              max={500}
+              baseClassName=""
+              subSteps={true}
+              step={10}
+              barInnerColor="#101010"
+              ruler={false}
+              label={false}
+              minValue={minValue}
+              maxValue={maxValue}
+              onChange={(e) => handlePriceFilterInput(e)}
+            />
+            <div className="space-x-10 pt-2">
+              min: {minValue} &nbsp; max: {maxValue}
+            </div>
+          </div>
         </div>
 
-        {/* Facilities items card */}
         {isFetching ? (
           <LoadingSkeleton />
         ) : (
@@ -217,7 +190,6 @@ const Facilities: React.FC = () => {
           </Pagination>
         </div>
       </div>
-      {/* )} */}
     </>
   );
 };
