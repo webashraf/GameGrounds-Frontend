@@ -1,4 +1,4 @@
-import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
+import { useGetFacilitiesQuery } from "../../../../Redux/api/facilities.api";
 import Loader from "../../../shared/Loader/Loader";
 import {
   Table,

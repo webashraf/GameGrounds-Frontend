@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
+
+import { useGetFacilitiesQuery } from "../../../../Redux/api/facilities.api";
 import {
   TAvailabilityCheckerProps,
   TFacilitySelect,

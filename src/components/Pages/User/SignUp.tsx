@@ -3,7 +3,8 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useSignUpMutation } from "../../../Redux/api/baseApi";
+
+import { useSignUpMutation } from "../../../Redux/api/auth.api";
 import CommonHero from "../../shared/CommonHero/CommonHero";
 import { Button } from "../../ui/button";
 import "./loginRegisterForm.css";

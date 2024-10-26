@@ -1,6 +1,7 @@
 import { Navigation } from "lucide-react";
 import { NavLink, useParams } from "react-router-dom";
-import { useGetSingleFacilityQuery } from "../../../Redux/api/baseApi";
+
+import { useGetSingleFacilityQuery } from "../../../Redux/api/facilities.api";
 import CommonHero from "../../shared/CommonHero/CommonHero";
 import Loader from "../../shared/Loader/Loader";
 import { Button } from "../../ui/button";

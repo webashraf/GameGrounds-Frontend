@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useAddFacilitiesMutation } from "../../../../Redux/api/baseApi";
+
+import { useAddFacilitiesMutation } from "../../../../Redux/api/facilities.api";
 import { Button } from "../../../ui/button";
 
 type TFacilityFormData = {

@@ -2,10 +2,8 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import {
-  useCreateABookMutation,
-  useGetFacilitiesQuery,
-} from "../../../../Redux/api/baseApi";
+import { useCreateABookMutation } from "../../../../Redux/api/booking.api";
+import { useGetFacilitiesQuery } from "../../../../Redux/api/facilities.api";
 import { useToken } from "../../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../../Redux/hook";
 import { TFacility, TFacilitySelect } from "../../../../types/gloval.types";

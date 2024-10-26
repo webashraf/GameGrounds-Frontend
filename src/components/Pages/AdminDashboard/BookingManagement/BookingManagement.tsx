@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetAllBookingsQuery } from "../../../../Redux/api/baseApi";
+
+import { useGetAllBookingsByUserQuery } from "../../../../Redux/api/booking.api";
 import Loader from "../../../shared/Loader/Loader";
 import {
   Table,
@@ -11,7 +12,8 @@ import {
 } from "../../../ui/table";
 
 const BookingManagement = () => {
-  const { data: bookings, isFetching } = useGetAllBookingsQuery(undefined);
+  const { data: bookings, isFetching } =
+    useGetAllBookingsByUserQuery(undefined);
   if (isFetching) {
     return (
       <div className="h-[90vh] flex justify-center items-center">

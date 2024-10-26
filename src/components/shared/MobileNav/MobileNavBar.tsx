@@ -84,12 +84,14 @@ const MobileNavBar = () => {
             />
           ))}
 
-          <Option
-            setOpen={setOpen}
-            link={`${user?.role}`}
-            Icon={RxDashboard}
-            text="Dashboard"
-          />
+          {user && (
+            <Option
+              setOpen={setOpen}
+              link={`${user?.role}`}
+              Icon={RxDashboard}
+              text="Dashboard"
+            />
+          )}
           <motion.li variants={itemVariants} onClick={() => setOpen(false)}>
             {user ? (
               <span

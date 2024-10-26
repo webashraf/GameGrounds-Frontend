@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { toast } from "sonner";
-import {
-  useDeleteFacilitiesMutation,
-  useUpdateFacilitiesMutation,
-} from "../../../../Redux/api/baseApi";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,6 +25,10 @@ import {
 import { TableCell, TableRow } from "../../../ui/table";
 
 import { SubmitHandler, useForm } from "react-hook-form";
+import {
+  useDeleteFacilitiesMutation,
+  useUpdateFacilitiesMutation,
+} from "../../../../Redux/api/facilities.api";
 
 const FacilitiesTable = ({ item, i }: any) => {
   const [updateFacilities] = useUpdateFacilitiesMutation();

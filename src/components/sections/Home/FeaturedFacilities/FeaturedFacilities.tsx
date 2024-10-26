@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NavLink } from "react-router-dom";
 import { toast } from "sonner";
-import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
+
+import { useGetFacilitiesQuery } from "../../../../Redux/api/facilities.api";
 import CommonCard from "../../../shared/CommonCard/CommonCard";
 import CommonHeading from "../../../shared/CommonHeading/CommonHeading";
 import Loader from "../../../shared/Loader/Loader";
@@ -13,6 +14,7 @@ const FeaturedFacilities = () => {
     isFetching,
     error,
   } = useGetFacilitiesQuery(undefined);
+  console.log("Facilities Feature: ", facilities);
   if (error) {
     toast.error("Failed to fetch facilities.");
   }

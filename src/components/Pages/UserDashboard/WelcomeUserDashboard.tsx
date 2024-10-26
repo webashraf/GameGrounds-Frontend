@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useGetUserQuery } from "../../../Redux/api/baseApi";
+import { useGetUserQuery } from "../../../Redux/api/auth.api";
 import { useToken } from "../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";

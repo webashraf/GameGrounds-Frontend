@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -69,7 +68,8 @@ const Navbar = () => {
           {user && (
             <NavLink
               to={`/${user?.role ? user?.role : "sign-in"}`}
-              className={({ isActive }) =>
+              className={
+                // ({ isActive }) =>
                 "hover:underline py-2 my-2 px-5 transition-all duration-500"
               }
               ref={addToRefs}

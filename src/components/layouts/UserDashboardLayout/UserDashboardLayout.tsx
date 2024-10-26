@@ -33,21 +33,17 @@ const UserDashboardLayout = () => {
   if (token) {
     user = verifyToken(token);
   }
-  // if (user.role === "admin" || user.role === "user") {
-  //   console.log(user.role);
-  //   return <UnAuthorizedUser />;
-  // }
 
   return (
-    <div>
-      <div className="flex">
-        <div className="lg:hidden fixed top-0  flex items-center  justify-between p-5  z-50 bg-black/80 w-full backdrop-blur-md">
+    <>
+      <div className="flex ">
+        <div className="lg:hidden  fixed top-0  flex items-center  justify-between p-5  z-50 w-full backdrop-blur-md">
           <DashboardMobileNav />
           <h2 className="text-4xl text-white font-serif">GameGround</h2>
         </div>
 
         {/* --------------- */}
-        <div className="bg-slate-900 lg:block hidden lg-[300px] h-screen p-5 pt-10">
+        <div className=" lg:block hidden bg-zinc-900 lg-[350px] h-screen p-5 pt-10 w-[450px]">
           {user?.role === "admin" ? (
             <div className="flex flex-col gap-4 text-white ">
               <NavLink
@@ -202,6 +198,32 @@ const UserDashboardLayout = () => {
                   <BookImageIcon />
                   My Booking
                 </NavLink>
+                <NavLink
+                  to="/user/payment-history"
+                  className={({ isActive }) =>
+                    `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
+                      isActive
+                        ? "bg-white/20 backdrop-blur-lg text-white"
+                        : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                    }`
+                  }
+                >
+                  <BookImageIcon />
+                  My Payments
+                </NavLink>
+                <NavLink
+                  to="/user/feedback"
+                  className={({ isActive }) =>
+                    `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
+                      isActive
+                        ? "bg-white/20 backdrop-blur-lg text-white"
+                        : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                    }`
+                  }
+                >
+                  <BookImageIcon />
+                  Feedbacks
+                </NavLink>
               </div>
             </div>
           )}
@@ -212,7 +234,7 @@ const UserDashboardLayout = () => {
           <Outlet />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { toast } from "sonner";
+
 import {
   useCancelBookingMutation,
   useGetAllBookingsByUserQuery,
-} from "../../../../Redux/api/baseApi";
+} from "../../../../Redux/api/booking.api";
 import { useToken } from "../../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../../Redux/hook";
 import { verifyToken } from "../../../../utils/verifyToken";
@@ -20,6 +21,15 @@ import {
   AlertDialogTrigger,
 } from "../../../ui/alert-dialog";
 import { Button } from "../../../ui/button";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "../../../ui/pagination";
 import {
   Table,
   TableBody,
@@ -40,7 +50,6 @@ const MyBookings = () => {
   );
   const [cancelBooking] = useCancelBookingMutation();
 
-
   const handleCancelBooking = async (id: string) => {
     const res = await cancelBooking(id).unwrap();
     if (res?.success) {
@@ -59,7 +68,7 @@ const MyBookings = () => {
   }
   return (
     <div className="lg:w-[90%]  ">
-      <div className="  relative h-[90vh] lg:w-[1000px] w-full px-5 overflow-auto  custom-scrollbar mx-auto section-padding mt-10">
+      <div className="  relative h-[90vh] lg:w-[1000px w-full px-5 overflow-auto  custom-scrollbar mx-auto section-padding mt-10">
         <h2 className="text-6xl text-black uppercase mb-10 ">My Bookings</h2>
         <Table className="">
           <TableHeader className="h-[100px] bg-black/80 shadow-2xl backdrop-blur-lg rounded-md ">
@@ -231,6 +240,32 @@ const MyBookings = () => {
               ))}
           </TableBody>
         </Table>
+        <div>
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious href="#" />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">1</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#" isActive>
+                  2
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">3</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext href="#" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       </div>
     </div>
   );

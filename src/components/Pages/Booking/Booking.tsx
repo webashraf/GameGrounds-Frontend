@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent, useState } from "react";
 import { toast } from "sonner";
-import {
-  useCheckAvailabilityQuery,
-  useGetFacilitiesQuery,
-} from "../../../Redux/api/baseApi";
+import { useGetFacilitiesQuery } from "../../../Redux/api/facilities.api";
 import { TFacility } from "../../../types/gloval.types";
 import CommonHero from "../../shared/CommonHero/CommonHero";
 import "./Booking.css";
 import AvailabilityChecker from "./BookingStepsItems/AvailabilityChecker";
 import BookingForm from "./BookingStepsItems/BookingForm";
+import { useCheckAvailabilityQuery } from "../../../Redux/api/booking.api";
 
 interface Query {
   date?: string;
