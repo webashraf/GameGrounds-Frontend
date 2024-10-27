@@ -12,16 +12,24 @@ const authApi = baseApi.injectEndpoints({
     signUp: builder.mutation({
       query: (payload) => {
         return {
-          url: "/auth/signup",
+          url: "/user/signup",
           method: "POST",
           body: payload,
         };
       },
     }),
-    getUser: builder.query({
-      query: (id) => {
+    getSingleUser: builder.query({
+      query: (email) => {
         return {
-          url: `/auth/${id}`,
+          url: `/user/${email}`,
+          method: "GET",
+        };
+      },
+    }),
+    getUser: builder.query({
+      query: () => {
+        return {
+          url: `/user`,
           method: "GET",
         };
       },
@@ -29,4 +37,9 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useSignUpMutation, useGetUserQuery } = authApi;
+export const {
+  useLoginMutation,
+  useSignUpMutation,
+  useGetUserQuery,
+  useGetSingleUserQuery,
+} = authApi;

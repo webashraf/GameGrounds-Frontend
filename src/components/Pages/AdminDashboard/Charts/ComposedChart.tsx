@@ -1,72 +1,89 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  Area,
-  Bar,
   CartesianGrid,
-  ComposedChart,
   Legend,
   Line,
+  LineChart,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
+import { useGetAllBookingsQuery } from "../../../../Redux/api/booking.api";
+import Loader from "../../../shared/Loader/Loader";
 
 const ComposedChartData = () => {
-  const data = [
-    {
-      name: "Page A",
-      dateOfBooking: 4000,
-      amount: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      dateOfBooking: 3000,
-      amount: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      dateOfBooking: 2000,
-      amount: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      dateOfBooking: 2780,
-      amount: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      dateOfBooking: 1890,
-      amount: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      dateOfBooking: 2390,
-      amount: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      dateOfBooking: 3490,
-      amount: 4300,
-      amt: 2100,
-    },
-  ];
+  const { data: bookings, isFetching, isLoading } = useGetAllBookingsQuery([]);
+
+  const groupedBookings = bookings?.data.reduce((acc: any, booking: any) => {
+    const { date, payableAmount, user, facility } = booking;
+
+    // Check if the date already exists in the accumulator
+    const existingDate = acc.find((item: any) => item.dateOfBooking === date);
+    if (existingDate) {
+      // If it exists, add the amount to the totalAmount and increase the booking totalCount
+      existingDate.totalAmount += payableAmount;
+      existingDate.totalCount += 1;
+
+      // Track unique users by their _id
+      if (!existingDate.uniqueUserIds.has(user._id)) {
+        existingDate.uniqueUserIds.add(user._id);
+        existingDate.userCount += 1;
+      }
+
+      // Track unique facilities by their _id
+      if (!existingDate.uniqueFacilityIds.has(facility._id)) {
+        existingDate.uniqueFacilityIds.add(facility._id);
+        existingDate.facilityCount += 1;
+      }
+    } else {
+      // If it doesn't exist, create a new entry with the initial values and Sets
+      acc.push({
+        dateOfBooking: date,
+        totalAmount: payableAmount,
+        totalCount: 1,
+        uniqueUserIds: new Set([user._id]),
+        userCount: 1,
+        uniqueFacilityIds: new Set([facility._id]),
+        facilityCount: 1,
+      });
+    }
+
+    return acc;
+  }, []);
+
+  // Clean up the final output by removing the Sets
+  const finalGroupedBookings = groupedBookings?.map(
+    ({ uniqueUserIds, uniqueFacilityIds, ...rest }: any) => ({
+      ...rest,
+    })
+  );
+
+  if (isLoading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div>
-      <ComposedChart width={730} height={250} data={data}>
-        <XAxis dataKey="name" />
+      <LineChart
+        width={730}
+        height={250}
+        data={finalGroupedBookings}
+        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="dateOfBooking" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <CartesianGrid stroke="#f5f5f5" />
-        <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-        <Bar dataKey="amount" barSize={20} fill="#413ea0" />
-        <Line type="monotone" dataKey="dateOfBooking" stroke="#ff7300" />
-      </ComposedChart>
+        <Line type="monotone" dataKey="totalAmount" stroke="#8884d8" />
+        <Line type="monotone" dataKey="totalCount" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="userCount" stroke="#82fd" />
+        <Line type="monotone" dataKey="facilityCount" stroke="#82cafd" />
+      </LineChart>
     </div>
   );
 };
