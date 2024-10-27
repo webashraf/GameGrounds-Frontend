@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Search } from "lucide-react";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllBookingsQuery } from "../../../../Redux/api/booking.api";
 import Loader from "../../../shared/Loader/Loader";
 // import "../../../shared/Styles/RangeSlider.css";
@@ -30,17 +29,11 @@ const BookingManagement = () => {
   const [query, setQuery] = useState<IBookingsQuery[]>([
     { field: "limit", value: 5 },
   ]);
-  const [minValue, setMinValue] = useState<number>(25);
-  const [maxValue, setMaxValue] = useState<number>(200);
 
   // Debounce timer
-  let debounceTimer: NodeJS.Timeout;
+  // let debounceTimer: NodeJS.Timeout;
 
-  const {
-    data: bookings,
-    isLoading,
-    isFetching,
-  } = useGetAllBookingsQuery(query);
+  const { data: bookings, isLoading } = useGetAllBookingsQuery(query);
 
   console.log(bookings);
 
@@ -53,35 +46,35 @@ const BookingManagement = () => {
     setBookingsLength(bookings?.dataLength);
   }, [bookings, isLoading]);
 
-  // * Debounced search handling
-  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const valueOfSearch = event.target.value;
+  // // * Debounced search handling
+  // const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const valueOfSearch = event.target.value;
 
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      setQuery([{ field: "searchTerm", value: valueOfSearch }]);
-      setBookingsLength(bookings?.data?.length);
-    }, 300);
-  };
+  //   clearTimeout(debounceTimer);
+  //   debounceTimer = setTimeout(() => {
+  //     setQuery([{ field: "searchTerm", value: valueOfSearch }]);
+  //     setBookingsLength(bookings?.data?.length);
+  //   }, 300);
+  // };
 
-  // * Handle filtering by price
-  const handlePriceFilterInput = (e: {
-    minValue: number;
-    maxValue: number;
-  }) => {
-    setMinValue(e.minValue);
-    setMaxValue(e.maxValue);
-    const newQuery = [
-      { field: "minPrice", value: e.minValue },
-      { field: "maxPrice", value: e.maxValue },
-    ];
+  // // * Handle filtering by price
+  // const handlePriceFilterInput = (e: {
+  //   minValue: number;
+  //   maxValue: number;
+  // }) => {
+  //   setMinValue(e.minValue);
+  //   setMaxValue(e.maxValue);
+  //   const newQuery = [
+  //     { field: "minPrice", value: e.minValue },
+  //     { field: "maxPrice", value: e.maxValue },
+  //   ];
 
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      setQuery(newQuery);
-      setBookingsLength(bookings?.data?.length);
-    }, 300);
-  };
+  //   clearTimeout(debounceTimer);
+  //   debounceTimer = setTimeout(() => {
+  //     setQuery(newQuery);
+  //     setBookingsLength(bookings?.data?.length);
+  //   }, 300);
+  // };
 
   // * handle pagination
   const handlePageChange = (page: number) => {
@@ -107,7 +100,7 @@ const BookingManagement = () => {
         </h2>
         {/* Search and filter */}
         <div className="flex justify-between  relative items-center mb-2">
-          <div className="relative ">
+          {/* <div className="relative ">
             <input
               placeholder="Search..."
               className="input shadow-lg focus:border-2 border-gray-300 px-5 py-3 rounded-xl w-56 transition-all focus:w-64 outline-none"
@@ -117,7 +110,7 @@ const BookingManagement = () => {
             />
 
             <Search className="size-6 absolute top-3 right-3 text-gray-500 cursor-pointer" />
-          </div>
+          </div> */}
 
           {/* <div className="w-[300px] shadow-xl shadow-black/10 rounded-md p-3">
             <h4 className="pb-2">Filter By Price:</h4>

@@ -28,7 +28,6 @@ const FacilitiesUpdate = () => {
 
   const {
     data: facilitiesData,
-    isFetching,
     isLoading,
   } = useGetFacilitiesQuery(query);
   const [facilitiesLength, setFacilitiesLength] = useState(

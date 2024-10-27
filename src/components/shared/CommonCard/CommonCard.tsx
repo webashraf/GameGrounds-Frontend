@@ -29,7 +29,12 @@ const CommonCard = ({ item }: any) => {
             Price: ${item.pricePerHour}
           </p>
         </div>
-        <NavLink to={`/single-facility/${item._id}`}>
+        {/* <NavLink to={`/single-facility/${item._id}`}>
+          <Button className="hover:  text-white mt-14 p-2 px-6 absolute bottom-5 left-6">
+            View Details
+          </Button>
+        </NavLink> */}
+        <NavLink to={`/booking`}>
           <Button className="hover:  text-white mt-14 p-2 px-6 absolute bottom-5 left-6">
             View Details
           </Button>

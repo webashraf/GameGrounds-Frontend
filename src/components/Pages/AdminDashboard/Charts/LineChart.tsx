@@ -12,8 +12,8 @@ import {
 import { useGetAllBookingsQuery } from "../../../../Redux/api/booking.api";
 import Loader from "../../../shared/Loader/Loader";
 
-const ComposedChartData = () => {
-  const { data: bookings, isFetching, isLoading } = useGetAllBookingsQuery([]);
+const LineChartAdminDashboard = () => {
+  const { data: bookings, isLoading } = useGetAllBookingsQuery([]);
 
   const groupedBookings = bookings?.data.reduce((acc: any, booking: any) => {
     const { date, payableAmount, user, facility } = booking;
@@ -88,4 +88,4 @@ const ComposedChartData = () => {
   );
 };
 
-export default ComposedChartData;
+export default LineChartAdminDashboard;

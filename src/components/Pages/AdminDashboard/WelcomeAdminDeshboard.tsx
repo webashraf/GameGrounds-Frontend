@@ -8,7 +8,7 @@ import { useGetFacilitiesQuery } from "../../../Redux/api/facilities.api";
 import { useToken } from "../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
-import ComposedChartData from "./Charts/ComposedChart";
+import LineChartAdminDashboard from "./Charts/LineChart";
 
 const WelcomeAdminDashboard = () => {
   const { data: userData } = useGetUserQuery([]);
@@ -128,7 +128,7 @@ const WelcomeAdminDashboard = () => {
         </div>
         <div className="mt-10 bg-zinc-200 p-5">
           <h4 className="text-2xl mb-5">Bookings Overview</h4>
-          <ComposedChartData />
+          <LineChartAdminDashboard />
         </div>
       </div>
     </div>

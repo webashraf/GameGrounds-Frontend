@@ -22,15 +22,6 @@ import {
 } from "../../../ui/alert-dialog";
 import { Button } from "../../../ui/button";
 import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "../../../ui/pagination";
-import {
   Table,
   TableBody,
   TableCell,
@@ -240,7 +231,7 @@ const MyBookings = () => {
               ))}
           </TableBody>
         </Table>
-        <div>
+        {/* <div>
           <Pagination>
             <PaginationContent>
               <PaginationItem>
@@ -265,7 +256,7 @@ const MyBookings = () => {
               </PaginationItem>
             </PaginationContent>
           </Pagination>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -181,7 +181,7 @@ const UserDashboardLayout = () => {
                   <BookImageIcon />
                   My Booking
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                   to="/user/payment-history"
                   className={({ isActive }) =>
                     `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
@@ -206,7 +206,7 @@ const UserDashboardLayout = () => {
                 >
                   <BookImageIcon />
                   Feedbacks
-                </NavLink>
+                </NavLink> */}
               </div>
             </div>
           )}

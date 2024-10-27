@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetFacilitiesQuery } from "../../../../Redux/api/baseApi";
+import { useGetFacilitiesQuery } from "../../../../Redux/api/facilities.api";
 import { TFacility } from "../../../../types/gloval.types";
 
 const FacilitySelect = ({ setFacility }: any) => {
@@ -15,7 +15,6 @@ const FacilitySelect = ({ setFacility }: any) => {
     );
 
     setFacility({ ...matchedFacility });
-
   };
   return (
     <div className=" text-left ">

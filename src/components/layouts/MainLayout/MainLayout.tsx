@@ -65,12 +65,18 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="max-w-full lg:max-w-[1920px] mx-auto w-full">
-      <div ref={container} className="relative overflow-x-hidden">
+    <div className="max-w-full  mx-auto w-full">
+      <div
+        ref={container}
+        className="relative overflow-x-hidden max-w-full lg:max-w-[1920px] mx-auto w-full"
+      >
         {/* Desktop Navbar */}
-        <div className="nav hidden lg:block fixed w-full lg:w-[1920px] mx-auto top-0 left-0 right-0 z-50">
+        <div className="nav hidden lg:block fixed w-full  mx-auto top-0 left-0 right-0 z-50">
           <div className="m-nav w-full  h-[60px] absolute bg-[#00000084] backdrop-blur-lg -z-20"></div>
-          <Navbar />
+          <div className="lg:w-[1920px] mx-auto">
+            {" "}
+            <Navbar />
+          </div>
         </div>
         {/* Mobile Navbar */}
         <div className="lg:hidden md:block relative  z-50">
@@ -93,7 +99,6 @@ const MainLayout = () => {
         <div className=" mx-auto">
           <Outlet />
         </div>
-        <Footer />
 
         {/* Scroll to Top Button */}
         {showScrollButton && (
@@ -105,6 +110,7 @@ const MainLayout = () => {
           </button>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

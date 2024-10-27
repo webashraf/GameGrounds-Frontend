@@ -79,21 +79,21 @@ const Login = () => {
               experience.
             </span>
             <span className="flex gap-2">
-              <Button
+              <span
                 className=" rounded-lg text-sm py-1 h-7"
-                variant={"outline"}
+                // variant={"outline"}
                 onClick={() =>
                   setLoginCredentials({
                     email: "ali@gmail.com",
-                    password: "ali@gmail.com",
+                    password: "123456",
                   })
                 }
               >
                 User Credentials
-              </Button>
-              <Button
+              </span>
+              <span
                 className=" rounded-lg text-sm py-1 h-7"
-                variant={"outline"}
+                // variant={"outline"}
                 onClick={() =>
                   setLoginCredentials({
                     email: "admin@gmail.com",
@@ -102,7 +102,7 @@ const Login = () => {
                 }
               >
                 Admin Credentials
-              </Button>
+              </span>
             </span>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className=" w-full">
