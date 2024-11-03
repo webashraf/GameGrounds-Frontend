@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import moment from "moment";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useCreateABookMutation } from "../../../Redux/api/booking.api";
-import { useGetFacilitiesQuery } from "../../../Redux/api/facilities.api";
 import { useToken } from "../../../Redux/feature/authSlice";
 import { useAppSelector } from "../../../Redux/hook";
-import { TFacility } from "../../../types/gloval.types";
 import { verifyToken } from "../../../utils/verifyToken";
 import { Button } from "../../ui/button";
 
@@ -18,15 +17,17 @@ interface IBookingFormInput {
 }
 
 const BookingFormDirect = ({
-  dateForBook,
+  dateForBook = moment(new Date()).format("YYYY-MM-DD"),
   facilityId,
+  amount,
 }: {
   dateForBook: string;
   facilityId: string;
+  amount: number;
 }) => {
-  const { data: facilities, error: facilitiesFetchError } =
-    useGetFacilitiesQuery(undefined);
-  // console.log(dateForBook, facilityId);
+  // const { data: facilities, error: facilitiesFetchError } =
+  //   useGetFacilitiesQuery(undefined);
+  console.log(dateForBook, facilityId);
   const [createABook] = useCreateABookMutation();
 
   const {
@@ -42,9 +43,6 @@ const BookingFormDirect = ({
 
   if (token) {
     user = verifyToken(token);
-  }
-  if (facilitiesFetchError) {
-    toast.error("Failed to fetch facilities.");
   }
 
   // * Handle Booking
@@ -63,9 +61,7 @@ const BookingFormDirect = ({
 
     setProcessBook("Processing...");
     setBookError("");
-    const amount = facilities?.data?.find(
-      (facility: TFacility) => facility._id === data.facility
-    )?.pricePerHour;
+
     console.log("Data", data);
     const bookingInfo = {
       ...data,
@@ -73,6 +69,7 @@ const BookingFormDirect = ({
       facility: facilityId,
       payableAmount: amount,
     };
+    console.log(bookingInfo);
     try {
       const res = await createABook(bookingInfo).unwrap();
       console.log(res);
@@ -108,130 +105,74 @@ const BookingFormDirect = ({
   });
 
   return (
-    <div className="">
+    <div className="w-full">
       <form onSubmit={handleSubmit(handleBooking)}>
-        {/* <div className="mb-3">
-          <Controller
-            name="date"
-            control={control}
-            defaultValue=""
-            rules={{ required: "Date is required" }}
-            render={({ field }) => (
-              <>
-                <input
-                  {...field}
-                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.date ? "border-red-500" : ""
-                  }`}
-                  type="date"
-                />
-                {errors.date && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.date.message}
-                  </p>
-                )}
-              </>
-            )}
-          />
-        </div>
-
-        <div className="mb-3">
-          <Controller
-            name="facility"
-            control={control}
-            defaultValue=""
-            rules={{ required: "Facility is required" }}
-            render={({ field }) => (
-              <>
-                <select
-                  {...field}
-                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.facility ? "border-red-500" : ""
-                  }`}
-                >
-                  <option value="" disabled>
-                    Select a facility
-                  </option>
-                  {facilities?.data.map((facility: TFacilitySelect) => (
-                    <option key={facility._id} value={facility._id}>
-                      {facility.name}
+        <div className="flex gap-5">
+          <div className="mb-3 w-full">
+            <Controller
+              name="startTime"
+              control={control}
+              defaultValue=""
+              rules={{ required: "Start time is required" }}
+              render={({ field }) => (
+                <>
+                  <select
+                    {...field}
+                    className={`w-full px-3 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-zinc-500 ${
+                      errors.startTime ? "border-red-500" : ""
+                    }`}
+                  >
+                    <option value="" disabled>
+                      Select Start Time
                     </option>
-                  ))}
-                </select>
-                {errors.facility && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.facility.message}
-                  </p>
-                )}
-              </>
-            )}
-          />
-        </div> */}
+                    {timeOptions.map((time) => (
+                      <option key={time} value={time}>
+                        {time}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.startTime && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.startTime.message}
+                    </p>
+                  )}
+                </>
+              )}
+            />
+          </div>
 
-        <div className="mb-3">
-          <Controller
-            name="startTime"
-            control={control}
-            defaultValue=""
-            rules={{ required: "Start time is required" }}
-            render={({ field }) => (
-              <>
-                <select
-                  {...field}
-                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.startTime ? "border-red-500" : ""
-                  }`}
-                >
-                  <option value="" disabled>
-                    Select Start Time
-                  </option>
-                  {timeOptions.map((time) => (
-                    <option key={time} value={time}>
-                      {time}
+          <div className="mb-3 w-full">
+            <Controller
+              name="endTime"
+              control={control}
+              defaultValue=""
+              rules={{ required: "End time is required" }}
+              render={({ field }) => (
+                <>
+                  <select
+                    {...field}
+                    className={`w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-zinc-500 ${
+                      errors.endTime ? "border-red-500" : ""
+                    }`}
+                  >
+                    <option value="" disabled>
+                      Select End Time
                     </option>
-                  ))}
-                </select>
-                {errors.startTime && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.startTime.message}
-                  </p>
-                )}
-              </>
-            )}
-          />
-        </div>
-
-        <div className="mb-3">
-          <Controller
-            name="endTime"
-            control={control}
-            defaultValue=""
-            rules={{ required: "End time is required" }}
-            render={({ field }) => (
-              <>
-                <select
-                  {...field}
-                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.endTime ? "border-red-500" : ""
-                  }`}
-                >
-                  <option value="" disabled>
-                    Select End Time
-                  </option>
-                  {timeOptions.map((time) => (
-                    <option key={time} value={time}>
-                      {time}
-                    </option>
-                  ))}
-                </select>
-                {errors.endTime && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.endTime.message}
-                  </p>
-                )}
-              </>
-            )}
-          />
+                    {timeOptions.map((time) => (
+                      <option key={time} value={time}>
+                        {time}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.endTime && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.endTime.message}
+                    </p>
+                  )}
+                </>
+              )}
+            />
+          </div>
         </div>
 
         <Button className="w-full bg-black" type="submit">

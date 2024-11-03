@@ -62,12 +62,13 @@ const BookingForm = () => {
     )?.pricePerHour;
 
     const bookingInfo = { ...data, payableAmount: amount };
+    console.log(bookingInfo);
     try {
       const res = await createABook(bookingInfo).unwrap();
       console.log(res);
       if (res?.success) {
         toast.success("Going to payment page..");
-        // window.location.href = res.data.paymentSession.payment_url;
+        window.location.href = res.data.paymentSession.payment_url;
       } else if (res?.error) {
         setProcessBook("");
         setBookError(
