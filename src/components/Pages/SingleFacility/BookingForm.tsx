@@ -2,13 +2,13 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useCreateABookMutation } from "../../../../Redux/api/booking.api";
-import { useGetFacilitiesQuery } from "../../../../Redux/api/facilities.api";
-import { useToken } from "../../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../../Redux/hook";
-import { TFacility, TFacilitySelect } from "../../../../types/gloval.types";
-import { verifyToken } from "../../../../utils/verifyToken";
-import { Button } from "../../../ui/button";
+import { useCreateABookMutation } from "../../../Redux/api/booking.api";
+import { useGetFacilitiesQuery } from "../../../Redux/api/facilities.api";
+import { useToken } from "../../../Redux/feature/authSlice";
+import { useAppSelector } from "../../../Redux/hook";
+import { TFacility } from "../../../types/gloval.types";
+import { verifyToken } from "../../../utils/verifyToken";
+import { Button } from "../../ui/button";
 
 interface IBookingFormInput {
   date: string;
@@ -17,10 +17,16 @@ interface IBookingFormInput {
   endTime: string;
 }
 
-const BookingForm = () => {
+const BookingFormDirect = ({
+  dateForBook,
+  facilityId,
+}: {
+  dateForBook: string;
+  facilityId: string;
+}) => {
   const { data: facilities, error: facilitiesFetchError } =
     useGetFacilitiesQuery(undefined);
-
+  // console.log(dateForBook, facilityId);
   const [createABook] = useCreateABookMutation();
 
   const {
@@ -60,31 +66,38 @@ const BookingForm = () => {
     const amount = facilities?.data?.find(
       (facility: TFacility) => facility._id === data.facility
     )?.pricePerHour;
-
-    const bookingInfo = { ...data, payableAmount: amount };
+    console.log("Data", data);
+    const bookingInfo = {
+      ...data,
+      date: dateForBook,
+      facility: facilityId,
+      payableAmount: amount,
+    };
     try {
       const res = await createABook(bookingInfo).unwrap();
       console.log(res);
       if (res?.success) {
         toast.success("Going to payment page..");
-        // window.location.href = res.data.paymentSession.payment_url;
+        window.location.href = res?.data?.paymentSession?.payment_url;
+        console.log(res?.data?.paymentSession);
       } else if (res?.error) {
         setProcessBook("");
+        console.log(res?.error);
         setBookError(
-          res.error?.data.message ? res.error?.data.message : "Failed to book"
+          res.error?.data.message ? res.error?.data.message : "Failed to book 1"
         );
         toast.error(
-          res.error?.data.message ? res.error?.data.message : "Failed to book"
+          res.error?.data.message ? res.error?.data.message : "Failed to book 1"
         );
       }
     } catch (err) {
-      console.log(err);
+      console.log("err", err);
       setProcessBook("");
       setBookError(
-        (err as any).status ? (err as any).data.message : "Failed to book"
+        (err as any).status ? (err as any).data.message : "Failed to book 2"
       );
       toast.error(
-        (err as any).status ? (err as any).data.message : "Failed to book"
+        (err as any).status ? (err as any).data.message : "Failed to book 2"
       );
     }
   };
@@ -97,7 +110,7 @@ const BookingForm = () => {
   return (
     <div className="">
       <form onSubmit={handleSubmit(handleBooking)}>
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <Controller
             name="date"
             control={control}
@@ -153,7 +166,7 @@ const BookingForm = () => {
               </>
             )}
           />
-        </div>
+        </div> */}
 
         <div className="mb-3">
           <Controller
@@ -230,4 +243,4 @@ const BookingForm = () => {
   );
 };
 
-export default BookingForm;
+export default BookingFormDirect;
