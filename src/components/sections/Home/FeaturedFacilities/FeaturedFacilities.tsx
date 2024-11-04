@@ -29,7 +29,7 @@ const FeaturedFacilities = () => {
         <LoadingSkeleton />
       ) : (
         <div className="flex flex-col justify-center items-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 lg:gap-28 pb-20 md:pb-28 lg:pb-36 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 lg:gap-28 pb-16 md:pb-20 lg:pb-28 ">
             {facilities?.data?.slice(0, 6).map((item: any) => (
               <CommonCard item={item} key={item._id} />
             ))}

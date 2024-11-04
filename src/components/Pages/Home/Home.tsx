@@ -6,17 +6,17 @@ import HowItsWork from "../../sections/Home/HowItsWork/HowItsWork";
 
 import OurFields from "../../sections/Home/OurFields/OurFields";
 import { SocialLink } from "../../sections/Home/SocialLink/SocialLink";
-import Testimonial from "../../sections/Home/Testimonial/Testimonial";
+import { MarqueeTestimonial } from "../../sections/Home/Testimonial/marque-testimonial";
 
 const Home = () => {
-
   return (
     <>
       <Hero />
       <div className="lg:px-20 px-5">
         <FeaturedFacilities />
         <HowItsWork />
-        <Testimonial />
+        {/* <Testimonial /> */}
+        <MarqueeTestimonial />
         <OurFields />
         <HeroParallaxGallery />
         <AdvertiseMent />
