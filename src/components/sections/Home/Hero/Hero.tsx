@@ -2,6 +2,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
+import heroBgVideo from "../../../../assets/hero/hero-bg-video.mp4"; // Changed to mp4
 import { Button } from "../../../ui/button";
 
 const Hero = () => {
@@ -20,15 +21,12 @@ const Hero = () => {
   return (
     <div className="relative h-[90vh] w-full mb-12 overflow-hidden">
       <video
-        autoPlay
-        muted
-        loop
         className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
       >
-        <source
-          src="https://videocdn.cdnpk.net/videos/59050779-2533-4041-8c58-97caf0139e22/horizontal/previews/clear/large.mp4?token=exp=1730636776~hmac=c4615528dd708fa22b5d0228780c6878e2bd57ddbc1d4892d2fb9fb6c727d6a9"
-          type="video/mp4"
-        />
+        <source src={heroBgVideo} type="video/mp4" /> {/* Updated to mp4 */}
         Your browser does not support the video tag.
       </video>
       <div
@@ -53,7 +51,7 @@ const Hero = () => {
               {items.map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-center mb-2 text-base md:text-lg px-5"
+                  className="flex items-center mb-2 text-[13px] px-5 "
                 >
                   <FontAwesomeIcon
                     icon={faCheck}
