@@ -30,7 +30,7 @@ const WelcomeAdminDashboard = () => {
   const { data: userInfo } = useGetSingleUserQuery(user?.email);
 
   return (
-    <div className="flex gap-5 items-end justify-center flex-col px-10 lg:px-5 lg:max-h-[95vh] overflow-y-scroll ">
+    <div className="flex gap-5 items-end justify-center lg:flex-row flex-col px-10 lg:px-5 lg:max-h-[95vh] overflow-y-scroll ">
       <div className="w-full max-w-4xl p-5 shadow-lg rounded-lg mt-20 ">
         <h1 className="text-4xl font-bold mb-4">Welcome, Admin!</h1>
         <p className="text-lg text-gray-700 mb-8">

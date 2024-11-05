@@ -5,17 +5,26 @@ import {
   FilePlus,
   FileSliders,
   Home,
+  LayoutDashboard,
+  LogOut,
   ShieldPlus,
   SquareKanban,
 } from "lucide-react";
-import { NavLink, Outlet } from "react-router-dom";
-import { useToken } from "../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../Redux/hook";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { logout, useToken } from "../../../Redux/feature/authSlice";
+import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
 import { DashboardMobileNav } from "../../shared/DashboardMobileNav/DashboardMobileNav";
 
 const UserDashboardLayout = () => {
   const token = useAppSelector(useToken);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   let user: any;
 
@@ -58,7 +67,7 @@ const UserDashboardLayout = () => {
                   }`
                 }
               >
-                <BookImageIcon />
+                <LayoutDashboard />
                 My Dashboard
               </NavLink>
               <>
@@ -126,6 +135,13 @@ const UserDashboardLayout = () => {
                 <ShieldPlus />
                 Add Admin
               </NavLink>
+              <div
+                onClick={() => handleLogOut()}
+                className={`uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 text-red-500  hover:bg-white/20 hover:backdrop-blur-lg`}
+              >
+                <LogOut />
+                Log Out
+              </div>
             </div>
           ) : (
             <div className="hidden lg:block">
@@ -165,7 +181,7 @@ const UserDashboardLayout = () => {
                     }`
                   }
                 >
-                  <BookImageIcon />
+                  <LayoutDashboard />
                   My Dashboard
                 </NavLink>
                 <NavLink
@@ -181,6 +197,13 @@ const UserDashboardLayout = () => {
                   <BookImageIcon />
                   My Booking
                 </NavLink>
+                <div
+                  onClick={() => handleLogOut()}
+                  className={`uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 text-red-500  hover:bg-white/20 hover:backdrop-blur-lg`}
+                >
+                  <LogOut />
+                  Log Out
+                </div>
                 {/* <NavLink
                   to="/user/payment-history"
                   className={({ isActive }) =>

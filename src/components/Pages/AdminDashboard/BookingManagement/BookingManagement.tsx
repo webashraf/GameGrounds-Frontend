@@ -1,9 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useState } from "react";
-import { useGetAllBookingsQuery } from "../../../../Redux/api/booking.api";
+import {
+  useCancelBookingMutation,
+  useGetAllBookingsQuery,
+} from "../../../../Redux/api/booking.api";
 import Loader from "../../../shared/Loader/Loader";
 // import "../../../shared/Styles/RangeSlider.css";
+import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../../../ui/alert-dialog";
+import { Button } from "../../../ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -46,36 +62,6 @@ const BookingManagement = () => {
     setBookingsLength(bookings?.dataLength);
   }, [bookings, isLoading]);
 
-  // // * Debounced search handling
-  // const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const valueOfSearch = event.target.value;
-
-  //   clearTimeout(debounceTimer);
-  //   debounceTimer = setTimeout(() => {
-  //     setQuery([{ field: "searchTerm", value: valueOfSearch }]);
-  //     setBookingsLength(bookings?.data?.length);
-  //   }, 300);
-  // };
-
-  // // * Handle filtering by price
-  // const handlePriceFilterInput = (e: {
-  //   minValue: number;
-  //   maxValue: number;
-  // }) => {
-  //   setMinValue(e.minValue);
-  //   setMaxValue(e.maxValue);
-  //   const newQuery = [
-  //     { field: "minPrice", value: e.minValue },
-  //     { field: "maxPrice", value: e.maxValue },
-  //   ];
-
-  //   clearTimeout(debounceTimer);
-  //   debounceTimer = setTimeout(() => {
-  //     setQuery(newQuery);
-  //     setBookingsLength(bookings?.data?.length);
-  //   }, 300);
-  // };
-
   // * handle pagination
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -83,6 +69,16 @@ const BookingManagement = () => {
       { field: "page", value: page },
       { field: "limit", value: limit },
     ]);
+  };
+  const [cancelBooking] = useCancelBookingMutation();
+
+  const handleCancelBooking = async (id: string) => {
+    const res = await cancelBooking(id).unwrap();
+    if (res?.success) {
+      toast.success(res.message);
+    } else {
+      toast.error("Failed to cancel book");
+    }
   };
 
   if (isLoading) {
@@ -99,40 +95,7 @@ const BookingManagement = () => {
           Booking Management
         </h2>
         {/* Search and filter */}
-        <div className="flex justify-between  relative items-center mb-2">
-          {/* <div className="relative ">
-            <input
-              placeholder="Search..."
-              className="input shadow-lg focus:border-2 border-gray-300 px-5 py-3 rounded-xl w-56 transition-all focus:w-64 outline-none"
-              name="search"
-              type="text"
-              onChange={handleSearchChange}
-            />
-
-            <Search className="size-6 absolute top-3 right-3 text-gray-500 cursor-pointer" />
-          </div> */}
-
-          {/* <div className="w-[300px] shadow-xl shadow-black/10 rounded-md p-3">
-            <h4 className="pb-2">Filter By Price:</h4>
-            <MultiRangeSlider
-              className="shadow-lg shadow-orange-700"
-              min={0}
-              max={500}
-              baseClassName=""
-              subSteps={true}
-              step={10}
-              barInnerColor="#101010"
-              ruler={false}
-              label={false}
-              minValue={minValue}
-              maxValue={maxValue}
-              onChange={(e) => handlePriceFilterInput(e)}
-            />
-            <div className="space-x-10 pt-2">
-              min: {minValue} &nbsp; max: {maxValue}
-            </div>
-          </div> */}
-        </div>
+        <div className="flex justify-between  relative items-center mb-2"></div>
         <div className="lg:h-auto h-[60vh] overflow-auto custom-scrollbar ">
           <Table className="">
             <TableHeader className="h-[00px] bg-black/80 shadow-2xl backdrop-blur-lg rounded-md ">
@@ -145,6 +108,7 @@ const BookingManagement = () => {
                 <TableHead className="text-white">Date</TableHead>
                 <TableHead className="text-white">Start Time</TableHead>
                 <TableHead className=" text-white ">End Time</TableHead>
+                <TableHead className=" text-white ">Action</TableHead>
               </TableRow>
             </TableHeader>
 
@@ -172,6 +136,135 @@ const BookingManagement = () => {
                     <TableCell>{item?.date}</TableCell>
                     <TableCell>${item?.startTime}</TableCell>
                     <TableCell>${item?.endTime}</TableCell>
+                    <TableCell className="text-right flex gap-2 items-center justify-center">
+                      {/* Delete Button  */}
+                      <AlertDialog>
+                        <AlertDialogTrigger>
+                          <div>
+                            {/* <Trash2 /> */}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="#ff0000"
+                              strokeWidth="1.25"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="lucide lucide-trash-2"
+                            >
+                              <path d="M3 6h18" />
+                              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                              <line x1="10" x2="10" y1="11" y2="17" />
+                              <line x1="14" x2="14" y1="11" y2="17" />
+                            </svg>
+                          </div>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Are you absolutely sure to delete this item?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will
+                              permanently delete this item and remove your data
+                              from our servers.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              className="btn-2 px-5 "
+                              onClick={() => handleCancelBooking(item._id)}
+                            >
+                              Continue
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+
+                      <div className="">
+                        <AlertDialog>
+                          <AlertDialogTrigger>
+                            <div>
+                              <Button>Details</Button>
+                            </div>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle></AlertDialogTitle>
+                              <AlertDialogDescription>
+                                <div className="bg-gray-100 font-sans leading-normal tracking-normal">
+                                  <div className="max-w-4xl mx-auto my-10 p-6 bg-white rounded-lg shadow-lg">
+                                    <h1 className="text-3xl font-semibold text-gray-800 mb-6">
+                                      Booking Details
+                                    </h1>
+
+                                    <div className="bg-gray-50 overflow-hidden rounded-lg shadow-md  mx-a">
+                                      <img
+                                        src={item.facility.photoUrl}
+                                        className="object-bottom h-[200px]  w-full object-cover"
+                                        alt=""
+                                      />
+                                    </div>
+                                    <div className=" gap-6 mb-8">
+                                      <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+                                        <h2 className="text-xl font-semibold text-gray-500">
+                                          {item.facility.name}
+                                        </h2>
+                                        <p className="mb-2 text-gray-500">
+                                          {item.facility.description}
+                                        </p>
+                                        <p className="text-gray-500">
+                                          <span className="font-bold">
+                                            Amount:{" "}
+                                          </span>
+                                          ${item.payableAmount}
+                                        </p>
+                                        <p className="text-gray-500">
+                                          <span className="font-bold">
+                                            Location:{" "}
+                                          </span>
+                                          {item.facility.location}
+                                        </p>
+
+                                        <p className="text-gray-500">
+                                          {" "}
+                                          <span className="font-bold">
+                                            Booking Date:{" "}
+                                          </span>
+                                          {item.date}
+                                        </p>
+                                        <p className="text-gray-500">
+                                          <span className="font-bold">
+                                            Start Time:{" "}
+                                          </span>
+                                          {item.startTime}
+                                        </p>
+                                        <p className="text-gray-500">
+                                          <span className="font-bold">
+                                            End Time:{" "}
+                                          </span>
+                                          {item.endTime}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              {/* <AlertDialogCancel>Cancel</AlertDialogCancel> */}
+                              <AlertDialogAction className="btn-2 px-5">
+                                Continue
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>

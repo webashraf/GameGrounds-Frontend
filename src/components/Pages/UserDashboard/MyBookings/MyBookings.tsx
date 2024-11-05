@@ -145,9 +145,7 @@ const MyBookings = () => {
                     </AlertDialog>
 
                     <div className="">
-                      {/* <NavLink to="/user/details-booking">
-                        <Button>Details</Button>
-                      </NavLink> */}
+                   
                       <AlertDialog>
                         <AlertDialogTrigger>
                           <div>
