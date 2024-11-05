@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
 
 import { addDays, format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
@@ -19,7 +18,6 @@ import {
 
 export function DatePickerWithPresets({ setDateForSlot }: any) {
   const [date, setDate] = React.useState<Date>();
-  //   console.log(date);
 
   const formattedDate = date && moment(date).format("YYYY-MM-DD");
 
