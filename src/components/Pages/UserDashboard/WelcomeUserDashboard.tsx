@@ -20,7 +20,7 @@ const WelcomeUserDashboard = () => {
 
   return (
     <div className="flex flex-col lg:flex-row lg:items-end justify-center px-5">
-      <div className="lg:w-[50%] w-full p-8 text-center bg-white shadow-lg rounded-lg mt-20">
+      <div className="lg:w-[50%] w-full p-8 text-center bg-white  shadow-lg rounded-lg mt-20">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-4">
           Welcome, {userInfo?.data.name}!
         </h1>
