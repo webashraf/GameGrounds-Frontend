@@ -22,7 +22,7 @@ interface LinkBoxProps {
 
 export const SocialLink: FC = () => {
   return (
-    <div className="section-padding bg-neutral-50 px-4 mt-24">
+    <div className="section-padding bg-white px-4">
       <div className="mx-auto max-w-7xl">
         <ClipPathLinks />
       </div>
@@ -32,7 +32,7 @@ export const SocialLink: FC = () => {
 
 const ClipPathLinks: FC = () => {
   return (
-    <div className="">
+    <div className="pt-8 pb-10">
       <CommonHeading
         title="Let’s Get Social"
         subTitle="Stay Updated with Our Social Feeds"

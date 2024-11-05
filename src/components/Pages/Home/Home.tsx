@@ -15,13 +15,13 @@ const Home = () => {
       <div className="lg:px-20 px-5">
         <FeaturedFacilities />
         <HowItsWork />
-        {/* <Testimonial /> */}
-        <MarqueeTestimonial />
-        <OurFields />
-        <HeroParallaxGallery />
-        <AdvertiseMent />
-        <SocialLink />
       </div>
+      {/* <Testimonial /> */}
+      <MarqueeTestimonial />
+      <OurFields />
+      <HeroParallaxGallery />
+      <AdvertiseMent />
+      <SocialLink />
     </>
   );
 };

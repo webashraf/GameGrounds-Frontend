@@ -55,7 +55,7 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="h-[250vh] py-40 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="h-[250vh] py-4 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d] bg-zinc-500/30 backdrop-blur-lg"
     >
       <Header />
       <motion.div
@@ -65,9 +65,9 @@ export const HeroParallax = ({
           translateY,
           opacity,
         }}
-        className=""
+        className="bg-white pt-10 sticky"
       >
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20 ">
           {firstRow?.map((product) => (
             <ProductCard
               product={product}
@@ -81,6 +81,15 @@ export const HeroParallax = ({
             <ProductCard
               product={product}
               translate={translateXReverse}
+              key={product.name}
+            />
+          ))}
+        </motion.div>
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20 ">
+          {firstRow?.map((product) => (
+            <ProductCard
+              product={product}
+              translate={translateX}
               key={product.name}
             />
           ))}
@@ -101,7 +110,7 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-    <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0">
+    <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 ">
       <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
         Explore our top fields
       </h1>
@@ -147,7 +156,7 @@ export const ProductCard = ({
           className="object-cover size-[600px] object-left-top absolute h-full w-full inset-0"
         />
       </Link>
-      <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
+      <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black/20 backdrop-hue-rotate-30 pointer-events-none"></div>
       <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
         {product.name}
       </h2>

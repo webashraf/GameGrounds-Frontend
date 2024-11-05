@@ -134,16 +134,62 @@ const ShuffleGrid: React.FC = () => {
 
 const OurFields: React.FC = () => {
   return (
-    <section className="w-full px- section-padding mb-20 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
+    <section className="w-full px- section-padding mb-20 grid grid-cols-1 lg:grid-cols-2 items-center items-c gap-14 max-w-[90%] mx-auto">
       <div>
         <h3 className="text-4xl md:text-6xl uppercase">
           Sports Field Showcase
         </h3>
-        <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
+        <p className="text-base md:text-lg text-slate-700 mb-2 md:mb-4">
           Take a visual journey through our extensive range of sports
           facilities, designed to accommodate a wide variety of sports and
           events with excellence.
         </p>
+        <ul className="mb-4 md:mb-6">
+          <li>
+            <strong> ✨State-of-the-Art Fields</strong>: Carefully maintained
+            and designed fields, adaptable for soccer, rugby, field hockey, and
+            more.
+          </li>
+          <li>
+            <strong> ✨Advanced Turf Technology</strong>: High-quality, durable
+            turf ensures optimal performance and safety for athletes.
+          </li>
+          <li>
+            <strong> ✨Multi-Sport Courts</strong>: Versatile courts available
+            for basketball, volleyball, tennis, and badminton.
+          </li>
+          <li>
+            <strong> ✨Spectator Seating</strong>: Comfortable, spacious seating
+            areas to enhance the viewing experience for fans and families.
+          </li>
+          <li>
+            <strong> ✨Modern Lighting Systems</strong>: Bright,
+            energy-efficient LED lighting for clear visibility during night
+            games.
+          </li>
+          <li>
+            <strong>✨Training and Practice Areas</strong>: Dedicated zones for
+            warm-ups, drills, and individual or team practice sessions.
+          </li>
+          <li>
+            <strong>✨On-Site Medical Support</strong>: First-aid and medical
+            assistance available to ensure athlete safety during events.
+          </li>
+          <li>
+            <strong>✨Event Support Services</strong>: Full-service event
+            management to help organize tournaments, matches, and special
+            events.
+          </li>
+          <li>
+            <strong>✨Weather-Resistant Structures</strong>: Sheltered areas to
+            protect players and spectators from adverse weather conditions.
+          </li>
+          <li>
+            <strong>✨Advanced Scoreboards</strong>: Digital scoreboards and
+            display screens for live updates and real-time event information.
+          </li>
+        </ul>
+
         <NavLink to="/facilities">
           <Button className=" text-white font-medium py-2 px-4  transition-all active:scale-95">
             Explore more

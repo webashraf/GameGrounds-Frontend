@@ -65,7 +65,7 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="max-w-full  mx-auto w-full">
+    <div className="max-w-full  mx-auto w-full bg-white">
       <div
         ref={container}
         className="relative overflow-x-hidden max-w-full lg:max-w-[1920px] mx-auto w-full"
