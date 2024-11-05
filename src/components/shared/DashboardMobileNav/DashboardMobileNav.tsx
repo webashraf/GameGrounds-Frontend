@@ -6,14 +6,15 @@ import {
   FilePlus,
   FileSliders,
   Home,
+  LogOut,
   Menu,
   ShieldPlus,
   SquareKanban,
 } from "lucide-react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { useToken } from "../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../Redux/hook";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout, useToken } from "../../../Redux/feature/authSlice";
+import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
 import { verifyToken } from "../../../utils/verifyToken";
 import { Button } from "../../ui/button";
 import {
@@ -37,6 +38,12 @@ export function DashboardMobileNav() {
   const [position, setPosition] = useState("bottom");
 
   const token = useAppSelector(useToken);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   let user: any;
 
@@ -99,9 +106,7 @@ export function DashboardMobileNav() {
               </NavLink>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    className={`bg-transparent flex justify-start gap-4`}
-                  >
+                  <Button className={`bg-transparent flex justify-start gap-4`}>
                     <FileSliders /> Facility Management
                   </Button>
                 </DropdownMenuTrigger>
@@ -170,6 +175,13 @@ export function DashboardMobileNav() {
                 <ShieldPlus />
                 Add Admin
               </NavLink>
+              <div
+                onClick={() => handleLogOut()}
+                className={`px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 hover:bg-white/20 hover:backdrop-blur-lg text-red-500`}
+              >
+                <LogOut />
+                Log Out
+              </div>
             </div>
           ) : (
             <div className="  w-[300px h-screen p-5">
@@ -216,6 +228,13 @@ export function DashboardMobileNav() {
                     <BookImageIcon />
                     My Booking
                   </NavLink>
+                  <div
+                    onClick={() => handleLogOut()}
+                    className={`px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 hover:bg-white/20 hover:backdrop-blur-lg text-red-500`}
+                  >
+                    <LogOut />
+                    Log Out
+                  </div>
                 </div>
               </div>
             </div>
