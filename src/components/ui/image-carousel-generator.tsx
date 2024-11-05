@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
@@ -29,7 +28,7 @@ export const ImagesSlider = ({
       prevIndex + 1 === images.length ? 0 : prevIndex + 1
     );
   };
-
+  console.log(loading);
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex - 1 < 0 ? images.length - 1 : prevIndex - 1
@@ -126,7 +125,7 @@ export const ImagesSlider = ({
         perspective: "1000px",
       }}
     >
-      {areImagesLoaded }
+      {areImagesLoaded}
       {areImagesLoaded && overlay && (
         <div
           className={cn("absolute inset-0 bg-black/10 z-40", overlayClassName)}
