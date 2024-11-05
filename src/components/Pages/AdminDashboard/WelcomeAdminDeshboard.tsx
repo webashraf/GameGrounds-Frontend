@@ -30,7 +30,7 @@ const WelcomeAdminDashboard = () => {
   const { data: userInfo } = useGetSingleUserQuery(user?.email);
 
   return (
-    <div className="flex gap-5 items-end justify-center flex-col px-10 lg:px-5 max-h-[95vh] overflow-y-scroll">
+    <div className="flex gap-5 items-end justify-center flex-col px-10 lg:px-5 lg:max-h-[95vh] overflow-y-scroll ">
       <div className="w-full max-w-4xl p-5 shadow-lg rounded-lg mt-20 ">
         <h1 className="text-4xl font-bold mb-4">Welcome, Admin!</h1>
         <p className="text-lg text-gray-700 mb-8">
@@ -111,8 +111,8 @@ const WelcomeAdminDashboard = () => {
           </div>
         </div>
       </div>
-      <div>
-        <div className="flex gap-5 items-center justify-center">
+      <div className="lg:block hidden  ">
+        <div className="flex gap-5 items-center justify-center flex-wrap">
           <div className="size-56 text-2xl bg-purple-100 flex flex-col items-center justify-center">
             <h2 className="text-4xl font-mono">{userData?.data?.length}</h2>
             Total User
@@ -126,7 +126,7 @@ const WelcomeAdminDashboard = () => {
             Total Bookings
           </div>
         </div>
-        <div className="mt-10 bg-zinc-200 p-5">
+        <div className="mt-10 bg-zinc-200 p-5 md:block hidden">
           <h4 className="text-2xl mb-5">Bookings Overview</h4>
           <LineChartAdminDashboard />
         </div>

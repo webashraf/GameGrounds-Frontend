@@ -57,15 +57,15 @@ const SingleFacility = () => {
           <Loader />
         </div>
       ) : (
-        <div className="w-[50 flex mx-auto rounded-lg lg:px-20">
-          <div className="lg:w-1/2 w-[100%]">
+        <div className=" flex flex-col md:flex-row mx-auto rounded-lg lg:px-20">
+          <div className="md:w-1/2 w-[100%]">
             <img
               src={facility?.data?.photoUrl}
               alt={facility?.data?.name}
               className="w-full h-full object-cover rounded-lg border-b-2 border-gray-200"
             />
           </div>
-          <div className="p-6 space-y-4 w-1/2">
+          <div className="p-6 space-y-4 md:w-1/2">
             <h1 className="text-4xl uppercase font-bold mb-2">
               {facility?.data?.name}
             </h1>
@@ -85,7 +85,7 @@ const SingleFacility = () => {
               per hour
             </p>
 
-            <div className="w-[50%] overflow-hidden">
+            <div className="lg:w-[50%] overflow-hidden">
               <div className="flex flex-col mb-2">
                 <label htmlFor="slotDate" className="uppercase">
                   Date for available slot

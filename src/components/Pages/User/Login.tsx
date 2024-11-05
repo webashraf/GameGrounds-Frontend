@@ -70,8 +70,8 @@ const Login = () => {
   return (
     <>
       <CommonHero title="Login" />
-      <div className="lg:w-[500px] mx-auto pt-10 pb-20 lg:px-0 md:px-36 px-5 mt-20 ">
-        <div className="form_container w-[80%] mx-auto">
+      <div className="lg:w-[550px]  mx-auto pt-10 pb-20 lg:px-0 md:px-36 px-5 mt-20 ">
+        <div className="form_container lg:w-[80%] mx-auto">
           <div className="title_container px-">
             <p className="title">Login to your Account</p>
             <span className="subtitle">

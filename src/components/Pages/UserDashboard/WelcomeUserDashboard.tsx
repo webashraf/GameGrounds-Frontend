@@ -19,8 +19,8 @@ const WelcomeUserDashboard = () => {
   const { data: userInfo } = useGetSingleUserQuery(user?.email);
 
   return (
-    <div className="flex items-end justify-center px-5">
-      <div className="lg:w-[50%] max-w-4xl p-8 text-center bg-white shadow-lg rounded-lg mt-20">
+    <div className="flex flex-col lg:flex-row lg:items-end justify-center px-5">
+      <div className="lg:w-[50%] w-full p-8 text-center bg-white shadow-lg rounded-lg mt-20">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-4">
           Welcome, {userInfo?.data.name}!
         </h1>
@@ -75,7 +75,7 @@ const WelcomeUserDashboard = () => {
           </div>
         </div>
       </div>
-      <div className="w-[50%] bg-zinc-200 mx-5 rounded-md">
+      <div className="lg:w-[50%] w-full lg:block hidden bg-zinc-200 mx-5 rounded-md">
         <h4 className="p-5 text-4xl">Booking Overview</h4>
         <LineChartUserDashboard />
       </div>
