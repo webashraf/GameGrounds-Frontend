@@ -56,7 +56,7 @@ export function DashboardMobileNav() {
       <Sheet key="left">
         <SheetTrigger asChild>
           <Button variant="outline" className=" ">
-            <Menu />
+            <Menu size={30} />
           </Button>
         </SheetTrigger>
         <SheetContent
