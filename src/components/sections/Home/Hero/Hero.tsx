@@ -19,7 +19,7 @@ const Hero = () => {
   const hoverRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative h-[90vh] w-full mb-12 overflow-hidden">
+    <div className="relative lg:h-[90vh] h-auto lg:py-0 py-10 w-full mb-12 overflow-hidden">
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
         autoPlay
