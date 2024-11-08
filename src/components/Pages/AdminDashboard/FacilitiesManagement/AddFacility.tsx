@@ -52,18 +52,18 @@ const AddFacility = () => {
   };
 
   return (
-    <div className=" mx-auto lg:w-[50%] lg:px-0 px-5 h-[100vh] lg:h-auto">
+    <div className=" mx-auto lg:w-[50%] lg:px-0 px-5  lg:h-auto">
       <h2 className="lg:text-6xl text-4xl lg:mt-10 mt-32 text-black uppercase mb-10 ">
         Add Facility
       </h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap- bg-white p-5 w-full  pb-20"
+        className="flex flex-col gap-3 bg-white p-5 w-full  "
       >
-        <div className="w-full p-3 rounded-lg fo">
+        <div className="w-full p- rounded-lg fo">
           <label
-            className="block text-gray-700 text-xl font-bold mb-2"
+            className="block text-gray-700 text- font-bold "
             htmlFor="name-input"
           >
             Name
@@ -83,9 +83,9 @@ const AddFacility = () => {
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg fo ">
+        <div className="w-full p- rounded-lg fo ">
           <label
-            className="block text-gray-700 text-xl font-bold mb-2"
+            className="block text-gray-700 text- font-bold "
             htmlFor="photo-input"
           >
             Photo URL
@@ -105,9 +105,9 @@ const AddFacility = () => {
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg fo ">
+        <div className="w-full p- rounded-lg fo ">
           <label
-            className="block text-gray-700 text-xl font-bold mb-2"
+            className="block text-gray-700 text- font-bold "
             htmlFor="description-input"
           >
             Description
@@ -128,9 +128,9 @@ const AddFacility = () => {
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg fo ">
+        <div className="w-full p- rounded-lg fo ">
           <label
-            className="block text-gray-700 text-xl font-bold mb-2"
+            className="block text-gray-700 text- font-bold "
             htmlFor="price-input"
           >
             Price Per Hour
@@ -152,9 +152,9 @@ const AddFacility = () => {
           )}
         </div>
 
-        <div className="w-full p-3 rounded-lg fo ">
+        <div className="w-full p- rounded-lg fo ">
           <label
-            className="block text-gray-700 text-xl font-bold mb-2"
+            className="block text-gray-700 text- font-bold "
             htmlFor="location-input"
           >
             Location
