@@ -114,23 +114,25 @@ const WelcomeAdminDashboard = () => {
 
       {/* Chart and Statistics Section */}
       <div className="flex flex-col lg:flex-row mt-10 w-full gap-6">
-        <div className="bg-zinc-200 p-5 w-full lg:w-2/3 rounded-lg shadow">
-          <h4 className="text-2xl mb-5">Bookings Overview</h4>
+        <div className="bg-zinc-200 lg:p-5 w-full lg:w-2/3 rounded-lg shadow">
+          <h4 className=" mb-5 p-5 lg:text-4xl text-2xl font-semibold">
+            Bookings Overview
+          </h4>
           <LineChartAdminDashboard />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:w-1/3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 ">
           <div className="p-5 bg-purple-100 flex flex-col items-center justify-center rounded-lg shadow">
             <h2 className="text-4xl font-mono">{userData?.data?.length}</h2>
-            <p className="text-lg">Total Users</p>
+            <p className="text-lg text-nowrap">Total Users</p>
           </div>
           <div className="p-5 bg-amber-100 flex flex-col items-center justify-center rounded-lg shadow">
             <h2 className="text-4xl font-mono">{facilitiesData?.dataLength}</h2>
-            <p className="text-lg">Total Facilities</p>
+            <p className="text-lg text-nowrap">Total Facilities</p>
           </div>
           <div className="p-5 bg-lime-100 flex flex-col items-center justify-center rounded-lg shadow">
             <h2 className="text-4xl font-mono">{bookingsData?.dataLength}</h2>
-            <p className="text-lg">Total Bookings</p>
+            <p className="text-lg text-nowrap">Total Bookings</p>
           </div>
         </div>
       </div>

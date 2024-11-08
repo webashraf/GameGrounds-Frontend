@@ -74,7 +74,9 @@ const WelcomeUserDashboard = () => {
 
           {/* Booking Overview Chart */}
           <div className="w-full bg-zinc-200 rounded-md mt-10 lg:inline-block">
-            <h4 className="p-5 text-4xl">Booking Overview</h4>
+            <h4 className="p-5 lg:text-4xl text-2xl font-semibold">
+              Booking Overview
+            </h4>
             <LineChartUserDashboard />
           </div>
         </div>
