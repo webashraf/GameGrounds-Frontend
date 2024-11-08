@@ -7,11 +7,11 @@ import {
   FileSliders,
   Home,
   LogOut,
-  Menu,
   ShieldPlus,
   SquareKanban,
 } from "lucide-react";
 import { useState } from "react";
+import { FiMenu } from "react-icons/fi";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout, useToken } from "../../../Redux/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
@@ -56,7 +56,7 @@ export function DashboardMobileNav() {
       <Sheet key="left">
         <SheetTrigger asChild>
           <Button variant="outline" className=" ">
-            <Menu size={30} />
+            <FiMenu size={20} />
           </Button>
         </SheetTrigger>
         <SheetContent

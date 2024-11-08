@@ -52,14 +52,14 @@ const AddFacility = () => {
   };
 
   return (
-    <div className=" mx-auto lg:w-[50%] lg:px-0 px-5 ">
-      <h2 className="lg:text-6xl text-4xl lg:mt-10 mt-32 text-black uppercase mb-10">
+    <div className=" mx-auto lg:w-[50%] lg:px-0 px-5 h-[100vh] lg:h-auto">
+      <h2 className="lg:text-6xl text-4xl lg:mt-10 mt-32 text-black uppercase mb-10 ">
         Add Facility
       </h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap- bg-white p-5 w-full"
+        className="flex flex-col gap- bg-white p-5 w-full  pb-20"
       >
         <div className="w-full p-3 rounded-lg fo">
           <label
