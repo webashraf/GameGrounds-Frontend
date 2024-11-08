@@ -55,8 +55,8 @@ export function DashboardMobileNav() {
     <div className="grid grid-cols-2 gap-2 lg:hidden">
       <Sheet key="left">
         <SheetTrigger asChild>
-          <div className="bg-white p-3">
-            <FiMenu size={20} />
+          <div className="">
+            <FiMenu size={30} className="text-white" />
           </div>
         </SheetTrigger>
         <SheetContent
