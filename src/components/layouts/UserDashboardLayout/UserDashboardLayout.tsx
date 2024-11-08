@@ -236,7 +236,7 @@ const UserDashboardLayout = () => {
         </div>
 
         {/* ---------- */}
-        <div className="w-full h-[90vh] overflow-y-scroll">
+        <div className="w-full h-[100vh] overflow-y-scroll">
           <Outlet />
         </div>
       </div>

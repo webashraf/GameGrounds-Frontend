@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { toast } from "sonner";
-
 import {
   useCancelBookingMutation,
   useGetAllBookingsByUserQuery,
@@ -32,21 +32,21 @@ import {
 
 const MyBookings = () => {
   const token = useAppSelector(useToken);
-  let user: any;
-  if (token) {
-    user = verifyToken(token);
-  }
+
+  const user: any = token ? verifyToken(token) : null;
   const { data: myBookings, isFetching } = useGetAllBookingsByUserQuery(
     user?.email
   );
   const [cancelBooking] = useCancelBookingMutation();
 
   const handleCancelBooking = async (id: string) => {
-    const res = await cancelBooking(id).unwrap();
-    if (res?.success) {
-      toast.success(res.message);
-    } else {
-      toast.error("Failed to cancel book");
+    try {
+      const res = await cancelBooking(id).unwrap();
+      toast[res.success ? "success" : "error"](
+        res.message || "Failed to cancel booking"
+      );
+    } catch (error) {
+      toast.error("An error occurred while canceling the booking.");
     }
   };
 
@@ -57,205 +57,113 @@ const MyBookings = () => {
       </div>
     );
   }
+
   return (
-    <div className="lg:w-[90%] lg:pt-0 pt-10">
-      <div className="  relative h-[90vh] lg:w-[1000px w-full px-5 overflow-auto  custom-scrollbar mx-auto section-padding mt-10">
-        <h2 className="lg:text-6xl text-4xl text-black uppercase mb-10 ">
+    <div className="lg:w-[95%] mx-auto lg:pt-0 pt-10">
+      <div className="relative  w-full px-5 mx-auto section-padding mt-10">
+        <h2 className="lg:text-6xl text-4xl text-black uppercase mb-10">
           My Bookings
         </h2>
-        <Table className="">
-          <TableHeader className="h-[100px] bg-black/80 shadow-2xl backdrop-blur-lg rounded-md ">
-            <TableRow className="w-full ">
-              <TableHead className=" text-white">Serial</TableHead>
+        <Table>
+          <TableHeader className="h-[100px] bg-black/80 shadow-2xl rounded-md">
+            <TableRow>
+              <TableHead className="text-white">Serial</TableHead>
               <TableHead className="text-white">Facility Name</TableHead>
               <TableHead className="text-white">Location</TableHead>
               <TableHead className="text-white">Cost</TableHead>
               <TableHead className="text-white">Date</TableHead>
               <TableHead className="text-white">Start Time</TableHead>
-              <TableHead className=" text-white ">End Time</TableHead>
-              <TableHead className=" text-white ">Action</TableHead>
+              <TableHead className="text-white">End Time</TableHead>
+              <TableHead className="text-white">Action</TableHead>
             </TableRow>
           </TableHeader>
-
-          {/* Map through the products and display each one in a table row */}
-          <TableBody className="">
-            {myBookings &&
-              myBookings?.data?.map((item: any, i: number) => (
-                <TableRow key={item._id} className="">
-                  <TableCell className="font-medium w-[3%]">{i}</TableCell>
-                  <TableCell className="uppercase flex flex-col">
-                    <h5 className="text-md font-bold mb-1">
-                      {item.facility.name}
-                    </h5>
-                  </TableCell>
-                  <TableCell className="uppercase">
-                    {item.facility.location}
-                  </TableCell>
-                  <TableCell className="uppercase">
-                    ${item.payableAmount}
-                  </TableCell>
-                  <TableCell>{item.date}</TableCell>
-                  <TableCell>{item.startTime}</TableCell>
-                  <TableCell>{item.endTime}</TableCell>
-                  <TableCell className="text-right flex gap-2 items-center justify-center">
-                    {/* Delete Button  */}
-                    <AlertDialog>
-                      <AlertDialogTrigger>
-                        <div>
-                          {/* <Trash2 /> */}
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="#ff0000"
-                            strokeWidth="1.25"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-trash-2"
-                          >
-                            <path d="M3 6h18" />
-                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                            <line x1="10" x2="10" y1="11" y2="17" />
-                            <line x1="14" x2="14" y1="11" y2="17" />
-                          </svg>
-                        </div>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            Are you absolutely sure to delete this item?
-                          </AlertDialogTitle>
-                          <AlertDialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete this item and remove your data from our
-                            servers.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction
-                            className="btn-2 px-5 "
-                            onClick={() => handleCancelBooking(item._id)}
-                          >
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-
-                    <div className="">
-                      <AlertDialog>
-                        <AlertDialogTrigger>
+          <TableBody>
+            {myBookings?.data?.map((item: any, i: number) => (
+              <TableRow key={item._id} className="bg-zinc-200">
+                <TableCell className="font-medium w-[3%]">{i + 1}</TableCell>
+                <TableCell className="uppercase">
+                  {item.facility.name}
+                </TableCell>
+                <TableCell className="uppercase">
+                  {item.facility.location}
+                </TableCell>
+                <TableCell className="uppercase">
+                  ${item.payableAmount}
+                </TableCell>
+                <TableCell>{item.date}</TableCell>
+                <TableCell>{item.startTime}</TableCell>
+                <TableCell>{item.endTime}</TableCell>
+                <TableCell className="text-right flex gap-2 items-center justify-center">
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <Button variant="ghost">Cancel</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Confirm Cancellation
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          Are you sure you want to cancel this booking? This
+                          action cannot be undone.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={() => handleCancelBooking(item._id)}
+                        >
+                          Confirm
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <Button>Details</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Booking Details</AlertDialogTitle>
+                        <AlertDialogDescription>
                           <div>
-                            <Button>Details</Button>
+                            <img
+                              src={item.facility.photoUrl}
+                              className="w-full h-[200px] object-cover"
+                              alt="Facility"
+                            />
+                            <div className="p-6 bg-gray-50">
+                              <h2 className="text-xl font-semibold">
+                                {item.facility.name}
+                              </h2>
+                              <p>{item.facility.description}</p>
+                              <p>
+                                <strong>Amount:</strong> ${item.payableAmount}
+                              </p>
+                              <p>
+                                <strong>Location:</strong>{" "}
+                                {item.facility.location}
+                              </p>
+                              <p>
+                                <strong>Booking Date:</strong> {item.date}
+                              </p>
+                              <p>
+                                <strong>Start Time:</strong> {item.startTime}
+                              </p>
+                              <p>
+                                <strong>End Time:</strong> {item.endTime}
+                              </p>
+                            </div>
                           </div>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle></AlertDialogTitle>
-                            <AlertDialogDescription>
-                              <div className="bg-gray-100 font-sans leading-normal tracking-normal">
-                                <div className="max-w-4xl mx-auto my-10 p-6 bg-white rounded-lg shadow-lg">
-                                  <h1 className="text-3xl font-semibold text-gray-800 mb-6">
-                                    Booking Details
-                                  </h1>
-
-                                  <div className="bg-gray-50 overflow-hidden rounded-lg shadow-md  mx-a">
-                                    <img
-                                      src={item.facility.photoUrl}
-                                      className="object-bottom h-[200px]  w-full object-cover"
-                                      alt=""
-                                    />
-                                  </div>
-                                  <div className=" gap-6 mb-8">
-                                    <div className="bg-gray-50 p-6 rounded-lg shadow-md">
-                                      <h2 className="text-xl font-semibold text-gray-500">
-                                        {item.facility.name}
-                                      </h2>
-                                      <p className="mb-2 text-gray-500">
-                                        {item.facility.description}
-                                      </p>
-                                      <p className="text-gray-500">
-                                        <span className="font-bold">
-                                          Amount:{" "}
-                                        </span>
-                                        ${item.payableAmount}
-                                      </p>
-                                      <p className="text-gray-500">
-                                        <span className="font-bold">
-                                          Location:{" "}
-                                        </span>
-                                        {item.facility.location}
-                                      </p>
-
-                                      <p className="text-gray-500">
-                                        {" "}
-                                        <span className="font-bold">
-                                          Booking Date:{" "}
-                                        </span>
-                                        {item.date}
-                                      </p>
-                                      <p className="text-gray-500">
-                                        <span className="font-bold">
-                                          Start Time:{" "}
-                                        </span>
-                                        {item.startTime}
-                                      </p>
-                                      <p className="text-gray-500">
-                                        <span className="font-bold">
-                                          End Time:{" "}
-                                        </span>
-                                        {item.endTime}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            {/* <AlertDialogCancel>Cancel</AlertDialogCancel> */}
-                            <AlertDialogAction className="btn-2 px-5">
-                              Continue
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
-        {/* <div>
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  2
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </div> */}
       </div>
     </div>
   );

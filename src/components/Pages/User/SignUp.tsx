@@ -55,13 +55,19 @@ const SignUp = ({ uRole = "user" }) => {
   return (
     <>
       <CommonHero title="Sign Up" />
-      <div className="lg:w-[500px] mx-auto pt-10 pb-20 lg:px-0 md:px-36 px-5 mt-20">
+      <div
+        className={`lg:w-[500px] mx-auto pt-10 pb-20 lg:px-0 md:px-36 mt-20 ${
+          uRole === "user" ? "px-5" : ""
+        }`}
+      >
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="form_container mx-w-full w-full"
         >
           <div className="title_container">
-            <p className="title">Sign-up now</p>
+            <p className="title">
+              Sign-up as {uRole === "user" ? "User" : "Admin"}
+            </p>
             <span className="subtitle">
               Get started with our app, just create an account and enjoy the
               experience.

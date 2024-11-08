@@ -5,6 +5,7 @@ import {
   Legend,
   Line,
   LineChart,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -66,24 +67,25 @@ const LineChartAdminDashboard = () => {
       </div>
     );
   }
+
   return (
-    <div>
-      <LineChart
-        width={730}
-        height={250}
-        data={finalGroupedBookings}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="dateOfBooking" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="totalAmount" stroke="#8884d8" />
-        <Line type="monotone" dataKey="totalCount" stroke="#82ca9d" />
-        <Line type="monotone" dataKey="userCount" stroke="#82fd" />
-        <Line type="monotone" dataKey="facilityCount" stroke="#82cafd" />
-      </LineChart>
+    <div style={{ width: "100%", height: 250 }}>
+      <ResponsiveContainer>
+        <LineChart
+          data={finalGroupedBookings}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="dateOfBooking" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="totalAmount" stroke="#8884d8" />
+          <Line type="monotone" dataKey="totalCount" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="userCount" stroke="#82fd" />
+          <Line type="monotone" dataKey="facilityCount" stroke="#82cafd" />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 };
