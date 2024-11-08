@@ -52,7 +52,7 @@ const AddFacility = () => {
   };
 
   return (
-    <div className=" mx-auto lg:w-[50%] lg:px-0 px-10 ">
+    <div className=" mx-auto lg:w-[50%] lg:px-0 px-5 ">
       <h2 className="lg:text-6xl text-4xl lg:mt-10 mt-32 text-black uppercase mb-10">
         Add Facility
       </h2>
