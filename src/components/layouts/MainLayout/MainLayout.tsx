@@ -96,7 +96,7 @@ const MainLayout = () => {
           </div>
         </div>
         {/* Main Content */}
-        <div className="bg-white mx-auto">
+        <div className="bg-white mx-auto min-h-[100vh]">
           <Outlet />
         </div>
 

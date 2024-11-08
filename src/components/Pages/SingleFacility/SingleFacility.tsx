@@ -13,9 +13,7 @@ import { DatePickerWithPresets } from "../Booking/BookingStepsItems/DatePickerCn
 import BookingFormDirect from "./BookingForm";
 
 const SingleFacility = () => {
-  const [dateForSlot, setDateForSlot] = useState<string>(
-    moment(new Date()).format("YYYY-MM-DD")
-  );
+  const [dateForSlot, setDateForSlot] = useState<string>("");
 
   console.log("New date", moment(new Date()).format("YYYY-MM-DD"));
 
@@ -57,14 +55,17 @@ const SingleFacility = () => {
           <Loader />
         </div>
       ) : (
-        <div className=" flex flex-col md:flex-row mx-auto rounded-lg lg:px-20">
-          <div className="md:w-1/2 w-[100%]">
-            <img
-              src={facility?.data?.photoUrl}
-              alt={facility?.data?.name}
-              className="w-full h-full object-cover rounded-lg border-b-2 border-gray-200"
-            />
+        <div className=" flex flex-col lg:gap-10 gap-0 md:flex-row mx-auto rounded-lg lg:px-20 justify-center">
+          <div className="md:w-1/2 w-[100%] flex justify-end">
+            <div className="w-[90%] overflow-hidden rounded-lg">
+              <img
+                src={facility?.data?.photoUrl}
+                alt={facility?.data?.name}
+                className="w-full h-[60vh] object-cover  object-bottom border-b-2 border-gray-200 transition-transform duration-500 ease-in-out hover:scale-x-110"
+              />
+            </div>
           </div>
+
           <div className="p-6 space-y-4 md:w-1/2">
             <h1 className="text-4xl uppercase font-bold mb-2">
               {facility?.data?.name}

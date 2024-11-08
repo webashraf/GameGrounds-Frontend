@@ -104,7 +104,7 @@ const Facilities: React.FC = () => {
     <>
       <CommonHero title="Facilities" />
 
-      <div className="lg:px-20 px-5">
+      <div className="lg:px-40 px-5">
         {/* Search and filter */}
         <div className="flex justify-between pb-20 relative items-center">
           <div className="relative">
@@ -144,7 +144,7 @@ const Facilities: React.FC = () => {
         {isFetching ? (
           <LoadingSkeleton />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 lg:gap-28 pb-20 md:pb-28 lg:pb-36 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 lg:gap-24 pb-20 md:pb-28 lg:pb-36 items-center">
             {facilities?.data.map((item: any) => (
               <CommonCard key={item._id} item={item} />
             ))}

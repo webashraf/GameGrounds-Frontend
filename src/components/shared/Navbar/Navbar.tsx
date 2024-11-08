@@ -43,7 +43,7 @@ const Navbar = () => {
             {[
               { path: "/", label: "Home" },
               { path: "/facilities", label: "Facilities" },
-              { path: "/booking", label: "Booking" },
+              // { path: "/booking", label: "Booking" },
               { path: "/about", label: "About" },
               { path: "/contact", label: "Contact" },
             ].map((link, index) => (

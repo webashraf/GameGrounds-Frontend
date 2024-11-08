@@ -6,7 +6,7 @@ import { IoLogInOutline, IoLogOutOutline } from "react-icons/io5";
 import { MdOutlineContactMail } from "react-icons/md";
 import { PiGiftDuotone } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
-import { TbBrandBooking, TbListDetails } from "react-icons/tb";
+import { TbListDetails } from "react-icons/tb";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout, useToken } from "../../../Redux/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
@@ -18,11 +18,11 @@ const NavItems = [
     icon: FiHome,
     link: "/",
   },
-  {
-    text: "Booking",
-    icon: TbBrandBooking,
-    link: "/booking",
-  },
+  // {
+  //   text: "Booking",
+  //   icon: TbBrandBooking,
+  //   link: "/booking",
+  // },
   {
     text: "Facilities",
     icon: PiGiftDuotone,
