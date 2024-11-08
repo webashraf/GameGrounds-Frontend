@@ -106,7 +106,7 @@ const Facilities: React.FC = () => {
 
       <div className="lg:px-40 px-5">
         {/* Search and filter */}
-        <div className="flex justify-between pb-20 relative items-center">
+        <div className="flex justify-between flex-col pb-20 relative lg:items-center items-start">
           <div className="relative">
             <input
               placeholder="Search..."
