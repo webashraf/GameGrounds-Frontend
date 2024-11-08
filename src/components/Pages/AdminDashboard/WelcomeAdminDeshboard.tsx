@@ -25,7 +25,7 @@ const WelcomeAdminDashboard = () => {
   const { data: userInfo } = useGetSingleUserQuery(user?.email);
 
   return (
-    <div className="px-5 lg:pt-0 pt-10 shadow-lg bg-white flex flex-col justify-center items-center w-full lg:w-[90%] mx-auto">
+    <div className="px-5 lg:pt-0 pt-10 shadow-lg bg-white flex flex-col justify-center items-center w-full lg:w-[90%] mx-auto pb-10">
       <div className="w-full p-5 rounded-lg mt-10 lg:mt-20">
         <h1 className="text-3xl lg:text-4xl font-bold mb-4 text-center">
           Welcome, Admin!
