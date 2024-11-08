@@ -12,8 +12,8 @@ const HowItsWork = () => {
         title="Simplified Booking Journey"
         subTitle="Understand the process of booking sports facilities in just a few clicks."
       />
-      <div className="flex flex-col lg:flex-row gap-10">
-        <div className="w-full lg:w-1/2 lg:h-[70vh]">
+      <div className="flex flex-col lg:flex-row gap-10 lg:h-[70vh] overflow-hidden">
+        <div className="w-full lg:w-1/2 lg:h-full rounded-lg overflow-hidden">
           <ImagesSlider className="h-[40rem]" images={images}></ImagesSlider>
         </div>
         <div className="w-full lg:w-1/2 h-auto lg:h-[70vh] shadow-xl">

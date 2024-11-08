@@ -58,9 +58,11 @@ const MyBookings = () => {
     );
   }
   return (
-    <div className="lg:w-[90%]  ">
+    <div className="lg:w-[90%] lg:pt-0 pt-10">
       <div className="  relative h-[90vh] lg:w-[1000px w-full px-5 overflow-auto  custom-scrollbar mx-auto section-padding mt-10">
-        <h2 className="text-6xl text-black uppercase mb-10 ">My Bookings</h2>
+        <h2 className="lg:text-6xl text-4xl text-black uppercase mb-10 ">
+          My Bookings
+        </h2>
         <Table className="">
           <TableHeader className="h-[100px] bg-black/80 shadow-2xl backdrop-blur-lg rounded-md ">
             <TableRow className="w-full ">
@@ -145,7 +147,6 @@ const MyBookings = () => {
                     </AlertDialog>
 
                     <div className="">
-                   
                       <AlertDialog>
                         <AlertDialogTrigger>
                           <div>

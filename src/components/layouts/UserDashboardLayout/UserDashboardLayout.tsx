@@ -35,7 +35,7 @@ const UserDashboardLayout = () => {
   return (
     <>
       <div className="flex ">
-        <div className="lg:hidden  fixed top-0  flex items-center  justify-between p-5  z-50 w-full backdrop-blur-md">
+        <div className="lg:hidden  fixed top-0  flex items-center  justify-between bg-black/50 p-5  z-50 w-full backdrop-blur-md">
           <DashboardMobileNav />
           <h2 className="text-4xl text-white font-serif">GameGround</h2>
         </div>
@@ -236,7 +236,7 @@ const UserDashboardLayout = () => {
         </div>
 
         {/* ---------- */}
-        <div className="w-full ">
+        <div className="w-full h-[90vh] overflow-y-scroll">
           <Outlet />
         </div>
       </div>
