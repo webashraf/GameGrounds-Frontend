@@ -54,10 +54,10 @@ const SignUp = ({ uRole = "user" }) => {
 
   return (
     <>
-      <CommonHero title="Sign Up" />
+      {uRole === "admin" ? "" : <CommonHero title="Sign Up" />}
       <div
         className={`lg:w-[500px] mx-auto pt-10 pb-20 lg:px-0 md:px-36 mt-20 ${
-          uRole === "user" ? "px-5" : ""
+          uRole === "admin" ? "" : "px-5"
         }`}
       >
         <form
@@ -66,7 +66,7 @@ const SignUp = ({ uRole = "user" }) => {
         >
           <div className="title_container">
             <p className="title">
-              Sign-up as {uRole === "user" ? "User" : "Admin"}
+              Sign-up as {uRole === "admin" ? "Admin" : "user"}
             </p>
             <span className="subtitle">
               Get started with our app, just create an account and enjoy the
@@ -158,10 +158,10 @@ const SignUp = ({ uRole = "user" }) => {
               <input
                 {...register("phone", {
                   required: "Phone number is required",
-                  pattern: {
-                    value: /^[0-9]{10,15}$/,
-                    message: "Invalid phone number",
-                  },
+                  // pattern: {
+                  //   value: /^[0-9]{10,15}$/,
+                  //   message: "Invalid phone number",
+                  // },
                 })}
                 placeholder="Contact Number"
                 type="text"
