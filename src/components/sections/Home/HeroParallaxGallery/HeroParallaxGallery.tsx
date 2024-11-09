@@ -8,6 +8,7 @@ export function HeroParallaxGallery() {
     data: facilities,
     // isLoading,
     // error,
-  } = useGetFacilitiesQuery(undefined);
+  } = useGetFacilitiesQuery([{ field: "limit", value: 15 }]);
+  console.log(facilities);
   return <HeroParallax products={facilities?.data} />;
 }
