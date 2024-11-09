@@ -25,6 +25,7 @@ import {
 import { TableCell, TableRow } from "../../../ui/table";
 
 import { SubmitHandler, useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 import {
   useDeleteFacilitiesMutation,
   useUpdateFacilitiesMutation,
@@ -87,10 +88,16 @@ const FacilitiesTable = ({ item, i }: any) => {
     <TableRow className="">
       <TableCell className="font-medium w-[3%]">{i}</TableCell>
       <TableCell className="uppercase flex flex-col">
-        <h5 className="text-md font-bold mb-1">{item.name}</h5>
+        <NavLink to={`/single-facility/${item?._id}`}>
+          <h5 className="text-md font-bold mb-1">{item.name}</h5>
+        </NavLink>
       </TableCell>
       <TableCell className="uppercase">{item.location}</TableCell>
-      <TableCell className="max-w-[400px]">{item.description}</TableCell>
+      <TableCell className="max-w-[400px]">
+        <NavLink to={`/single-facility/${item?._id}`}>
+          {item?.description?.slice(0, 80)}...
+        </NavLink>
+      </TableCell>
       <TableCell>${item.pricePerHour}</TableCell>
       <TableCell className="text-right flex gap-2 items-center justify-center">
         {/* Delete Button  */}

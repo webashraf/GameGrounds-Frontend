@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useGetAllBookingsQuery } from "../../../../Redux/api/booking.api";
 import Loader from "../../../shared/Loader/Loader";
 // import "../../../shared/Styles/RangeSlider.css";
+import { NavLink } from "react-router-dom";
+import { Button } from "../../../ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -82,6 +84,7 @@ const BookingManagement = () => {
                 <TableHead className="text-white">Date</TableHead>
                 <TableHead className="text-white">Start Time</TableHead>
                 <TableHead className=" text-white ">End Time</TableHead>
+                <TableHead className=" text-white ">View Details</TableHead>
               </TableRow>
             </TableHeader>
 
@@ -97,7 +100,7 @@ const BookingManagement = () => {
                       </h5>
                     </TableCell>
                     <TableCell className="uppercase max-w-[200px]">
-                      {item?.facility?.description}
+                      {item?.facility?.description?.slice(0, 50)}...
                     </TableCell>
                     <TableCell className="uppercase">
                       {item?.user?.name}
@@ -109,6 +112,11 @@ const BookingManagement = () => {
                     <TableCell>{item?.date}</TableCell>
                     <TableCell>${item?.startTime}</TableCell>
                     <TableCell>${item?.endTime}</TableCell>
+                    <TableCell>
+                      <NavLink to={`/single-facility/${item?.facility?._id}`}>
+                        <Button>View details</Button>
+                      </NavLink>
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
