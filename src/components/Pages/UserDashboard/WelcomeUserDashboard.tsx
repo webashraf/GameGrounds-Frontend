@@ -1,15 +1,16 @@
 import { NavLink } from "react-router-dom";
+import useUser from "../../../hooks/userHook";
 import { useGetSingleUserQuery } from "../../../Redux/api/auth.api";
-import { useToken } from "../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../Redux/hook";
-import { verifyToken } from "../../../utils/verifyToken";
 import { Button } from "../../ui/button";
 import LineChartUserDashboard from "./Charts/LineChart";
 
 const WelcomeUserDashboard = () => {
-  const token = useAppSelector(useToken);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const user: any = token ? verifyToken(token) : null;
+  // const token = useAppSelector(useToken);
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // const user: any = token ? verifyToken(token) : null;
+
+  const user = useUser();
+
   const { data: userInfo } = useGetSingleUserQuery(user?.email);
 
   return (

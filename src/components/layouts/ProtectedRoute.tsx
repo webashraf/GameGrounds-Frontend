@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { useToken } from "../../Redux/feature/authSlice";
-import { useAppSelector } from "../../Redux/hook";
-import { verifyToken } from "../../utils/verifyToken";
+import useUser from "../../hooks/userHook";
 
 export type TUser = {
   email: string;
@@ -14,13 +12,9 @@ export type TUser = {
 type TProtectedRoute = { children: ReactNode; role?: string };
 
 const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
-  const token = useAppSelector(useToken);
+ 
 
-  let user;
-
-  if (token) {
-    user = verifyToken(token);
-  }
+  const user = useUser();
 
   if (role && (user as TUser)?.role !== role && role !== "admin") {
     return <Navigate to="/unauthorized" replace={true} />;

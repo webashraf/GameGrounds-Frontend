@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import useUser from "../../../hooks/userHook";
 import {
   useGetSingleUserQuery,
   useGetUserQuery,
 } from "../../../Redux/api/auth.api";
 import { useGetAllBookingsQuery } from "../../../Redux/api/booking.api";
 import { useGetFacilitiesQuery } from "../../../Redux/api/facilities.api";
-import { useToken } from "../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../Redux/hook";
-import { verifyToken } from "../../../utils/verifyToken";
 import LineChartAdminDashboard from "./Charts/LineChart";
 
 const WelcomeAdminDashboard = () => {
@@ -15,12 +12,9 @@ const WelcomeAdminDashboard = () => {
   const { data: facilitiesData } = useGetFacilitiesQuery(undefined);
   const { data: bookingsData } = useGetAllBookingsQuery([]);
 
-  const token = useAppSelector(useToken);
 
-  let user: any;
-  if (token) {
-    user = verifyToken(token);
-  }
+
+  const user = useUser();
 
   const { data: userInfo } = useGetSingleUserQuery(user?.email);
 

@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { toast } from "sonner";
+import useUser from "../../../../hooks/userHook";
 import {
   useCancelBookingMutation,
   useGetAllBookingsByUserQuery,
 } from "../../../../Redux/api/booking.api";
-import { useToken } from "../../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../../Redux/hook";
-import { verifyToken } from "../../../../utils/verifyToken";
 import Loader from "../../../shared/Loader/Loader";
 import {
   AlertDialog,
@@ -31,9 +29,9 @@ import {
 } from "../../../ui/table";
 
 const MyBookings = () => {
-  const token = useAppSelector(useToken);
+ 
+  const user = useUser();
 
-  const user: any = token ? verifyToken(token) : null;
   const { data: myBookings, isFetching } = useGetAllBookingsByUserQuery(
     user?.email
   );

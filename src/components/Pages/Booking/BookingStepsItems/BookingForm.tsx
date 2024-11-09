@@ -2,12 +2,10 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import useUser from "../../../../hooks/userHook";
 import { useCreateABookMutation } from "../../../../Redux/api/booking.api";
 import { useGetFacilitiesQuery } from "../../../../Redux/api/facilities.api";
-import { useToken } from "../../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../../Redux/hook";
 import { TFacility, TFacilitySelect } from "../../../../types/gloval.types";
-import { verifyToken } from "../../../../utils/verifyToken";
 import { Button } from "../../../ui/button";
 
 interface IBookingFormInput {
@@ -31,12 +29,10 @@ const BookingForm = () => {
 
   const [bookError, setBookError] = useState("");
   const [processBook, setProcessBook] = useState("");
-  const token = useAppSelector(useToken);
-  let user: any;
 
-  if (token) {
-    user = verifyToken(token);
-  }
+
+  const user = useUser();
+
   if (facilitiesFetchError) {
     toast.error("Failed to fetch facilities.");
   }

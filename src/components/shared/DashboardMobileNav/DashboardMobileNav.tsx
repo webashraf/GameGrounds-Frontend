@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { Button } from "../../ui/button";
 import {
   BookImageIcon,
@@ -6,16 +5,18 @@ import {
   FilePlus,
   FileSliders,
   Home,
+  LayoutDashboard,
   LogOut,
+  MessageSquare,
   ShieldPlus,
   SquareKanban,
 } from "lucide-react";
 import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logout, useToken } from "../../../Redux/feature/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
-import { verifyToken } from "../../../utils/verifyToken";
+import useUser from "../../../hooks/userHook";
+import { logout } from "../../../Redux/feature/authSlice";
+import { useAppDispatch } from "../../../Redux/hook";
 import { Button } from "../../ui/button";
 import {
   DropdownMenu,
@@ -36,20 +37,13 @@ import {
 
 export function DashboardMobileNav() {
   const [position, setPosition] = useState("bottom");
-
-  const token = useAppSelector(useToken);
+  const user = useUser();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleLogOut = () => {
     dispatch(logout());
     navigate("/");
   };
-
-  let user: any;
-
-  if (token) {
-    user = verifyToken(token);
-  }
 
   return (
     <div className="grid grid-cols-2 gap-2 lg:hidden">
@@ -101,7 +95,7 @@ export function DashboardMobileNav() {
                   }`
                 }
               >
-                <BookImageIcon />
+                <LayoutDashboard />
                 My Dashboard
               </NavLink>
               <DropdownMenu>
@@ -212,7 +206,7 @@ export function DashboardMobileNav() {
                       }`
                     }
                   >
-                    <BookImageIcon />
+                    <LayoutDashboard />
                     My Dashboard
                   </NavLink>
                   <NavLink
@@ -227,6 +221,19 @@ export function DashboardMobileNav() {
                   >
                     <BookImageIcon />
                     My Booking
+                  </NavLink>
+                  <NavLink
+                    to="/user/feedback"
+                    className={({ isActive }) =>
+                      `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
+                        isActive
+                          ? "bg-white/20 backdrop-blur-lg text-white"
+                          : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                      }`
+                    }
+                  >
+                    <MessageSquare />
+                    Feedback
                   </NavLink>
                   <div
                     onClick={() => handleLogOut()}

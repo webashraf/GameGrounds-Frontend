@@ -26,10 +26,7 @@ interface FacilityQuery {
 const FacilitiesUpdate = () => {
   const [query, setQuery] = useState<FacilityQuery[]>([]);
 
-  const {
-    data: facilitiesData,
-    isLoading,
-  } = useGetFacilitiesQuery(query);
+  const { data: facilitiesData, isLoading } = useGetFacilitiesQuery(query);
   const [facilitiesLength, setFacilitiesLength] = useState(
     facilitiesData?.dataLength
   );
@@ -87,27 +84,6 @@ const FacilitiesUpdate = () => {
 
               <Search className="size-6 absolute top-3 right-3 text-gray-500 cursor-pointer" />
             </div>
-
-            {/* <div className="w-[300px] shadow-xl shadow-black/10 rounded-md p-3">
-            <h4 className="pb-2">Filter By Price:</h4>
-            <MultiRangeSlider
-              className="shadow-lg shadow-orange-700"
-              min={0}
-              max={500}
-              baseClassName=""
-              subSteps={true}
-              step={10}
-              barInnerColor="#101010"
-              ruler={false}
-              label={false}
-              minValue={minValue}
-              maxValue={maxValue}
-              onChange={(e) => handlePriceFilterInput(e)}
-            />
-            <div className="space-x-10 pt-2">
-              min: {minValue} &nbsp; max: {maxValue}
-            </div>
-          </div> */}
           </div>
           {/* Display the list of products in a table */}
           <div className="lg:h-auto h-[60vh] overflow-auto custom-scrollbar">

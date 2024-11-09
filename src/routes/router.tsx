@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
+import UserLayout from "../components/layouts/DashboardLayout/DashboardLayout";
 import MainLayout from "../components/layouts/MainLayout/MainLayout";
 import ProtectedRoute from "../components/layouts/ProtectedRoute";
-import UserLayout from "../components/layouts/UserDashboardLayout/UserDashboardLayout";
 import About from "../components/Pages/About/About";
 import AddAdmin from "../components/Pages/AdminDashboard/AddAdmin/AddAdmin";
 import BookingManagement from "../components/Pages/AdminDashboard/BookingManagement/BookingManagement";
@@ -17,6 +17,7 @@ import Home from "../components/Pages/Home/Home";
 import SingleFacility from "../components/Pages/SingleFacility/SingleFacility";
 import Login from "../components/Pages/User/Login";
 import UserSignUp from "../components/Pages/User/SignUp";
+import CreateFeedback from "../components/Pages/UserDashboard/FeedBack/CreateFeedback";
 import DetailsBooking from "../components/Pages/UserDashboard/MyBookings/DetailsBooking";
 import MyBookings from "../components/Pages/UserDashboard/MyBookings/MyBookings";
 import WelcomeUserDashboard from "../components/Pages/UserDashboard/WelcomeUserDashboard";
@@ -143,6 +144,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute role="user">
             <MyBookings />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "feedback",
+        element: (
+          <ProtectedRoute role="user">
+            <CreateFeedback />
           </ProtectedRoute>
         ),
       },

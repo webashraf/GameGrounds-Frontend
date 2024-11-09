@@ -1,31 +1,24 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CartesianGrid,
   Legend,
   Line,
   LineChart,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
-  ResponsiveContainer,
 } from "recharts";
+import useUser from "../../../../hooks/userHook";
 import { useGetAllBookingsByUserQuery } from "../../../../Redux/api/booking.api";
-import { useToken } from "../../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../../Redux/hook";
-import { verifyToken } from "../../../../utils/verifyToken";
 import Loader from "../../../shared/Loader/Loader";
 
 const LineChartUserDashboard = () => {
-  const token = useAppSelector(useToken);
-  let user: any;
-  if (token) {
-    user = verifyToken(token);
-  }
-  const {
-    data: myBookings,
-    isLoading,
-  } = useGetAllBookingsByUserQuery(user?.email);
+  const user = useUser();
+
+  const { data: myBookings, isLoading } = useGetAllBookingsByUserQuery(
+    user?.email
+  );
 
   const groupedBookings = myBookings?.data.reduce((acc: any, booking: any) => {
     const { date, payableAmount } = booking;

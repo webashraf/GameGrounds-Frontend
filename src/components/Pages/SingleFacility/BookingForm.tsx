@@ -3,10 +3,8 @@ import moment from "moment";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import useUser from "../../../hooks/userHook";
 import { useCreateABookMutation } from "../../../Redux/api/booking.api";
-import { useToken } from "../../../Redux/feature/authSlice";
-import { useAppSelector } from "../../../Redux/hook";
-import { verifyToken } from "../../../utils/verifyToken";
 import { Button } from "../../ui/button";
 
 interface IBookingFormInput {
@@ -38,12 +36,7 @@ const BookingFormDirect = ({
 
   const [bookError, setBookError] = useState("");
   const [processBook, setProcessBook] = useState("");
-  const token = useAppSelector(useToken);
-  let user: any;
-
-  if (token) {
-    user = verifyToken(token);
-  }
+  const user = useUser();
 
   // * Handle Booking
   const handleBooking = async (data: IBookingFormInput) => {

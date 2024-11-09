@@ -1,24 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import { logout, useToken } from "../../../Redux/feature/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
-import { verifyToken } from "../../../utils/verifyToken";
+import useUser from "../../../hooks/userHook";
+import { logout } from "../../../Redux/feature/authSlice";
+import { useAppDispatch } from "../../../Redux/hook";
 import { Button } from "../../ui/button";
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
-  const token = useAppSelector(useToken);
   const navRefs = useRef<HTMLAnchorElement[]>([]);
   const dispatch = useAppDispatch();
-
-  let user: any;
-
-  if (token) {
-    user = verifyToken(token);
-  }
+  const user = useUser();
 
   const addToRefs = (el: HTMLAnchorElement) => {
     if (el && !navRefs.current.includes(el)) {

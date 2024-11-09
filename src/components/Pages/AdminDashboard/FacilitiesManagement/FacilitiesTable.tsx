@@ -167,11 +167,11 @@ const FacilitiesTable = ({ item, i }: any) => {
                   <div>
                     <form
                       onSubmit={handleSubmit(onSubmit)}
-                      className="flex flex-col gap- bg-white  p-5 w-full"
+                      className="flex flex-col gap-3 bg-white  p-5 w-full"
                     >
-                      <div className="w-full p-3 rounded-lg font-mono bg-blac">
+                      <div className="w-full p- rounded-lg font-mono ">
                         <label
-                          className="block text-gray-700 text-xl font-bold mb-2"
+                          className="block text-gray-700  font-bold mb-1"
                           htmlFor="name-input"
                         >
                           Name
@@ -187,9 +187,9 @@ const FacilitiesTable = ({ item, i }: any) => {
                         />
                       </div>
 
-                      <div className="w-full p-3 rounded-lg font-mono bg-blac">
+                      <div className="w-full p- rounded-lg font-mono ">
                         <label
-                          className="block text-gray-700 text-xl font-bold mb-2"
+                          className="block text-gray-700  font-bold mb-1"
                           htmlFor="photo-input"
                         >
                           Photo
@@ -205,9 +205,9 @@ const FacilitiesTable = ({ item, i }: any) => {
                         />
                       </div>
 
-                      <div className="w-full p-3 rounded-lg font-mono bg-blac">
+                      <div className="w-full p- rounded-lg font-mono ">
                         <label
-                          className="block text-gray-700 text-xl font-bold mb-2"
+                          className="block text-gray-700  font-bold mb-1"
                           htmlFor="unique-input"
                         >
                           Description
@@ -222,9 +222,9 @@ const FacilitiesTable = ({ item, i }: any) => {
                         />
                       </div>
 
-                      <div className="w-full p-3 rounded-lg font-mono bg-blac">
+                      <div className="w-full p- rounded-lg font-mono ">
                         <label
-                          className="block text-gray-700 text-xl font-bold mb-2"
+                          className="block text-gray-700  font-bold mb-1"
                           htmlFor="unique-input"
                         >
                           price Per-Hour
@@ -239,9 +239,9 @@ const FacilitiesTable = ({ item, i }: any) => {
                         />
                       </div>
 
-                      <div className="w-full p-3 rounded-lg font-mono bg-blac">
+                      <div className="w-full p- rounded-lg font-mono ">
                         <label
-                          className="block text-gray-700 text-xl font-bold mb-2"
+                          className="block text-gray-700  font-bold mb-1"
                           htmlFor="unique-input"
                         >
                           Location

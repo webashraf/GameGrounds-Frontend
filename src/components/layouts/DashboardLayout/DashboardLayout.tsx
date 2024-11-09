@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   BookImageIcon,
   FileEdit,
@@ -7,17 +6,18 @@ import {
   Home,
   LayoutDashboard,
   LogOut,
+  MessageSquare,
   ShieldPlus,
   SquareKanban,
 } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { logout, useToken } from "../../../Redux/feature/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
-import { verifyToken } from "../../../utils/verifyToken";
+import useUser from "../../../hooks/userHook";
+import { logout } from "../../../Redux/feature/authSlice";
+import { useAppDispatch } from "../../../Redux/hook";
 import { DashboardMobileNav } from "../../shared/DashboardMobileNav/DashboardMobileNav";
 
 const UserDashboardLayout = () => {
-  const token = useAppSelector(useToken);
+  const user = useUser();
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -25,12 +25,6 @@ const UserDashboardLayout = () => {
     dispatch(logout());
     navigate("/");
   };
-
-  let user: any;
-
-  if (token) {
-    user = verifyToken(token);
-  }
 
   return (
     <>
@@ -196,6 +190,19 @@ const UserDashboardLayout = () => {
                 >
                   <BookImageIcon />
                   My Booking
+                </NavLink>
+                <NavLink
+                  to="/user/feedback"
+                  className={({ isActive }) =>
+                    `uppercase px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center gap-4 ${
+                      isActive
+                        ? "bg-white/20 backdrop-blur-lg text-white"
+                        : "text-gray-300 hover:bg-white/20 hover:backdrop-blur-lg hover:text-white"
+                    }`
+                  }
+                >
+                  <MessageSquare />
+                  Feedback
                 </NavLink>
                 <div
                   onClick={() => handleLogOut()}

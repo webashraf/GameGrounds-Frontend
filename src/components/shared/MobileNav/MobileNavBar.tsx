@@ -8,9 +8,9 @@ import { PiGiftDuotone } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
 import { TbListDetails } from "react-icons/tb";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logout, useToken } from "../../../Redux/feature/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../Redux/hook";
-import { verifyToken } from "../../../utils/verifyToken";
+import useUser from "../../../hooks/userHook";
+import { logout } from "../../../Redux/feature/authSlice";
+import { useAppDispatch } from "../../../Redux/hook";
 
 const NavItems = [
   {
@@ -42,15 +42,11 @@ const NavItems = [
 
 const MobileNavBar = () => {
   const [open, setOpen] = useState(false);
-  let user: any;
-  const token = useAppSelector(useToken);
+  const user = useUser();
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  if (token) {
-    user = verifyToken(token);
-  }
   const handleLogOut = () => {
     dispatch(logout());
     navigate("/sign-in");
