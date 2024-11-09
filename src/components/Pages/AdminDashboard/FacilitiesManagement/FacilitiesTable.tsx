@@ -87,14 +87,19 @@ const FacilitiesTable = ({ item, i }: any) => {
   return (
     <TableRow className="">
       <TableCell className="font-medium w-[3%]">{i}</TableCell>
-      <TableCell className="uppercase flex flex-col">
+      <TableCell className="uppercase lg:flex flex-col">
         <NavLink to={`/single-facility/${item?._id}`}>
-          <h5 className="text-md font-bold mb-1">{item.name}</h5>
+          <h5 className="text-md font-bold mb-1 hover:underline">
+            {item.name}
+          </h5>
         </NavLink>
       </TableCell>
       <TableCell className="uppercase">{item.location}</TableCell>
       <TableCell className="max-w-[400px]">
-        <NavLink to={`/single-facility/${item?._id}`}>
+        <NavLink
+          to={`/single-facility/${item?._id}`}
+          className="hover:underline"
+        >
           {item?.description?.slice(0, 80)}...
         </NavLink>
       </TableCell>

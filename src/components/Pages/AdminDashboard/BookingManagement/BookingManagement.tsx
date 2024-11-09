@@ -94,10 +94,8 @@ const BookingManagement = () => {
                 bookings?.data?.map((item: any, i: number) => (
                   <TableRow key={item._id} className="bg-zinc-200">
                     <TableCell className="font-medium w-[3%]">{i}</TableCell>
-                    <TableCell className="uppercase flex flex-col">
-                      <h5 className="text-md font-bold mb-1">
-                        {item?.facility?.name}
-                      </h5>
+                    <TableCell className="uppercase lg:flex flex-col items-center h-full text-md font-bold mb-1">
+                      {item?.facility?.name}
                     </TableCell>
                     <TableCell className="uppercase max-w-[200px]">
                       {item?.facility?.description?.slice(0, 50)}...
