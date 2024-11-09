@@ -61,7 +61,7 @@ const Hero = () => {
                 </li>
               ))}
             </ul>
-            <NavLink to="/booking">
+            <NavLink to="/facilities">
               <Button className="uppercase rounded-none px-10 md:px-20 h-[40px] md:h-[50px] mt-5 text-base md:text-lg bg-[#101010a0] backdrop-blur-md">
                 Book Now
               </Button>

@@ -116,10 +116,10 @@ const Footer = () => {
               <NavLink to="/contact" className="hover:underline">
                 Contact
               </NavLink>
-              <NavLink to="/booking" className="hover:underline">
+              <NavLink to="/facilities" className="hover:underline">
                 Facilities
               </NavLink>
-              <NavLink to="/booking" className="hover:underline">
+              <NavLink to="/facilities" className="hover:underline">
                 Booking
               </NavLink>
             </div>
