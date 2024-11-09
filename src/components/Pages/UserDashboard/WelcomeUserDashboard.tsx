@@ -14,8 +14,8 @@ const WelcomeUserDashboard = () => {
   const { data: userInfo } = useGetSingleUserQuery(user?.email);
 
   return (
-    <div className="w-[90%] mx-auto pt-10 lg:pt-0 bg-white shadow-lg">
-      <div className="w-full px-3 py-8 lg:px-8 lg:py-8 text-center  rounded-lg mt-20">
+    <div className="w-[90%] mx-auto pt-10 lg:pt-0 lg:bg-white lg:shadow-lg">
+      <div className="w-full py-8 lg:px-8 lg:py-8 text-center  rounded-lg mt-20">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-4">
           Welcome, {userInfo?.data?.name || "User"}!
         </h1>
